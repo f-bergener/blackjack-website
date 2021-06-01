@@ -17,7 +17,84 @@ import {
   SPLIT_DECREASE_BANKROLL_RESET,
   SPLIT_NO_CHANGE_BANKROLL_RESET,
 } from "./actionConstants";
-import getDeck from "../components/data/getDeck";
+// import getDeck from "../components/data/getDeck";
+
+
+const suits = ["spades", "diamonds", "clubs", "hearts"];
+const values = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+
+const getDeck = () => {
+  const deck = [];
+  for (let i = 0; i < suits.length; i++) {
+    for (let j = 0; j < values.length; j++) {
+      // TODO Add numberValue and typeValue for each card
+      const card = {
+        suit: suits[i],
+        value: values[j],
+        id: (i + 1) * (j + 1),
+      };
+      deck.push(card);
+    }
+  }
+  for (let i = 0; i < 2000; i++) {
+    const location1 = Math.floor(Math.random() * deck.length);
+    const location2 = Math.floor(Math.random() * deck.length);
+    [deck[location1], deck[location2]] = [deck[location2], deck[location1]];
+  }
+  return deck;
+};
+
+interface card {
+  suit: string,
+  numberValue: number,
+  faceValue: string,
+  id: number,
+}
+
+const hand: card[] = [];
+
+const calculateCount = (hand: card[]) => {
+  const faceCardArray: string[] = [];
+  const numberCardArray: number[] = []
+  const aceArray: string[] = [];
+  let count = 0;
+  for (let i = 0; i < hand.length; i++) {
+    if (hand[i].value !== "A") {
+      if (typeof(hand[i].value) === "string") {
+        faceCardArray.push(hand[i].value);
+      }
+      else numberCardArray.push(hand[i].value);
+    } else {
+      aceArray.push(hand[i].value);
+    }
+  }
+  for (let i = 0; i < handArray.length; i++) {
+    if (handArray[i] === "J" || handArray[i] === "Q" || handArray[i] === "K") {
+      count += 10;
+    } else {
+      count += handArray[i];
+    }
+  }
+  if (aceArray.length === 1) {
+    if (count >= 11) {
+      count += 1;
+    } else {
+      count += 11;
+    }
+  } else if (aceArray.length === 0) {
+    count += 0;
+  } else {
+    if (count < 10) {
+      count += aceArray.length - 1;
+      if (count <= 10) {
+        count += 11;
+      }
+    } else {
+      count += aceArray.length;
+    }
+  }
+  return count;
+};
 
 const initialState = {
   currentCardDeck: getDeck(),
@@ -25,9 +102,9 @@ const initialState = {
   bet: 0,
   pot: 0,
   splitPot: 0,
-  playerHand: [],
-  dealerHand: [],
-  splitHand: [],
+  playerHand: hand,
+  dealerHand: hand,
+  splitHand: hand,
   playerCount: 0,
   dealerCount: 0,
   splitCount: 0,
@@ -39,9 +116,14 @@ const initialState = {
   splitStayBoolean: false,
 };
 
-const gameReducer = (state = initialState, action) => {
+interface action {
+  type: string,
+  payload: number
+}
+
+const gameReducer = (state = initialState, action: action) => {
   switch (action.type) {
-    case RESTART_GAME:
+    case RESTART_GAME: {
       return {
         ...state,
         currentCardDeck: getDeck(),
@@ -49,9 +131,9 @@ const gameReducer = (state = initialState, action) => {
         bet: 0,
         pot: 0,
         splitPot: 0,
-        playerHand: [],
-        dealerHand: [],
-        splitHand: [],
+        playerHand: hand,
+        dealerHand: hand,
+        splitHand: hand,
         playerCount: 0,
         dealerCount: 0,
         splitCount: 0,
@@ -62,7 +144,8 @@ const gameReducer = (state = initialState, action) => {
         splitHitBoolean: false,
         splitStayBoolean: false,
       };
-    case ADD_TO_BET:
+    }
+    case ADD_TO_BET: {
       const newBet = state.bet + +action.payload;
       const newBankroll = state.bankroll - +action.payload;
       return {
@@ -70,7 +153,8 @@ const gameReducer = (state = initialState, action) => {
         bet: newBet,
         bankroll: newBankroll,
       };
-    case REMOVE_FROM_BET:
+    }
+    case REMOVE_FROM_BET: {
       let newBet = state.bet - +action.payload;
       let newBankroll = state.bankroll + +action.payload;
       if (newBet < 0) {
@@ -82,11 +166,12 @@ const gameReducer = (state = initialState, action) => {
         bet: newBet,
         bankroll: newBankroll,
       };
-    case DEAL:
+    }
+    case DEAL: {
       // Start with empty hands for the player and the dealer
-      const newPlayerHand = [];
-      const newDealerHand = [];
-      const newSplitHand = [];
+      const newPlayerHand = hand;
+      const newDealerHand = hand;
+      const newSplitHand = hand;
       const newCardDeck = [...state.currentCardDeck];
       // Deal cards to the player and dealer
       newPlayerHand.push(newCardDeck.pop());
@@ -196,7 +281,8 @@ const gameReducer = (state = initialState, action) => {
         stayBoolean: true,
         doubleDownBoolean: false,
       };
-    case STAY:
+    }
+    case STAY: {
       const newCardDeck = [...state.currentCardDeck];
       const newDealerHand = [...state.dealerHand];
       let newDealerCount = state.dealerCount;
@@ -215,7 +301,8 @@ const gameReducer = (state = initialState, action) => {
         doubleDownBoolean: false,
         splitBoolean: false,
       };
-    case HIT:
+    }
+    case HIT: {
       const newCardDeck = [...state.currentCardDeck];
       const newPlayerHand = [...state.playerHand];
       newPlayerHand.push(newCardDeck.pop());
@@ -252,7 +339,7 @@ const gameReducer = (state = initialState, action) => {
         };
       }
       // Player busted so removing the ability to take any actions
-      else if (newPlayerCount > 21) {
+      else {
         return {
           ...state,
           playerHand: newPlayerHand,
@@ -263,7 +350,8 @@ const gameReducer = (state = initialState, action) => {
           doubleDownBoolean: false,
         };
       }
-    case DOUBLE_DOWN:
+    }
+    case DOUBLE_DOWN: {
       const newCardDeck = [...state.currentCardDeck];
       const newPlayerHand = [...state.playerHand];
       newPlayerHand.push(newCardDeck.pop());
@@ -301,7 +389,8 @@ const gameReducer = (state = initialState, action) => {
           stayBoolean: false,
           doubleDownBoolean: false,
         };
-    case SPLIT:
+      }
+    case SPLIT: {
       const newPlayerHand = [...state.playerHand];
       const newSplitHand = [...state.splitHand];
       newSplitHand.push(newPlayerHand.pop());
@@ -323,7 +412,8 @@ const gameReducer = (state = initialState, action) => {
         splitHitBoolean: true,
         splitStayBoolean: true,
       };
-    case SPLIT_HIT:
+    }
+    case SPLIT_HIT: {
       const newSplitHand = [...state.splitHand];
       const newCardDeck = [...state.currentCardDeck];
       newSplitHand.push(newCardDeck.pop());
@@ -359,6 +449,7 @@ const gameReducer = (state = initialState, action) => {
           splitStayBoolean: false,
         };
       }
+    }
     case SPLIT_STAY:
       return {
         ...state,
