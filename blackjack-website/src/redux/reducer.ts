@@ -20,18 +20,18 @@ import {
 // import getDeck from "../components/data/getDeck";
 
 interface card {
-  suit: string,
-  numberValue: number,
-  faceValue: string,
-  id: number,
+  suit: string;
+  numberValue: number;
+  faceValue: string;
+  id: number;
 }
 
 const suits = ["spades", "diamonds", "clubs", "hearts"];
 const faceCardValues = ["A", "J", "Q", "K"];
-const numberCardValues = [2, 3, 4, 5, 6, 7, 8, 9, 10]
+const numberCardValues = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 // TODO Fix ID generation
-const getDeck = () => {
+const getDeck = (): card[] => {
   const deck: card[] = [];
   for (let i = 0; i < suits.length; i++) {
     for (let j = 0; j < numberCardValues.length; j++) {
@@ -61,24 +61,22 @@ const getDeck = () => {
   return deck;
 };
 
-
-
 const hand: card[] = [];
 
 const calculateCount = (hand: card[]) => {
   const faceCardArray: string[] = [];
-  const numberCardArray: number[] = []
+  const numberCardArray: number[] = [];
   const aceArray: string[] = [];
   let count = 0;
   hand.forEach((card) => {
     if (card.faceValue === "A") {
       aceArray.push(card.faceValue);
     } else if (card.faceValue) {
-      faceCardArray.push(card.faceValue)
+      faceCardArray.push(card.faceValue);
     } else numberCardArray.push(card.numberValue);
-  })
-  faceCardArray.forEach(() => count += 10);
-  numberCardArray.forEach((card) => count += card)
+  });
+  faceCardArray.forEach(() => (count += 10));
+  numberCardArray.forEach((card) => (count += card));
   if (aceArray.length === 1) {
     if (count >= 11) {
       count += 1;
@@ -121,8 +119,8 @@ const initialState = {
 };
 
 interface action {
-  type: string,
-  payload: number
+  type: string;
+  payload: number;
 }
 
 const gameReducer = (state = initialState, action: action) => {
@@ -179,8 +177,10 @@ const gameReducer = (state = initialState, action: action) => {
       const newCardDeck = [...state.currentCardDeck];
       // Deal cards to the player and dealer
       while (newPlayerHand.length < 2 && newDealerHand.length < 2) {
-      if (newCardDeck[newCardDeck.length - 1]) newPlayerHand.push(newCardDeck.pop());
-      if (newCardDeck[newCardDeck.length - 1]) newDealerHand.push(newCardDeck.pop());
+        if (newCardDeck[newCardDeck.length - 1])
+          newPlayerHand.push(newCardDeck.pop());
+        if (newCardDeck[newCardDeck.length - 1])
+          newDealerHand.push(newCardDeck.pop());
       }
       // Get the count for the player and the dealer
       let newPlayerCount = calculateCount(newPlayerHand);
@@ -238,7 +238,7 @@ const gameReducer = (state = initialState, action: action) => {
       }
       // Giving the player the ability to split their hand or double down
       else if (
-        newPlayerHand[0].faceValue === newPlayerHand[1].faceValue && 
+        newPlayerHand[0].faceValue === newPlayerHand[1].faceValue &&
         newPlayerHand[0].numberValue === newPlayerHand[1].numberValue &&
         state.bankroll >= newPot
       ) {
@@ -361,12 +361,13 @@ const gameReducer = (state = initialState, action: action) => {
       const newPlayerHand = [...state.playerHand];
       newPlayerHand.push(newCardDeck.pop());
       const newPlayerCount = calculateCount(newPlayerHand);
+      const newDealerHand = [...state.dealerHand];
       const newBankroll = state.bankroll - state.pot;
       const newPot = state.pot * 2;
       let newDealerCount = state.dealerCount;
       if (newPlayerCount <= 21) {
         while (newDealerCount < 17) {
-          newDealerHand.push(newCardDeck);
+          newDealerHand.push(newCardDeck.pop());
           newDealerCount = calculateCount(newDealerHand);
         }
         return {
@@ -443,7 +444,7 @@ const gameReducer = (state = initialState, action: action) => {
           splitHitBoolean: true,
           splitStayBoolean: true,
         };
-      } else if (newSplitCount > 21) {
+      } else {
         return {
           ...state,
           splitHand: newSplitHand,
@@ -455,7 +456,7 @@ const gameReducer = (state = initialState, action: action) => {
         };
       }
     }
-    case SPLIT_STAY:
+    case SPLIT_STAY: {
       return {
         ...state,
         splitBoolean: false,
@@ -463,15 +464,16 @@ const gameReducer = (state = initialState, action: action) => {
         splitStayBoolean: false,
         doubleDownBoolean: false,
       };
-    case INCREASE_BANKROLL_RESET:
+    }
+    case INCREASE_BANKROLL_RESET: {
       const newBankroll = state.bankroll + state.pot * 2;
       if (state.currentCardDeck.length < 20) {
         return {
           ...state,
           bankroll: newBankroll,
           pot: 0,
-          playerHand: [],
-          dealerHand: [],
+          playerHand: hand,
+          dealerHand: hand,
           playerCount: 0,
           dealerCount: 0,
           currentCardDeck: getDeck(),
@@ -481,20 +483,21 @@ const gameReducer = (state = initialState, action: action) => {
           ...state,
           bankroll: newBankroll,
           pot: 0,
-          playerHand: [],
-          dealerHand: [],
+          playerHand: hand,
+          dealerHand: hand,
           playerCount: 0,
           dealerCount: 0,
         };
-    case BLACKJACK_INCREASE_BANKROLL_RESET:
+    }
+    case BLACKJACK_INCREASE_BANKROLL_RESET: {
       const newBankroll = state.bankroll + state.pot * 2 + state.pot * 0.5;
       if (state.currentCardDeck.length < 20) {
         return {
           ...state,
           bankroll: newBankroll,
           pot: 0,
-          playerHand: [],
-          dealerHand: [],
+          playerHand: hand,
+          dealerHand: hand,
           playerCount: 0,
           dealerCount: 0,
           currentCardDeck: getDeck(),
@@ -504,18 +507,19 @@ const gameReducer = (state = initialState, action: action) => {
           ...state,
           bankroll: newBankroll,
           pot: 0,
-          playerHand: [],
-          dealerHand: [],
+          playerHand: hand,
+          dealerHand: hand,
           playerCount: 0,
           dealerCount: 0,
         };
-    case DECREASE_BANKROLL_RESET:
+    }
+    case DECREASE_BANKROLL_RESET: {
       if (state.currentCardDeck.length < 20) {
         return {
           ...state,
           pot: 0,
-          playerHand: [],
-          dealerHand: [],
+          playerHand: hand,
+          dealerHand: hand,
           playerCount: 0,
           dealerCount: 0,
           currentCardDeck: getDeck(),
@@ -524,20 +528,21 @@ const gameReducer = (state = initialState, action: action) => {
         return {
           ...state,
           pot: 0,
-          playerHand: [],
-          dealerHand: [],
+          playerHand: hand,
+          dealerHand: hand,
           playerCount: 0,
           dealerCount: 0,
         };
-    case NO_CHANGE_BANKROLL_RESET:
+    }
+    case NO_CHANGE_BANKROLL_RESET: {
       const newBankroll = state.bankroll + state.pot;
       if (state.currentCardDeck.length < 20) {
         return {
           ...state,
           bankroll: newBankroll,
           pot: 0,
-          playerHand: [],
-          dealerHand: [],
+          playerHand: hand,
+          dealerHand: hand,
           playerCount: 0,
           dealerCount: 0,
           currentCardDeck: getDeck(),
@@ -547,36 +552,40 @@ const gameReducer = (state = initialState, action: action) => {
           ...state,
           bankroll: newBankroll,
           pot: 0,
-          playerHand: [],
-          dealerHand: [],
+          playerHand: hand,
+          dealerHand: hand,
           playerCount: 0,
           dealerCount: 0,
         };
-    case SPLIT_INCREASE_BANKROLL_RESET:
+    }
+    case SPLIT_INCREASE_BANKROLL_RESET: {
       const newBankroll = state.bankroll + state.splitPot * 2;
       return {
         ...state,
         bankroll: newBankroll,
         splitPot: 0,
-        splitHand: [],
+        splitHand: hand,
         splitCount: 0,
       };
-    case SPLIT_DECREASE_BANKROLL_RESET:
+    }
+    case SPLIT_DECREASE_BANKROLL_RESET: {
       return {
         ...state,
         splitPot: 0,
-        splitHand: [],
+        splitHand: hand,
         splitCount: 0,
       };
-    case SPLIT_NO_CHANGE_BANKROLL_RESET:
+    }
+    case SPLIT_NO_CHANGE_BANKROLL_RESET: {
       const newBankroll = state.bankroll + state.splitPot;
       return {
         ...state,
         bankroll: newBankroll,
         splitPot: 0,
-        splitHand: [],
+        splitHand: hand,
         splitCount: 0,
       };
+    }
     default:
       return state;
   }
