@@ -1,18 +1,39 @@
 //Using modified version of getDeck function from THATSOFTWAREDUDE Coding A Card Deck in JavaScript article
 
 const suits = ["spades", "diamonds", "clubs", "hearts"];
-const values = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+const faceCardValues = ["A", "J", "Q", "K"];
+const numberCardValues = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-const getDeck = () => {
-  const deck = [];
+interface card {
+  suit: string;
+  numberValue: number;
+  faceValue: string;
+  id: number;
+}
+
+const getDeck = (): card[] => {
+  const deck: card[] = [];
+  let y = 0;
   for (let i = 0; i < suits.length; i++) {
-    for (let j = 0; j < values.length; j++) {
+    for (let j = 0; j < numberCardValues.length; j++) {
       const card = {
         suit: suits[i],
-        value: values[j],
-        id: (i + 1) * (j + 1),
+        numberValue: numberCardValues[j],
+        faceValue: "",
+        id: y,
       };
       deck.push(card);
+      y++;
+    }
+    for (let j = 0; j < faceCardValues.length; j++) {
+      const card = {
+        suit: suits[i],
+        numberValue: 0,
+        faceValue: faceCardValues[j],
+        id: y,
+      };
+      deck.push(card);
+      y++;
     }
   }
   for (let i = 0; i < 2000; i++) {
