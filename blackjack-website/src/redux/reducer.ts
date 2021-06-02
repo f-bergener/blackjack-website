@@ -30,27 +30,29 @@ const suits = ["spades", "diamonds", "clubs", "hearts"];
 const faceCardValues = ["A", "J", "Q", "K"];
 const numberCardValues = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-// TODO Fix ID generation
 const getDeck = (): card[] => {
   const deck: card[] = [];
+  let y = 0;
   for (let i = 0; i < suits.length; i++) {
     for (let j = 0; j < numberCardValues.length; j++) {
       const card = {
         suit: suits[i],
         numberValue: numberCardValues[j],
         faceValue: "",
-        id: (i + 1) * (j + 1),
+        id: y,
       };
       deck.push(card);
+      y++;
     }
     for (let j = 0; j < faceCardValues.length; j++) {
       const card = {
         suit: suits[i],
         numberValue: 0,
         faceValue: faceCardValues[j],
-        id: (i + 1) * (j + 10),
+        id: y,
       };
       deck.push(card);
+      y++;
     }
   }
   for (let i = 0; i < 2000; i++) {
