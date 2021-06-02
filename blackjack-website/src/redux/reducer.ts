@@ -19,19 +19,36 @@ import {
 } from "./actionConstants";
 // import getDeck from "../components/data/getDeck";
 
+interface card {
+  suit: string,
+  numberValue: number,
+  faceValue: string,
+  id: number,
+}
 
 const suits = ["spades", "diamonds", "clubs", "hearts"];
-const values = ["A", 2, 3, 4, 5, 6, 7, 8, 9, 10, "J", "Q", "K"];
+const faceCardValues = ["A", "J", "Q", "K"];
+const numberCardValues = [2, 3, 4, 5, 6, 7, 8, 9, 10]
 
+// TODO Fix ID generation
 const getDeck = () => {
-  const deck = [];
+  const deck: card[] = [];
   for (let i = 0; i < suits.length; i++) {
-    for (let j = 0; j < values.length; j++) {
-      // TODO Add numberValue and typeValue for each card
+    for (let j = 0; j < numberCardValues.length; j++) {
       const card = {
         suit: suits[i],
-        value: values[j],
+        numberValue: numberCardValues[j],
+        faceValue: "",
         id: (i + 1) * (j + 1),
+      };
+      deck.push(card);
+    }
+    for (let j = 0; j < faceCardValues.length; j++) {
+      const card = {
+        suit: suits[i],
+        numberValue: 0,
+        faceValue: faceCardValues[j],
+        id: (i + 1) * (j + 10),
       };
       deck.push(card);
     }
@@ -44,12 +61,7 @@ const getDeck = () => {
   return deck;
 };
 
-interface card {
-  suit: string,
-  numberValue: number,
-  faceValue: string,
-  id: number,
-}
+
 
 const hand: card[] = [];
 
@@ -58,30 +70,22 @@ const calculateCount = (hand: card[]) => {
   const numberCardArray: number[] = []
   const aceArray: string[] = [];
   let count = 0;
-  for (let i = 0; i < hand.length; i++) {
-    if (hand[i].value !== "A") {
-      if (typeof(hand[i].value) === "string") {
-        faceCardArray.push(hand[i].value);
-      }
-      else numberCardArray.push(hand[i].value);
-    } else {
-      aceArray.push(hand[i].value);
-    }
-  }
-  for (let i = 0; i < handArray.length; i++) {
-    if (handArray[i] === "J" || handArray[i] === "Q" || handArray[i] === "K") {
-      count += 10;
-    } else {
-      count += handArray[i];
-    }
-  }
+  hand.forEach((card) => {
+    if (card.faceValue === "A") {
+      aceArray.push(card.faceValue);
+    } else if (card.faceValue) {
+      faceCardArray.push(card.faceValue)
+    } else numberCardArray.push(card.numberValue);
+  })
+  faceCardArray.forEach(() => count += 10);
+  numberCardArray.forEach((card) => count += card)
   if (aceArray.length === 1) {
     if (count >= 11) {
       count += 1;
     } else {
       count += 11;
     }
-  } else if (aceArray.length === 0) {
+  } else if (!aceArray.length) {
     count += 0;
   } else {
     if (count < 10) {
@@ -174,10 +178,10 @@ const gameReducer = (state = initialState, action: action) => {
       const newSplitHand = hand;
       const newCardDeck = [...state.currentCardDeck];
       // Deal cards to the player and dealer
-      newPlayerHand.push(newCardDeck.pop());
-      newDealerHand.push(newCardDeck.pop());
-      newPlayerHand.push(newCardDeck.pop());
-      newDealerHand.push(newCardDeck.pop());
+      while (newPlayerHand.length < 2 && newDealerHand.length < 2) {
+      if (newCardDeck[newCardDeck.length - 1]) newPlayerHand.push(newCardDeck.pop());
+      if (newCardDeck[newCardDeck.length - 1]) newDealerHand.push(newCardDeck.pop());
+      }
       // Get the count for the player and the dealer
       let newPlayerCount = calculateCount(newPlayerHand);
       let newDealerCount = calculateCount(newDealerHand);
@@ -234,7 +238,8 @@ const gameReducer = (state = initialState, action: action) => {
       }
       // Giving the player the ability to split their hand or double down
       else if (
-        newPlayerHand[0].value === newPlayerHand[1].value &&
+        newPlayerHand[0].faceValue === newPlayerHand[1].faceValue && 
+        newPlayerHand[0].numberValue === newPlayerHand[1].numberValue &&
         state.bankroll >= newPot
       ) {
         return {
@@ -389,7 +394,7 @@ const gameReducer = (state = initialState, action: action) => {
           stayBoolean: false,
           doubleDownBoolean: false,
         };
-      }
+    }
     case SPLIT: {
       const newPlayerHand = [...state.playerHand];
       const newSplitHand = [...state.splitHand];
