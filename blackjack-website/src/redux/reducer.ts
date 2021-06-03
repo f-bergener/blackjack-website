@@ -19,12 +19,6 @@ import {
 } from "./actionConstants";
 // import getDeck from "../components/data/getDeck";
 
-// Notes
-// I added @ts-ignore above each line where I remove a card from the deck and add it to a player's hand
-// TypeScript generates an error as pop() returns T | undefined https://github.com/microsoft/TypeScript/blob/ea93ee6db9441eb51a1d816e114b0468363dcd9c/lib/lib.es5.d.ts#L1236
-// Arrays with the type of hand are expecting objects with the type of card, so TypeScript generates an error
-// This error is not legitimate as a reshuffled deck of 52 cards is generated for each round of play
-
 interface card {
   suit: string;
   numberValue: number;
@@ -186,11 +180,13 @@ const gameReducer = (state = initialState, action: action) => {
       // Deal cards to the player and dealer
       while (newPlayerHand.length < 2 && newDealerHand.length < 2) {
         if (newCardDeck[newCardDeck.length - 1])
-          // @ts-ignore
-          newPlayerHand.push(newCardDeck.pop());
+          // Adding the ! after newCardDeck.pop() tells TypeScript that I know that this value will not be undefined
+          // TypeScript generates an error as pop() returns with the type of T | undefined
+          // https://github.com/microsoft/TypeScript/blob/ea93ee6db9441eb51a1d816e114b0468363dcd9c/lib/lib.es5.d.ts#L1236
+          // This error is not a concern since a reshuffled deck of 52 cards is generated for each round of play
+          newPlayerHand.push(newCardDeck.pop()!);
         if (newCardDeck[newCardDeck.length - 1])
-          // @ts-ignore
-          newDealerHand.push(newCardDeck.pop());
+          newDealerHand.push(newCardDeck.pop()!);
       }
       // Get the count for the player and the dealer
       let newPlayerCount = calculateCount(newPlayerHand);
@@ -201,8 +197,7 @@ const gameReducer = (state = initialState, action: action) => {
       // than or equal to 17 if the player's count is 21 after the cards are dealt
       if (newPlayerCount === 21 && newDealerCount < 17) {
         while (newDealerCount < 17) {
-          // @ts-ignore
-          newDealerHand.push(newCardDeck.pop());
+          newDealerHand.push(newCardDeck.pop()!);
           newDealerCount = calculateCount(newDealerHand);
         }
         return {
@@ -283,20 +278,21 @@ const gameReducer = (state = initialState, action: action) => {
           stayBoolean: true,
           doubleDownBoolean: true,
         };
+      } else {
+        return {
+          ...state,
+          bet: newBet,
+          pot: newPot,
+          playerHand: newPlayerHand,
+          dealerHand: newDealerHand,
+          currentCardDeck: newCardDeck,
+          playerCount: newPlayerCount,
+          dealerCount: newDealerCount,
+          hitBoolean: true,
+          stayBoolean: true,
+          doubleDownBoolean: false,
+        };
       }
-      return {
-        ...state,
-        bet: newBet,
-        pot: newPot,
-        playerHand: newPlayerHand,
-        dealerHand: newDealerHand,
-        currentCardDeck: newCardDeck,
-        playerCount: newPlayerCount,
-        dealerCount: newDealerCount,
-        hitBoolean: true,
-        stayBoolean: true,
-        doubleDownBoolean: false,
-      };
     }
     case STAY: {
       const newCardDeck = [...state.currentCardDeck];
@@ -304,8 +300,7 @@ const gameReducer = (state = initialState, action: action) => {
       let newDealerCount = state.dealerCount;
       // Add cards to the dealer's hand until the count is greater than or equal to 17
       while (newDealerCount < 17) {
-        // @ts-ignore
-        newDealerHand.push(newCardDeck.pop());
+        newDealerHand.push(newCardDeck.pop()!);
         newDealerCount = calculateCount(newDealerHand);
       }
       return {
@@ -322,8 +317,7 @@ const gameReducer = (state = initialState, action: action) => {
     case HIT: {
       const newCardDeck = [...state.currentCardDeck];
       const newPlayerHand = [...state.playerHand];
-      // @ts-ignore
-      newPlayerHand.push(newCardDeck.pop());
+      newPlayerHand.push(newCardDeck.pop()!);
       const newPlayerCount = calculateCount(newPlayerHand);
       let newDealerCount = state.dealerCount;
       const newDealerHand = [...state.dealerHand];
@@ -331,8 +325,7 @@ const gameReducer = (state = initialState, action: action) => {
       // than or equal to 17 if the player's count is 21 after the player hits
       if (newPlayerCount === 21) {
         while (newDealerCount < 17) {
-          // @ts-ignore
-          newDealerHand.push(newCardDeck.pop());
+          newDealerHand.push(newCardDeck.pop()!);
           newDealerCount = calculateCount(newDealerHand);
         }
         return {
@@ -373,8 +366,7 @@ const gameReducer = (state = initialState, action: action) => {
     case DOUBLE_DOWN: {
       const newCardDeck = [...state.currentCardDeck];
       const newPlayerHand = [...state.playerHand];
-      // @ts-ignore
-      newPlayerHand.push(newCardDeck.pop());
+      newPlayerHand.push(newCardDeck.pop()!);
       const newPlayerCount = calculateCount(newPlayerHand);
       const newDealerHand = [...state.dealerHand];
       const newBankroll = state.bankroll - state.pot;
@@ -382,8 +374,7 @@ const gameReducer = (state = initialState, action: action) => {
       let newDealerCount = state.dealerCount;
       if (newPlayerCount <= 21) {
         while (newDealerCount < 17) {
-          // @ts-ignore
-          newDealerHand.push(newCardDeck.pop());
+          newDealerHand.push(newCardDeck.pop()!);
           newDealerCount = calculateCount(newDealerHand);
         }
         return {
@@ -399,7 +390,7 @@ const gameReducer = (state = initialState, action: action) => {
           stayBoolean: false,
           doubleDownBoolean: false,
         };
-      } else
+      } else {
         return {
           ...state,
           pot: newPot,
@@ -411,17 +402,15 @@ const gameReducer = (state = initialState, action: action) => {
           stayBoolean: false,
           doubleDownBoolean: false,
         };
+      }
     }
     case SPLIT: {
       const newPlayerHand = [...state.playerHand];
       const newSplitHand = [...state.splitHand];
-      // @ts-ignore
-      newSplitHand.push(newPlayerHand.pop());
+      newSplitHand.push(newPlayerHand.pop()!);
       const newCardDeck = [...state.currentCardDeck];
-      // @ts-ignore
-      newPlayerHand.push(newCardDeck.pop());
-      // @ts-ignore
-      newSplitHand.push(newCardDeck.pop());
+      newPlayerHand.push(newCardDeck.pop()!);
+      newSplitHand.push(newCardDeck.pop()!);
       const newBankroll = state.bankroll - state.pot;
       const newSplitPot = state.pot;
       return {
@@ -441,8 +430,7 @@ const gameReducer = (state = initialState, action: action) => {
     case SPLIT_HIT: {
       const newSplitHand = [...state.splitHand];
       const newCardDeck = [...state.currentCardDeck];
-      // @ts-ignore
-      newSplitHand.push(newCardDeck.pop());
+      newSplitHand.push(newCardDeck.pop()!);
       const newSplitCount = calculateCount(newSplitHand);
       if (newSplitCount === 21) {
         return {
