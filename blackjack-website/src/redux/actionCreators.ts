@@ -1,123 +1,105 @@
-import {
-  RESTART_GAME,
-  ADD_TO_BET,
-  REMOVE_FROM_BET,
-  HIT,
-  STAY,
-  DOUBLE_DOWN,
-  SPLIT,
-  SPLIT_HIT,
-  SPLIT_STAY,
-  DEAL,
-  INCREASE_BANKROLL_RESET,
-  BLACKJACK_INCREASE_BANKROLL_RESET,
-  DECREASE_BANKROLL_RESET,
-  NO_CHANGE_BANKROLL_RESET,
-  SPLIT_INCREASE_BANKROLL_RESET,
-  SPLIT_DECREASE_BANKROLL_RESET,
-  SPLIT_NO_CHANGE_BANKROLL_RESET,
-} from "./actionConstants";
+import { ActionConstants } from "./actionConstants";
 
 export const restartGame = () => {
   return {
-    type: RESTART_GAME,
+    type: ActionConstants.RESTART_GAME,
   };
 };
 
 export const addToBet = (value: number) => {
   return {
-    type: ADD_TO_BET,
+    type: ActionConstants.ADD_TO_BET,
     payload: value,
   };
 };
 
 export const removeFromBet = (value: number) => {
   return {
-    type: REMOVE_FROM_BET,
+    type: ActionConstants.REMOVE_FROM_BET,
     payload: value,
   };
 };
 
 export const hit = () => {
   return {
-    type: HIT,
+    type: ActionConstants.HIT,
   };
 };
 
 export const stay = () => {
   return {
-    type: STAY,
+    type: ActionConstants.STAY,
   };
 };
 
 export const doubleDown = () => {
   return {
-    type: DOUBLE_DOWN,
+    type: ActionConstants.DOUBLE_DOWN,
   };
 };
 
 export const split = () => {
   return {
-    type: SPLIT,
+    type: ActionConstants.SPLIT,
   };
 };
 
 export const splitHit = () => {
   return {
-    type: SPLIT_HIT,
+    type: ActionConstants.SPLIT_HIT,
   };
 };
 
 export const splitStay = () => {
   return {
-    type: SPLIT_STAY,
+    type: ActionConstants.SPLIT_STAY,
   };
 };
 
 export const deal = () => {
   return {
-    type: DEAL,
+    type: ActionConstants.DEAL,
   };
 };
 
 export const increaseBankrollReset = () => {
   return {
-    type: INCREASE_BANKROLL_RESET,
+    type: ActionConstants.INCREASE_BANKROLL_RESET,
   };
 };
 
 export const blackjackIncreaseBankrollReset = () => {
   return {
-    type: BLACKJACK_INCREASE_BANKROLL_RESET,
+    type: ActionConstants.BLACKJACK_INCREASE_BANKROLL_RESET,
   };
 };
 
 export const decreaseBankrollReset = () => {
   return {
-    type: DECREASE_BANKROLL_RESET,
+    type: ActionConstants.DECREASE_BANKROLL_RESET,
   };
 };
 
 export const noChangeBankrollReset = () => {
   return {
-    type: NO_CHANGE_BANKROLL_RESET,
+    type: ActionConstants.NO_CHANGE_BANKROLL_RESET,
   };
 };
 
 export const splitIncreaseBankrollReset = () => {
   return {
-    type: SPLIT_INCREASE_BANKROLL_RESET,
+    type: ActionConstants.SPLIT_INCREASE_BANKROLL_RESET,
   };
 };
 
 export const splitDecreaseBankrollReset = () => {
   return {
-    type: SPLIT_DECREASE_BANKROLL_RESET,
+    type: ActionConstants.SPLIT_DECREASE_BANKROLL_RESET,
   };
 };
 
 export const splitNoChangeBankrollReset = () => {
   return {
-    type: SPLIT_NO_CHANGE_BANKROLL_RESET,
+    type: ActionConstants.SPLIT_NO_CHANGE_BANKROLL_RESET,
   };
 };

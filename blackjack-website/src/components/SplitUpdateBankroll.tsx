@@ -5,12 +5,13 @@ import {
   splitIncreaseBankrollReset,
   splitDecreaseBankrollReset,
   splitNoChangeBankrollReset,
-} from "./actions";
+} from "../redux/actionCreators";
+import { State } from "../redux/reducer";
 
 const SplitUpdateBankroll = () => {
-  const splitHand = useSelector((state) => state.splitHand);
-  const splitCount = useSelector((state) => state.splitCount);
-  const dealerCount = useSelector((state) => state.dealerCount);
+  const splitHand = useSelector((state: State) => state.splitHand);
+  const splitCount = useSelector((state: State) => state.splitCount);
+  const dealerCount = useSelector((state: State) => state.dealerCount);
   const dispatch = useDispatch();
 
   const splitUpdateBankroll = () => {

@@ -6,12 +6,13 @@ import {
   decreaseBankrollReset,
   noChangeBankrollReset,
   increaseBankrollReset,
-} from "./actions";
+} from "../redux/actionCreators";
+import { State } from "../redux/reducer";
 
 const UpdateBankroll = () => {
-  const playerHand = useSelector((state) => state.playerHand);
-  const playerCount = useSelector((state) => state.playerCount);
-  const dealerCount = useSelector((state) => state.dealerCount);
+  const playerHand = useSelector((state: State) => state.playerHand);
+  const playerCount = useSelector((state: State) => state.playerCount);
+  const dealerCount = useSelector((state: State) => state.dealerCount);
   const dispatch = useDispatch();
 
   const updateBankroll = () => {

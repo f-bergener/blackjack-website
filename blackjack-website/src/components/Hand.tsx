@@ -1,37 +1,44 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { State } from "../redux/reducer";
+import { card } from "../redux/reducer";
 
-const dealerHand = useSelector((state) => state.dealerHand);
-
-export const RegularHand = (hand) => {
-  return hand.map((card) => {
-    return (
+export const RegularHand = (hand: card[]) => {
+  return hand.map((card: card) => {
+    return card.faceValue ? (
       <img
         className="card"
-        src={require(`./data/card-images/${card.value}_of_${card.suit}.svg`)}
-        alt={card.concat}
+        src={require(`../../public/card-images/${card.faceValue}_of_${card.suit}.svg`)}
+        alt={`${card.faceValue} of ${card.suit}`}
+      />
+    ) : (
+      <img
+        className="card"
+        src={require(`../../public/card-images/${card.numberValue}_of_${card.suit}.svg`)}
+        alt={`${card.numberValue} of ${card.suit}`}
       />
     );
   });
 };
 
-export const DealerTwoCardHand = () => {
-  if (dealerHand.length === 2) {
-    let card = dealerHand[1];
-    return (
-      <img>
-        <img
-          className="card-back"
-          src={require("./data/card-images/card_back.svg")}
-          alt="Card Back"
-          style={{ marginRight: "-1px" }}
-        />
-        <img
-          className="card"
-          src={require(`./data/card-images/${card.value}_of_${card.suit}.svg`)}
-          alt={card.concat}
-        />
-      </img>
-    );
-  }
-};
+// export const DealerTwoCardHand = () => {
+//   const dealerHand = useSelector((state: State) => state.dealerHand);
+//   if (dealerHand.length === 2) {
+//     let card = dealerHand[1];
+//     return (
+//       <>
+//         <img
+//           className="card-back"
+//           src={require("../../public/card-images/card_back.svg")}
+//           alt="Card Back"
+//           style={{ marginRight: "-1px" }}
+//         />
+//         <img
+//           className="card"
+//           src={require(`../../public/card-images/${card.faceValue}_of_${card.suit}.svg`)}
+//           alt={card.faceValue}
+//         />
+//       </>
+//     );
+//   }
+// };

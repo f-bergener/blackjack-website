@@ -1,25 +1,8 @@
-import {
-  RESTART_GAME,
-  ADD_TO_BET,
-  REMOVE_FROM_BET,
-  HIT,
-  STAY,
-  DOUBLE_DOWN,
-  SPLIT,
-  SPLIT_HIT,
-  SPLIT_STAY,
-  DEAL,
-  INCREASE_BANKROLL_RESET,
-  BLACKJACK_INCREASE_BANKROLL_RESET,
-  DECREASE_BANKROLL_RESET,
-  NO_CHANGE_BANKROLL_RESET,
-  SPLIT_INCREASE_BANKROLL_RESET,
-  SPLIT_DECREASE_BANKROLL_RESET,
-  SPLIT_NO_CHANGE_BANKROLL_RESET,
-} from "./actionConstants";
+import { ActionConstants } from "./actionConstants";
+import { Action } from "./actionTypes";
 // import getDeck from "../components/data/getDeck";
 
-interface card {
+export interface card {
   suit: string;
   numberValue: number;
   faceValue: string;
@@ -100,6 +83,26 @@ const calculateCount = (hand: card[]) => {
   return count;
 };
 
+export type State = {
+  currentCardDeck: card[];
+  bankroll: number;
+  bet: number;
+  pot: number;
+  splitPot: number;
+  playerHand: card[];
+  dealerHand: card[];
+  splitHand: card[];
+  playerCount: number;
+  dealerCount: number;
+  splitCount: number;
+  hitBoolean: boolean;
+  stayBoolean: boolean;
+  doubleDownBoolean: boolean;
+  splitBoolean: boolean;
+  splitHitBoolean: boolean;
+  splitStayBoolean: boolean;
+};
+
 const initialState = {
   currentCardDeck: getDeck(),
   bankroll: 5000,
@@ -120,14 +123,9 @@ const initialState = {
   splitStayBoolean: false,
 };
 
-interface action {
-  type: string;
-  payload: number;
-}
-
-const gameReducer = (state = initialState, action: action) => {
+const gameReducer = (state: State = initialState, action: Action) => {
   switch (action.type) {
-    case RESTART_GAME: {
+    case ActionConstants.RESTART_GAME: {
       return {
         ...state,
         currentCardDeck: getDeck(),
@@ -149,7 +147,7 @@ const gameReducer = (state = initialState, action: action) => {
         splitStayBoolean: false,
       };
     }
-    case ADD_TO_BET: {
+    case ActionConstants.ADD_TO_BET: {
       const newBet = state.bet + +action.payload;
       const newBankroll = state.bankroll - +action.payload;
       return {
@@ -158,7 +156,7 @@ const gameReducer = (state = initialState, action: action) => {
         bankroll: newBankroll,
       };
     }
-    case REMOVE_FROM_BET: {
+    case ActionConstants.REMOVE_FROM_BET: {
       let newBet = state.bet - +action.payload;
       let newBankroll = state.bankroll + +action.payload;
       if (newBet < 0) {
@@ -171,7 +169,7 @@ const gameReducer = (state = initialState, action: action) => {
         bankroll: newBankroll,
       };
     }
-    case DEAL: {
+    case ActionConstants.DEAL: {
       // Start with empty hands for the player and the dealer
       const newPlayerHand = hand;
       const newDealerHand = hand;
@@ -294,7 +292,7 @@ const gameReducer = (state = initialState, action: action) => {
         };
       }
     }
-    case STAY: {
+    case ActionConstants.STAY: {
       const newCardDeck = [...state.currentCardDeck];
       const newDealerHand = [...state.dealerHand];
       let newDealerCount = state.dealerCount;
@@ -314,7 +312,7 @@ const gameReducer = (state = initialState, action: action) => {
         splitBoolean: false,
       };
     }
-    case HIT: {
+    case ActionConstants.HIT: {
       const newCardDeck = [...state.currentCardDeck];
       const newPlayerHand = [...state.playerHand];
       newPlayerHand.push(newCardDeck.pop()!);
@@ -363,7 +361,7 @@ const gameReducer = (state = initialState, action: action) => {
         };
       }
     }
-    case DOUBLE_DOWN: {
+    case ActionConstants.DOUBLE_DOWN: {
       const newCardDeck = [...state.currentCardDeck];
       const newPlayerHand = [...state.playerHand];
       newPlayerHand.push(newCardDeck.pop()!);
@@ -404,7 +402,7 @@ const gameReducer = (state = initialState, action: action) => {
         };
       }
     }
-    case SPLIT: {
+    case ActionConstants.SPLIT: {
       const newPlayerHand = [...state.playerHand];
       const newSplitHand = [...state.splitHand];
       newSplitHand.push(newPlayerHand.pop()!);
@@ -427,7 +425,7 @@ const gameReducer = (state = initialState, action: action) => {
         splitStayBoolean: true,
       };
     }
-    case SPLIT_HIT: {
+    case ActionConstants.SPLIT_HIT: {
       const newSplitHand = [...state.splitHand];
       const newCardDeck = [...state.currentCardDeck];
       newSplitHand.push(newCardDeck.pop()!);
@@ -464,7 +462,7 @@ const gameReducer = (state = initialState, action: action) => {
         };
       }
     }
-    case SPLIT_STAY: {
+    case ActionConstants.SPLIT_STAY: {
       return {
         ...state,
         splitBoolean: false,
@@ -473,7 +471,7 @@ const gameReducer = (state = initialState, action: action) => {
         doubleDownBoolean: false,
       };
     }
-    case INCREASE_BANKROLL_RESET: {
+    case ActionConstants.INCREASE_BANKROLL_RESET: {
       const newBankroll = state.bankroll + state.pot * 2;
       return {
         ...state,
@@ -486,7 +484,7 @@ const gameReducer = (state = initialState, action: action) => {
         currentCardDeck: getDeck(),
       };
     }
-    case BLACKJACK_INCREASE_BANKROLL_RESET: {
+    case ActionConstants.BLACKJACK_INCREASE_BANKROLL_RESET: {
       const newBankroll = state.bankroll + state.pot * 2 + state.pot * 0.5;
       return {
         ...state,
@@ -499,7 +497,7 @@ const gameReducer = (state = initialState, action: action) => {
         currentCardDeck: getDeck(),
       };
     }
-    case DECREASE_BANKROLL_RESET: {
+    case ActionConstants.DECREASE_BANKROLL_RESET: {
       return {
         ...state,
         pot: 0,
@@ -510,7 +508,7 @@ const gameReducer = (state = initialState, action: action) => {
         currentCardDeck: getDeck(),
       };
     }
-    case NO_CHANGE_BANKROLL_RESET: {
+    case ActionConstants.NO_CHANGE_BANKROLL_RESET: {
       const newBankroll = state.bankroll + state.pot;
       return {
         ...state,
@@ -523,7 +521,7 @@ const gameReducer = (state = initialState, action: action) => {
         currentCardDeck: getDeck(),
       };
     }
-    case SPLIT_INCREASE_BANKROLL_RESET: {
+    case ActionConstants.SPLIT_INCREASE_BANKROLL_RESET: {
       const newBankroll = state.bankroll + state.splitPot * 2;
       return {
         ...state,
@@ -533,7 +531,7 @@ const gameReducer = (state = initialState, action: action) => {
         splitCount: 0,
       };
     }
-    case SPLIT_DECREASE_BANKROLL_RESET: {
+    case ActionConstants.SPLIT_DECREASE_BANKROLL_RESET: {
       return {
         ...state,
         splitPot: 0,
@@ -541,7 +539,7 @@ const gameReducer = (state = initialState, action: action) => {
         splitCount: 0,
       };
     }
-    case SPLIT_NO_CHANGE_BANKROLL_RESET: {
+    case ActionConstants.SPLIT_NO_CHANGE_BANKROLL_RESET: {
       const newBankroll = state.bankroll + state.splitPot;
       return {
         ...state,
