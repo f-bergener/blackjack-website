@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addToBet } from "../redux/actionCreators";
 import { State } from "../redux/reducer";
-import "./upChips.css";
 
 const UpChips = () => {
   const bankroll = useSelector((state: State) => state.bankroll);

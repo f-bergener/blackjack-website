@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromBet } from "../redux/actionCreators";
 import { State } from "../redux/reducer";
-import "./downChips.css";
 
 const DownChips = () => {
   const bet = useSelector((state: State) => state.bet);

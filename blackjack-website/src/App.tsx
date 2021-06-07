@@ -1,8 +1,8 @@
 import React from "react";
 import { HashRouter as Router, Route } from "react-router-dom";
-import Header from "./Header";
-import Homepage from "./Homepage";
-import Game from "./Game";
+import Header from "./components/Header";
+import Homepage from "./components/Homepage";
+import Game from "./components/Game";
 
 const App: React.FC = () => {
   return (
