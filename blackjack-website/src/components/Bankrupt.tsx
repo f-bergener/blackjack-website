@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { restartGame } from "../redux/actions";
+import { restartGame } from "../redux/actionCreators";
 
 const Bankrupt = () => {
   const dispatch = useDispatch();

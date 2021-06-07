@@ -1,6 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deal, hit, split, splitHit, splitStay, stay } from "../redux/actions";
+import {
+  deal,
+  hit,
+  split,
+  splitHit,
+  splitStay,
+  stay,
+} from "../redux/actionCreators";
 
 const dispatch = useDispatch();
 const playerHand = useSelector((state) => state.playerHand);
