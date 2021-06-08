@@ -26,7 +26,7 @@ const PreDealDisplay = () => {
       ) : (
         ""
       )}
-      {Deal()}
+      {bet ? Deal() : <></>}
     </>
   );
 };

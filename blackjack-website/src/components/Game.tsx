@@ -5,6 +5,7 @@ import { State } from "../redux/reducer";
 import PreDealDisplay from "./PreDealDisplay";
 import { DoubleDown, Hit, Split, Stay } from "./GameButtons";
 import RegularHand from "./RegularHand";
+import DealerTwoCardHand from "./DealerTwoCardHand";
 
 // When the game starts, the first components that should be displayed are
 // the chips and the deal button
@@ -36,6 +37,7 @@ const Game = () => {
         <Stay />
         <DoubleDown />
         <Split />
+        <DealerTwoCardHand />
       </>
     );
   };
