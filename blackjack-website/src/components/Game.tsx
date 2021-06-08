@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import { State } from "../redux/reducer";
 import PreDealDisplay from "./PreDealDisplay";
 import { DoubleDown, Hit, Split, Stay } from "./GameButtons";
-import RegularHand from "./RegularHand";
-import DealerTwoCardHand from "./DealerTwoCardHand";
+import DealerHand from "./DealerHand";
+import PlayerHand from "./PlayerHand";
 
 // When the game starts, the first components that should be displayed are
 // the chips and the deal button
@@ -32,12 +32,12 @@ const Game = () => {
         ) : (
           <></>
         )}
-        {RegularHand(playerHand)}
+        <PlayerHand />
         <Hit />
         <Stay />
         <DoubleDown />
         <Split />
-        <DealerTwoCardHand />
+        <DealerHand />
       </>
     );
   };

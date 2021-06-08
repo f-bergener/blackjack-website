@@ -3,8 +3,9 @@ import { useSelector } from "react-redux";
 import { State } from "../redux/reducer";
 import cardBack from "./data/card-images/card_back.svg";
 import images from "./data/card-images";
+import RegularHand from "./RegularHand";
 
-const DealerTwoCardHand = () => {
+const DealerHand = () => {
   const dealerHand = useSelector((state: State) => state.dealerHand);
   if (dealerHand.length === 2) {
     let card = dealerHand[1];
@@ -42,8 +43,8 @@ const DealerTwoCardHand = () => {
       );
     }
   } else {
-    return <></>;
+    return RegularHand(dealerHand);
   }
 };
 
-export default DealerTwoCardHand;
+export default DealerHand;
