@@ -3,7 +3,7 @@ import RegularHand from "./RegularHand";
 import { useSelector } from "react-redux";
 import { State } from "../redux/reducer";
 
-const PlayerHand = () => {
+const PlayerHand: React.FC = () => {
   const playerHand = useSelector((state: State) => state.playerHand);
   return RegularHand(playerHand);
 };

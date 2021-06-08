@@ -5,7 +5,7 @@ import { State } from "../redux/reducer";
 import PreDealDisplay from "./PreDealDisplay";
 import ActiveHandDisplay from "./ActiveHandDisplay";
 
-const Game = () => {
+const Game: React.FC = () => {
   const pot = useSelector((state: State) => state.pot);
   const bankroll = useSelector((state: State) => state.bankroll);
 

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeFromBet } from "../redux/actionCreators";
 import { State } from "../redux/reducer";
 
-const DownChips = () => {
+const DownChips: React.FC = () => {
   const bet = useSelector((state: State) => state.bet);
   const dispatch = useDispatch();
 

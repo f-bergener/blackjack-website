@@ -8,7 +8,7 @@ import {
 } from "../redux/actionCreators";
 import { State } from "../redux/reducer";
 
-const UpdateBankroll = () => {
+const UpdateBankroll: React.FC = () => {
   const playerHand = useSelector((state: State) => state.playerHand);
   const playerCount = useSelector((state: State) => state.playerCount);
   const dealerCount = useSelector((state: State) => state.dealerCount);

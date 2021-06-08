@@ -15,7 +15,7 @@ import UpdateBankroll from "./UpdateBankroll";
 import SplitUpdateBankroll from "./SplitUpdateBankroll";
 import SplitHand from "./SplitHand";
 
-const ActiveHandDisplay = () => {
+const ActiveHandDisplay: React.FC = () => {
   const pot = useSelector((state: State) => state.pot);
   const splitPot = useSelector((state: State) => state.splitPot);
   const playerCount = useSelector((state: State) => state.playerCount);

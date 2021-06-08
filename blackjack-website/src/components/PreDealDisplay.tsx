@@ -5,7 +5,7 @@ import UpChips from "./UpChips";
 import DownChips from "./DownChips";
 import { Deal } from "./GameButtons";
 
-const PreDealDisplay = () => {
+const PreDealDisplay: React.FC = () => {
   const bankroll = useSelector((state: State) => state.bankroll);
   const pot = useSelector((state: State) => state.pot);
   const bet = useSelector((state: State) => state.bet);
@@ -25,7 +25,7 @@ const PreDealDisplay = () => {
       ) : (
         ""
       )}
-      {bet ? Deal() : <></>}
+      {bet ? <Deal /> : <></>}
     </>
   );
 };

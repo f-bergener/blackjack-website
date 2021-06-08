@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToBet } from "../redux/actionCreators";
 import { State } from "../redux/reducer";
 
-const UpChips = () => {
+const UpChips: React.FC = () => {
   const bankroll = useSelector((state: State) => state.bankroll);
   const dispatch = useDispatch();
 

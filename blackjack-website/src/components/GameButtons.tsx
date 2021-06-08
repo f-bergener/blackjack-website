@@ -11,7 +11,7 @@ import {
 } from "../redux/actionCreators";
 import { State } from "../redux/reducer";
 
-export const Deal = () => {
+export const Deal: React.FC = () => {
   const dispatch = useDispatch();
   return (
     <button className="button deal-button" onClick={() => dispatch(deal())}>
@@ -20,7 +20,7 @@ export const Deal = () => {
   );
 };
 
-export const Hit = () => {
+export const Hit: React.FC = () => {
   const dispatch = useDispatch();
   const hitBoolean = useSelector((state: State) => state.hitBoolean);
   if (hitBoolean) {
@@ -34,7 +34,7 @@ export const Hit = () => {
   }
 };
 
-export const Stay = () => {
+export const Stay: React.FC = () => {
   const dispatch = useDispatch();
   const stayBoolean = useSelector((state: State) => state.stayBoolean);
   if (stayBoolean) {
@@ -48,7 +48,7 @@ export const Stay = () => {
   }
 };
 
-export const DoubleDown = () => {
+export const DoubleDown: React.FC = () => {
   const dispatch = useDispatch();
   const doubleDownBoolean = useSelector(
     (state: State) => state.doubleDownBoolean
@@ -67,7 +67,7 @@ export const DoubleDown = () => {
   }
 };
 
-export const Split = () => {
+export const Split: React.FC = () => {
   const dispatch = useDispatch();
   const splitBoolean = useSelector((state: State) => state.splitBoolean);
   if (splitBoolean) {
@@ -81,7 +81,7 @@ export const Split = () => {
   }
 };
 
-export const SplitHit = () => {
+export const SplitHit: React.FC = () => {
   const dispatch = useDispatch();
   const splitHitBoolean = useSelector((state: State) => state.splitHitBoolean);
   if (splitHitBoolean) {
@@ -98,7 +98,7 @@ export const SplitHit = () => {
   }
 };
 
-export const SplitStay = () => {
+export const SplitStay: React.FC = () => {
   const dispatch = useDispatch();
   const splitStayBoolean = useSelector(
     (state: State) => state.splitStayBoolean

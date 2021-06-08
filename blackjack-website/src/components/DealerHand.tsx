@@ -5,7 +5,7 @@ import cardBack from "./data/card-images/card_back.svg";
 import images from "./data/card-images";
 import RegularHand from "./RegularHand";
 
-const DealerHand = () => {
+const DealerHand: React.FC = () => {
   const dealerHand = useSelector((state: State) => state.dealerHand);
   if (dealerHand.length === 2) {
     let card = dealerHand[1];

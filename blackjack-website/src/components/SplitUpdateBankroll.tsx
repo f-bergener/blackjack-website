@@ -7,7 +7,7 @@ import {
 } from "../redux/actionCreators";
 import { State } from "../redux/reducer";
 
-const SplitUpdateBankroll = () => {
+const SplitUpdateBankroll: React.FC = () => {
   const splitHand = useSelector((state: State) => state.splitHand);
   const splitCount = useSelector((state: State) => state.splitCount);
   const dealerCount = useSelector((state: State) => state.dealerCount);

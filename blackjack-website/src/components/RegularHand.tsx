@@ -2,7 +2,7 @@ import React from "react";
 import images from "./data/card-images";
 import { card } from "./data/getDeck";
 
-const RegularHand = (hand: card[]) => {
+const RegularHand: React.FC<card[]> = (hand: card[]) => {
   return (
     <>
       {hand.map((card: card) => {
