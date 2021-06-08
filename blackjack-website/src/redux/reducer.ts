@@ -5,6 +5,7 @@ import { card, getDeck, calculateCount } from "../components/data/getDeck";
 const hand: card[] = [];
 
 export type State = {
+  activeGame: boolean;
   currentCardDeck: card[];
   bankroll: number;
   bet: number;
@@ -25,6 +26,7 @@ export type State = {
 };
 
 const initialState = {
+  activeGame: false,
   currentCardDeck: getDeck(),
   bankroll: 5000,
   bet: 0,
@@ -49,6 +51,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
     case ActionConstants.RESTART_GAME: {
       return {
         ...state,
+        activeGame: false,
         currentCardDeck: getDeck(),
         bankroll: 5000,
         bet: 0,
@@ -120,6 +123,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         }
         return {
           ...state,
+          activeGame: true,
           bet: newBet,
           pot: newPot,
           playerHand: newPlayerHand,
@@ -143,6 +147,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
       ) {
         return {
           ...state,
+          activeGame: true,
           bet: newBet,
           pot: newPot,
           playerHand: newPlayerHand,
@@ -166,6 +171,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
       ) {
         return {
           ...state,
+          activeGame: true,
           bet: newBet,
           pot: newPot,
           playerHand: newPlayerHand,
@@ -183,6 +189,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
       else if (newPlayerCount < 21 && state.bankroll >= newPot) {
         return {
           ...state,
+          activeGame: true,
           bet: newBet,
           pot: newPot,
           playerHand: newPlayerHand,
@@ -197,6 +204,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
       } else {
         return {
           ...state,
+          activeGame: true,
           bet: newBet,
           pot: newPot,
           playerHand: newPlayerHand,
