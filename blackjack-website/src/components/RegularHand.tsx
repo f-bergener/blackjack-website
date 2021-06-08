@@ -1,6 +1,6 @@
 import React from "react";
-import { card } from "../redux/reducer";
 import images from "./data/card-images";
+import { card } from "./data/getDeck";
 
 const RegularHand = (hand: card[]) => {
   return hand.map((card: card) => {
