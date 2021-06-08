@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./updateBankroll.css";
 import {
   blackjackIncreaseBankrollReset,
   decreaseBankrollReset,
@@ -13,6 +12,17 @@ const UpdateBankroll = () => {
   const playerHand = useSelector((state: State) => state.playerHand);
   const playerCount = useSelector((state: State) => state.playerCount);
   const dealerCount = useSelector((state: State) => state.dealerCount);
+  const hitBoolean = useSelector((state: State) => state.hitBoolean);
+  const stayBoolean = useSelector((state: State) => state.stayBoolean);
+  const doubleDownBoolean = useSelector(
+    (state: State) => state.doubleDownBoolean
+  );
+  const splitBoolean = useSelector((state: State) => state.splitBoolean);
+  const splitHitBoolean = useSelector((state: State) => state.splitHitBoolean);
+  const splitStayBoolean = useSelector(
+    (state: State) => state.splitStayBoolean
+  );
+
   const dispatch = useDispatch();
 
   const updateBankroll = () => {
@@ -194,8 +204,18 @@ const UpdateBankroll = () => {
       }
     }
   };
-
-  return <>{updateBankroll()}</>;
+  if (
+    !hitBoolean &&
+    !stayBoolean &&
+    !doubleDownBoolean &&
+    !splitBoolean &&
+    !splitHitBoolean &&
+    !splitStayBoolean
+  ) {
+    return <>{updateBankroll()}</>;
+  } else {
+    return <></>;
+  }
 };
 
 export default UpdateBankroll;

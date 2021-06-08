@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import "./splitUpdateBankroll.css";
 import {
   splitIncreaseBankrollReset,
   splitDecreaseBankrollReset,
@@ -12,6 +11,16 @@ const SplitUpdateBankroll = () => {
   const splitHand = useSelector((state: State) => state.splitHand);
   const splitCount = useSelector((state: State) => state.splitCount);
   const dealerCount = useSelector((state: State) => state.dealerCount);
+  const hitBoolean = useSelector((state: State) => state.hitBoolean);
+  const stayBoolean = useSelector((state: State) => state.stayBoolean);
+  const doubleDownBoolean = useSelector(
+    (state: State) => state.doubleDownBoolean
+  );
+  const splitBoolean = useSelector((state: State) => state.splitBoolean);
+  const splitHitBoolean = useSelector((state: State) => state.splitHitBoolean);
+  const splitStayBoolean = useSelector(
+    (state: State) => state.splitStayBoolean
+  );
   const dispatch = useDispatch();
 
   const splitUpdateBankroll = () => {
@@ -191,10 +200,22 @@ const SplitUpdateBankroll = () => {
           </>
         );
       }
+    } else {
+      return <></>;
     }
   };
-
-  return <>{splitUpdateBankroll()}</>;
+  if (
+    !hitBoolean &&
+    !stayBoolean &&
+    !doubleDownBoolean &&
+    !splitBoolean &&
+    !splitHitBoolean &&
+    !splitStayBoolean
+  ) {
+    return <>{splitUpdateBankroll()}</>;
+  } else {
+    return <></>;
+  }
 };
 
 export default SplitUpdateBankroll;

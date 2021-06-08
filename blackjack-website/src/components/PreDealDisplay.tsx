@@ -11,7 +11,6 @@ const PreDealDisplay = () => {
   const bet = useSelector((state: State) => state.bet);
   return (
     <>
-      <h2>Bankroll: {bankroll.toLocaleString("en")}</h2>
       {bankroll > 0 && pot === 0 ? (
         <>
           <h2>Increase Bet</h2> <UpChips />

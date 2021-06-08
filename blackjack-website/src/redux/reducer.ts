@@ -30,9 +30,9 @@ const initialState = {
   bet: 0,
   pot: 0,
   splitPot: 0,
-  playerHand: hand,
-  dealerHand: hand,
-  splitHand: hand,
+  playerHand: [...hand],
+  dealerHand: [...hand],
+  splitHand: [...hand],
   playerCount: 0,
   dealerCount: 0,
   splitCount: 0,
@@ -54,9 +54,9 @@ const gameReducer = (state: State = initialState, action: Action) => {
         bet: 0,
         pot: 0,
         splitPot: 0,
-        playerHand: hand,
-        dealerHand: hand,
-        splitHand: hand,
+        playerHand: [...hand],
+        dealerHand: [...hand],
+        splitHand: [...hand],
         playerCount: 0,
         dealerCount: 0,
         splitCount: 0,
@@ -92,9 +92,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
     }
     case ActionConstants.DEAL: {
       // Start with empty hands for the player and the dealer
-      const newPlayerHand = hand;
-      const newDealerHand = hand;
-      const newSplitHand = hand;
+      const newPlayerHand = [...state.playerHand];
+      const newDealerHand = [...state.dealerHand];
       const newCardDeck = [...state.currentCardDeck];
       // Deal cards to the player and dealer
       while (newPlayerHand.length < 2 && newDealerHand.length < 2) {
@@ -125,7 +124,6 @@ const gameReducer = (state: State = initialState, action: Action) => {
           pot: newPot,
           playerHand: newPlayerHand,
           dealerHand: newDealerHand,
-          splitHand: newSplitHand,
           currentCardDeck: newCardDeck,
           playerCount: newPlayerCount,
           dealerCount: newDealerCount,
@@ -149,7 +147,6 @@ const gameReducer = (state: State = initialState, action: Action) => {
           pot: newPot,
           playerHand: newPlayerHand,
           dealerHand: newDealerHand,
-          splitHand: newSplitHand,
           currentCardDeck: newCardDeck,
           playerCount: newPlayerCount,
           dealerCount: newDealerCount,
@@ -257,9 +254,10 @@ const gameReducer = (state: State = initialState, action: Action) => {
           hitBoolean: false,
           stayBoolean: false,
           doubleDownBoolean: false,
+          splitBoolean: false,
         };
       }
-      // Removing the ability to double down after the player hits
+      // Removing the ability to double down or split after the player hits
       else if (newPlayerCount < 21) {
         return {
           ...state,
@@ -267,6 +265,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           currentCardDeck: newCardDeck,
           playerCount: newPlayerCount,
           doubleDownBoolean: false,
+          splitBoolean: false,
         };
       }
       // Player busted so removing the ability to take any actions
@@ -398,8 +397,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
         ...state,
         bankroll: newBankroll,
         pot: 0,
-        playerHand: hand,
-        dealerHand: hand,
+        playerHand: [...hand],
+        dealerHand: [...hand],
         playerCount: 0,
         dealerCount: 0,
         currentCardDeck: getDeck(),
@@ -411,8 +410,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
         ...state,
         bankroll: newBankroll,
         pot: 0,
-        playerHand: hand,
-        dealerHand: hand,
+        playerHand: [...hand],
+        dealerHand: [...hand],
         playerCount: 0,
         dealerCount: 0,
         currentCardDeck: getDeck(),
@@ -422,8 +421,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
       return {
         ...state,
         pot: 0,
-        playerHand: hand,
-        dealerHand: hand,
+        playerHand: [...hand],
+        dealerHand: [...hand],
         playerCount: 0,
         dealerCount: 0,
         currentCardDeck: getDeck(),
@@ -435,8 +434,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
         ...state,
         bankroll: newBankroll,
         pot: 0,
-        playerHand: hand,
-        dealerHand: hand,
+        playerHand: [...hand],
+        dealerHand: [...hand],
         playerCount: 0,
         dealerCount: 0,
         currentCardDeck: getDeck(),
@@ -448,7 +447,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         ...state,
         bankroll: newBankroll,
         splitPot: 0,
-        splitHand: hand,
+        splitHand: [...hand],
         splitCount: 0,
       };
     }
@@ -456,7 +455,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
       return {
         ...state,
         splitPot: 0,
-        splitHand: hand,
+        splitHand: [...hand],
         splitCount: 0,
       };
     }
@@ -466,7 +465,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         ...state,
         bankroll: newBankroll,
         splitPot: 0,
-        splitHand: hand,
+        splitHand: [...hand],
         splitCount: 0,
       };
     }
