@@ -1,6 +1,7 @@
 import { ActionConstants } from "./actionConstants";
 import { Action } from "./actionTypes";
 import { card, getDeck, calculateCount } from "../components/data/getDeck";
+import { handRows, countRows } from "../components/data/table";
 
 const hand: card[] = [];
 
@@ -23,6 +24,8 @@ export type State = {
   splitBoolean: boolean;
   splitHitBoolean: boolean;
   splitStayBoolean: boolean;
+  playerHandBestMove: string;
+  splitHandBestMove: string;
 };
 
 const initialState = {
@@ -44,6 +47,8 @@ const initialState = {
   splitBoolean: false,
   splitHitBoolean: false,
   splitStayBoolean: false,
+  playerHandBestMove: "",
+  splitHandBestMove: "",
 };
 
 const gameReducer = (state: State = initialState, action: Action) => {
