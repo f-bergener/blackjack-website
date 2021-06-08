@@ -22,35 +22,38 @@ export const Deal = () => {
 
 export const Hit = () => {
   const dispatch = useDispatch();
-  const playerHand = useSelector((state: State) => state.playerHand);
-  const playerCount = useSelector((state: State) => state.playerCount);
-  if (playerHand.length >= 2 && playerCount < 21) {
+  const hitBoolean = useSelector((state: State) => state.hitBoolean);
+  if (hitBoolean) {
     return (
       <button className="button hit-button" onClick={() => dispatch(hit())}>
         Hit
       </button>
     );
+  } else {
+    return <></>;
   }
 };
 
 export const Stay = () => {
   const dispatch = useDispatch();
-  const playerHand = useSelector((state: State) => state.playerHand);
-  const playerCount = useSelector((state: State) => state.playerCount);
-  if (playerHand.length >= 2 && playerCount < 21) {
+  const stayBoolean = useSelector((state: State) => state.stayBoolean);
+  if (stayBoolean) {
     return (
       <button className="button stay-button" onClick={() => dispatch(stay())}>
         Stay
       </button>
     );
+  } else {
+    return <></>;
   }
 };
 
 export const DoubleDown = () => {
   const dispatch = useDispatch();
-  const playerHand = useSelector((state: State) => state.playerHand);
-  const playerCount = useSelector((state: State) => state.playerCount);
-  if (playerHand.length === 2 && playerCount < 21) {
+  const doubleDownBoolean = useSelector(
+    (state: State) => state.doubleDownBoolean
+  );
+  if (doubleDownBoolean) {
     return (
       <button
         className="button double-down-button"
@@ -60,39 +63,56 @@ export const DoubleDown = () => {
       </button>
     );
   } else {
-    return "";
+    return <></>;
   }
 };
 
 export const Split = () => {
   const dispatch = useDispatch();
-  const playerHand = useSelector((state: State) => state.playerHand);
-  if (playerHand.length === 2) {
+  const splitBoolean = useSelector((state: State) => state.splitBoolean);
+  if (splitBoolean) {
     return (
       <button className="button split-button" onClick={() => dispatch(split())}>
         Split
       </button>
     );
+  } else {
+    return <></>;
   }
 };
 
 export const SplitHit = () => {
   const dispatch = useDispatch();
-  return (
-    <button className="button hit-button" onClick={() => dispatch(splitHit())}>
-      Hit
-    </button>
-  );
+  const splitHitBoolean = useSelector((state: State) => state.splitHitBoolean);
+  if (splitHitBoolean) {
+    return (
+      <button
+        className="button hit-button"
+        onClick={() => dispatch(splitHit())}
+      >
+        Hit
+      </button>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 export const SplitStay = () => {
   const dispatch = useDispatch();
-  return (
-    <button
-      className="button stay-button"
-      onClick={() => dispatch(splitStay())}
-    >
-      Stay
-    </button>
+  const splitStayBoolean = useSelector(
+    (state: State) => state.splitStayBoolean
   );
+  if (splitStayBoolean) {
+    return (
+      <button
+        className="button stay-button"
+        onClick={() => dispatch(splitStay())}
+      >
+        Stay
+      </button>
+    );
+  } else {
+    return <></>;
+  }
 };

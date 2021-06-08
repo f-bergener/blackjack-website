@@ -29,10 +29,68 @@ const Game = () => {
   const splitStayBoolean = useSelector(
     (state: State) => state.splitStayBoolean
   );
+
+  // const ActiveHandDisplay = () => {
+  //   return (
+  //     <>
+  //       <h2>Bet: ${pot.toLocaleString("en")}</h2>
+  //       {splitPot ? (
+  //         <h2>Split Bet: ${splitPot.toLocaleString("en")}</h2>
+  //       ) : (
+  //         <></>
+  //       )}
+  //       <div id="hand-section">
+  //         <div className="hand-subsection">
+  //           {playerHand.length >= 2 ? (
+  //             <>
+  //               <div className="hand">{displayPlayerHand(playerHand)}</div>
+  //               <h1 className="count">Player Count: {playerCount}</h1>
+  //             </>
+  //           ) : (
+  //             <></>
+  //           )}
+  //           <div className="game-buttons">
+  //             {hitBoolean && !splitStayBoolean ? displayHit() : <></>}
+  //             {stayBoolean && !splitStayBoolean ? displayStay() : <></>}
+  //             {doubleDownBoolean ? displayDoubleDown() : <></>}
+  //             {splitBoolean && splitHand.length < 2 ? displaySplit() : <></>}
+  //           </div>
+  //         </div>
+  //         <div className="hand-subsection">
+  //           {splitHand.length >= 2 ? (
+  //             <>
+  //               <div className="hand">{displayPlayerHand(splitHand)}</div>
+  //               <h1 className="count">Split Count: {splitCount}</h1>
+  //             </>
+  //           ) : (
+  //             <></>
+  //           )}
+  //           <div className="game-buttons">
+  //             {splitHitBoolean ? displaySplitHit() : <></>}
+  //             {splitStayBoolean ? displaySplitStay() : <></>}
+  //           </div>
+  //         </div>
+  //         <div className="hand-subsection">
+  //           {!stayBoolean && dealerHand.length >= 2 ? (
+  //             <div className="hand">{displayDealerHand()}</div>
+  //           ) : (
+  //             <div className="hand">{displayDealerTwoCardHand()}</div>
+  //           )}
+  //           {!stayBoolean && dealerHand.length >= 2 ? (
+  //             <h1 className="count">Dealer Count: {dealerCount}</h1>
+  //           ) : (
+  //             ""
+  //           )}
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
+  // };
+
   return (
     <>
       <h1>Game</h1>
-      {!pot ? PreDealDisplay() : ""}
+      {!pot ? <PreDealDisplay /> : <ActiveHandDisplay />}
       <Link to="/">
         <button>Back to Home</button>
       </Link>
