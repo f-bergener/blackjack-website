@@ -23,6 +23,12 @@ const ActiveHandDisplay: React.FC = () => {
   const splitHand = useSelector((state: State) => state.splitHand);
   const dealerCount = useSelector((state: State) => state.dealerCount);
   const dealerHand = useSelector((state: State) => state.dealerHand);
+  const playerHandBestMove = useSelector(
+    (state: State) => state.playerHandBestMove
+  );
+  const splitHandBestMove = useSelector(
+    (state: State) => state.splitHandBestMove
+  );
   return (
     <>
       <h2>Bet: ${pot.toLocaleString("en")}</h2>
@@ -33,10 +39,12 @@ const ActiveHandDisplay: React.FC = () => {
       <Stay />
       <DoubleDown />
       <Split />
+      {playerHandBestMove ? <h1>{playerHandBestMove}</h1> : <></>}
       <SplitHand />
       <h2>{splitHand.length > 2 ? `Split Count: ${splitCount}` : <></>}</h2>
       <SplitHit />
       <SplitStay />
+      {splitHandBestMove ? <h1>{splitHandBestMove}</h1> : <></>}
       <h2>{dealerHand.length > 2 ? `Dealer Count: ${dealerCount}` : <></>}</h2>
       <DealerHand />
       <UpdateBankroll />

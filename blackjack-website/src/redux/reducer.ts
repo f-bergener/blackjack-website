@@ -1,7 +1,7 @@
 import { ActionConstants } from "./actionConstants";
 import { Action } from "./actionTypes";
 import { card, getDeck, calculateCount } from "../components/data/getDeck";
-import { handRows, countRows } from "../components/data/table";
+import { getBestMove } from "../components/data/table";
 
 const hand: card[] = [];
 
@@ -74,6 +74,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
         splitBoolean: false,
         splitHitBoolean: false,
         splitStayBoolean: false,
+        playerHandBestMove: "",
+        splitHandBestMove: "",
       };
     }
     case ActionConstants.ADD_TO_BET: {
@@ -188,9 +190,14 @@ const gameReducer = (state: State = initialState, action: Action) => {
           stayBoolean: true,
           doubleDownBoolean: true,
           splitBoolean: true,
+          playerHandBestMove: getBestMove(
+            newPlayerHand,
+            newDealerHand,
+            newPlayerCount
+          ),
         };
       }
-      // Giving the player the ability to double down
+      // Giving the player the ability to double down, but not the ability split
       else if (newPlayerCount < 21 && state.bankroll >= newPot) {
         return {
           ...state,
@@ -205,6 +212,11 @@ const gameReducer = (state: State = initialState, action: Action) => {
           hitBoolean: true,
           stayBoolean: true,
           doubleDownBoolean: true,
+          playerHandBestMove: getBestMove(
+            newPlayerHand,
+            newDealerHand,
+            newPlayerCount
+          ),
         };
       } else {
         return {
@@ -220,6 +232,11 @@ const gameReducer = (state: State = initialState, action: Action) => {
           hitBoolean: true,
           stayBoolean: true,
           doubleDownBoolean: false,
+          playerHandBestMove: getBestMove(
+            newPlayerHand,
+            newDealerHand,
+            newPlayerCount
+          ),
         };
       }
     }
@@ -241,6 +258,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
         stayBoolean: false,
         doubleDownBoolean: false,
         splitBoolean: false,
+        playerHandBestMove: "",
+        splitHandBestMove: "",
       };
     }
     case ActionConstants.HIT: {
@@ -268,6 +287,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           stayBoolean: false,
           doubleDownBoolean: false,
           splitBoolean: false,
+          playerHandBestMove: "",
         };
       }
       // Removing the ability to double down or split after the player hits
@@ -279,6 +299,11 @@ const gameReducer = (state: State = initialState, action: Action) => {
           playerCount: newPlayerCount,
           doubleDownBoolean: false,
           splitBoolean: false,
+          playerHandBestMove: getBestMove(
+            newPlayerHand,
+            newDealerHand,
+            newPlayerCount
+          ),
         };
       }
       // Player busted so removing the ability to take any actions
@@ -291,6 +316,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           hitBoolean: false,
           stayBoolean: false,
           doubleDownBoolean: false,
+          playerHandBestMove: "",
         };
       }
     }
@@ -320,6 +346,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           hitBoolean: false,
           stayBoolean: false,
           doubleDownBoolean: false,
+          playerHandBestMove: "",
         };
       } else {
         return {
@@ -332,6 +359,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           hitBoolean: false,
           stayBoolean: false,
           doubleDownBoolean: false,
+          playerHandBestMove: "",
         };
       }
     }
@@ -344,18 +372,31 @@ const gameReducer = (state: State = initialState, action: Action) => {
       newSplitHand.push(newCardDeck.pop()!);
       const newBankroll = state.bankroll - state.pot;
       const newSplitPot = state.pot;
+      const newPlayerCount = calculateCount(newPlayerHand);
+      const newSplitCount = calculateCount(newPlayerHand);
       return {
         ...state,
         playerHand: newPlayerHand,
         splitHand: newSplitHand,
-        playerCount: calculateCount(newPlayerHand),
-        splitCount: calculateCount(newSplitHand),
+        playerCount: newPlayerCount,
+        splitCount: newSplitCount,
         bankroll: newBankroll,
         splitPot: newSplitPot,
         doubleDownBoolean: false,
         splitBoolean: false,
         splitHitBoolean: true,
         splitStayBoolean: true,
+        playerHandBestMove: getBestMove(
+          newPlayerHand,
+          state.dealerHand,
+          newPlayerCount
+        ),
+        splitHandBestMove: getBestMove(
+          newSplitHand,
+          state.dealerHand,
+          newSplitCount,
+          true
+        ),
       };
     }
     case ActionConstants.SPLIT_HIT: {
@@ -382,6 +423,12 @@ const gameReducer = (state: State = initialState, action: Action) => {
           splitBoolean: false,
           splitHitBoolean: true,
           splitStayBoolean: true,
+          splitHandBestMove: getBestMove(
+            newSplitHand,
+            state.dealerHand,
+            newSplitCount,
+            true
+          ),
         };
       } else {
         return {
@@ -392,6 +439,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           splitBoolean: false,
           splitHitBoolean: false,
           splitStayBoolean: false,
+          splitHandBestMove: "",
         };
       }
     }
@@ -402,6 +450,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         splitHitBoolean: false,
         splitStayBoolean: false,
         doubleDownBoolean: false,
+        splitHandBestMove: "",
       };
     }
     case ActionConstants.INCREASE_BANKROLL_RESET: {
@@ -415,6 +464,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         playerCount: 0,
         dealerCount: 0,
         currentCardDeck: getDeck(),
+        playerHandBestMove: "",
       };
     }
     case ActionConstants.BLACKJACK_INCREASE_BANKROLL_RESET: {
@@ -428,6 +478,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         playerCount: 0,
         dealerCount: 0,
         currentCardDeck: getDeck(),
+        playerHandBestMove: "",
       };
     }
     case ActionConstants.DECREASE_BANKROLL_RESET: {
@@ -439,6 +490,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         playerCount: 0,
         dealerCount: 0,
         currentCardDeck: getDeck(),
+        playerHandBestMove: "",
       };
     }
     case ActionConstants.NO_CHANGE_BANKROLL_RESET: {
@@ -452,6 +504,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         playerCount: 0,
         dealerCount: 0,
         currentCardDeck: getDeck(),
+        playerHandBestMove: "",
       };
     }
     case ActionConstants.SPLIT_INCREASE_BANKROLL_RESET: {
@@ -462,6 +515,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         splitPot: 0,
         splitHand: [...hand],
         splitCount: 0,
+        splitHandBestMove: "",
       };
     }
     case ActionConstants.SPLIT_DECREASE_BANKROLL_RESET: {
@@ -470,6 +524,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         splitPot: 0,
         splitHand: [...hand],
         splitCount: 0,
+        splitHandBestMove: "",
       };
     }
     case ActionConstants.SPLIT_NO_CHANGE_BANKROLL_RESET: {
@@ -480,6 +535,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         splitPot: 0,
         splitHand: [...hand],
         splitCount: 0,
+        splitHandBestMove: "",
       };
     }
     default:

@@ -7,7 +7,8 @@ import RegularHand from "./RegularHand";
 
 const DealerHand: React.FC = () => {
   const dealerHand = useSelector((state: State) => state.dealerHand);
-  if (dealerHand.length === 2) {
+  const stayBoolean = useSelector((state: State) => state.stayBoolean);
+  if (dealerHand.length === 2 && stayBoolean) {
     let card = dealerHand[1];
     if (card.faceValue) {
       return (
