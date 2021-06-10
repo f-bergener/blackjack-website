@@ -375,7 +375,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
       const newBankroll = state.bankroll - state.pot;
       const newSplitPot = state.pot;
       const newPlayerCount = calculateCount(newPlayerHand);
-      const newSplitCount = calculateCount(newPlayerHand);
+      const newSplitCount = calculateCount(newSplitHand);
       return {
         ...state,
         playerHand: newPlayerHand,

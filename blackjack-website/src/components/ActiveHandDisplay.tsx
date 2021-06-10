@@ -29,6 +29,7 @@ const ActiveHandDisplay: React.FC = () => {
   const splitHandBestMove = useSelector(
     (state: State) => state.splitHandBestMove
   );
+  const stayBoolean = useSelector((state: State) => state.stayBoolean);
   return (
     <>
       <h2>Bet: ${pot.toLocaleString("en")}</h2>
@@ -41,12 +42,12 @@ const ActiveHandDisplay: React.FC = () => {
       <Split />
       {playerHandBestMove ? <h1>{playerHandBestMove}</h1> : <></>}
       <SplitHand />
-      <h2>{splitHand.length > 2 ? `Split Count: ${splitCount}` : <></>}</h2>
+      <h2>{splitHand.length >= 2 ? `Split Count: ${splitCount}` : <></>}</h2>
       <SplitHit />
       <SplitStay />
       {splitHandBestMove ? <h1>{splitHandBestMove}</h1> : <></>}
-      <h2>{dealerHand.length > 2 ? `Dealer Count: ${dealerCount}` : <></>}</h2>
       <DealerHand />
+      <h2>{!stayBoolean ? `Dealer Count: ${dealerCount}` : <></>}</h2>
       <UpdateBankroll />
       <SplitUpdateBankroll />
     </>
