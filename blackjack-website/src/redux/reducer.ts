@@ -1,7 +1,10 @@
 import { ActionConstants } from "./actionConstants";
 import { Action } from "./actionTypes";
 import { card, getDeck, calculateCount } from "../components/data/getDeck";
-import { getBestMove } from "../components/data/table";
+import {
+  initialHandGetBestMove,
+  postFirstMoveGetBestHand,
+} from "../components/data/table";
 
 const hand: card[] = [];
 
@@ -190,7 +193,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           stayBoolean: true,
           doubleDownBoolean: true,
           splitBoolean: true,
-          playerHandBestMove: getBestMove(
+          playerHandBestMove: initialHandGetBestMove(
             newPlayerHand,
             newDealerHand,
             newPlayerCount
@@ -212,7 +215,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           hitBoolean: true,
           stayBoolean: true,
           doubleDownBoolean: true,
-          playerHandBestMove: getBestMove(
+          playerHandBestMove: initialHandGetBestMove(
             newPlayerHand,
             newDealerHand,
             newPlayerCount
@@ -232,7 +235,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           hitBoolean: true,
           stayBoolean: true,
           doubleDownBoolean: false,
-          playerHandBestMove: getBestMove(
+          playerHandBestMove: initialHandGetBestMove(
             newPlayerHand,
             newDealerHand,
             newPlayerCount
@@ -299,8 +302,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           playerCount: newPlayerCount,
           doubleDownBoolean: false,
           splitBoolean: false,
-          playerHandBestMove: getBestMove(
-            newPlayerHand,
+          playerHandBestMove: postFirstMoveGetBestHand(
             newDealerHand,
             newPlayerCount
           ),
@@ -386,16 +388,13 @@ const gameReducer = (state: State = initialState, action: Action) => {
         splitBoolean: false,
         splitHitBoolean: true,
         splitStayBoolean: true,
-        playerHandBestMove: getBestMove(
-          newPlayerHand,
+        playerHandBestMove: postFirstMoveGetBestHand(
           state.dealerHand,
           newPlayerCount
         ),
-        splitHandBestMove: getBestMove(
-          newSplitHand,
+        splitHandBestMove: postFirstMoveGetBestHand(
           state.dealerHand,
-          newSplitCount,
-          true
+          newSplitCount
         ),
       };
     }
@@ -413,6 +412,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           splitBoolean: false,
           splitHitBoolean: false,
           splitStayBoolean: false,
+          splitHandBestMove: "",
         };
       } else if (newSplitCount < 21) {
         return {
@@ -423,11 +423,9 @@ const gameReducer = (state: State = initialState, action: Action) => {
           splitBoolean: false,
           splitHitBoolean: true,
           splitStayBoolean: true,
-          splitHandBestMove: getBestMove(
-            newSplitHand,
+          splitHandBestMove: postFirstMoveGetBestHand(
             state.dealerHand,
-            newSplitCount,
-            true
+            newSplitCount
           ),
         };
       } else {
@@ -478,7 +476,6 @@ const gameReducer = (state: State = initialState, action: Action) => {
         playerCount: 0,
         dealerCount: 0,
         currentCardDeck: getDeck(),
-        playerHandBestMove: "",
       };
     }
     case ActionConstants.DECREASE_BANKROLL_RESET: {

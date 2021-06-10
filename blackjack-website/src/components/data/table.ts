@@ -848,25 +848,16 @@ const postMoveCountRows = {
   },
 };
 
-export const getBestMove = (
+export const initialHandGetBestMove = (
   playerHand: card[],
   dealerHand: card[],
-  playerCount: number,
-  splitHand: boolean = true
+  playerCount: number
 ): string => {
   let cardOne = playerHand[0];
   let cardTwo = playerHand[1];
   let dealerFace = dealerHand[1].faceValue;
   let dealerNumber = dealerHand[1].numberValue;
   if (dealerNumber) {
-    if (playerHand.length > 2) {
-      // @ts-ignore
-      return postMoveCountRows[playerCount][dealerNumber];
-    }
-    if (splitHand) {
-      // @ts-ignore
-      return postMoveCountRows[playerCount][dealerNumber];
-    }
     if (
       cardOne.faceValue &&
       cardTwo.faceValue &&
@@ -886,14 +877,6 @@ export const getBestMove = (
     // @ts-ignore
     return countRows[playerCount][dealerNumber];
   } else {
-    if (splitHand) {
-      // @ts-ignore
-      return postMoveCountRows[playerCount][dealerFace];
-    }
-    if (playerHand.length > 2) {
-      // @ts-ignore
-      return postMoveCountRows[playerCount][dealerFace];
-    }
     if (
       cardOne.faceValue &&
       cardTwo.faceValue &&
@@ -914,4 +897,17 @@ export const getBestMove = (
     // @ts-ignore
     return countRows[playerCount][dealerFace];
   }
+};
+
+export const postFirstMoveGetBestHand = (
+  dealerHand: card[],
+  playerCount: number
+) => {
+  let dealerFace = dealerHand[1].faceValue;
+  let dealerNumber = dealerHand[1].numberValue;
+  if (dealerNumber) {
+    // @ts-ignore
+    return postMoveCountRows[playerCount][dealerNumber];
+    // @ts-ignore
+  } else return postMoveCountRows[playerCount][dealerFace];
 };
