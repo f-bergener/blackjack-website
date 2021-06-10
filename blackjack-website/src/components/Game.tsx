@@ -15,7 +15,6 @@ const Game: React.FC = () => {
 
   return (
     <>
-      <h1>Game</h1>
       <h2>Bankroll: ${bankroll.toLocaleString("en")}</h2>
       {!pot ? <PreDealDisplay /> : <ActiveHandDisplay />}
       <Link to="/">
