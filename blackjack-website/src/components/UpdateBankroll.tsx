@@ -22,6 +22,7 @@ const UpdateBankroll: React.FC = () => {
   const splitStayBoolean = useSelector(
     (state: State) => state.splitStayBoolean
   );
+  const splitHand = useSelector((state: State) => state.splitHand);
 
   const dispatch = useDispatch();
 
@@ -204,14 +205,7 @@ const UpdateBankroll: React.FC = () => {
       }
     }
   };
-  if (
-    !hitBoolean &&
-    !stayBoolean &&
-    !doubleDownBoolean &&
-    !splitBoolean &&
-    !splitHitBoolean &&
-    !splitStayBoolean
-  ) {
+  if (!hitBoolean && !stayBoolean && !doubleDownBoolean && !splitHand.length) {
     return <>{updateBankroll()}</>;
   } else {
     return <></>;

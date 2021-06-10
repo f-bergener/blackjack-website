@@ -23,7 +23,11 @@ export const Deal: React.FC = () => {
 export const Hit: React.FC = () => {
   const dispatch = useDispatch();
   const hitBoolean = useSelector((state: State) => state.hitBoolean);
-  if (hitBoolean) {
+  const splitStayBoolean = useSelector(
+    (state: State) => state.splitStayBoolean
+  );
+  // Checking if the player has an active split hand since I want the player to complete their split hand before moving forward
+  if (hitBoolean && !splitStayBoolean) {
     return (
       <button className="button hit-button" onClick={() => dispatch(hit())}>
         Hit
@@ -37,7 +41,11 @@ export const Hit: React.FC = () => {
 export const Stay: React.FC = () => {
   const dispatch = useDispatch();
   const stayBoolean = useSelector((state: State) => state.stayBoolean);
-  if (stayBoolean) {
+  const splitStayBoolean = useSelector(
+    (state: State) => state.splitStayBoolean
+  );
+  // Checking if the player has an active split hand since I want the player to complete their split hand before moving forward
+  if (stayBoolean && !splitStayBoolean) {
     return (
       <button className="button stay-button" onClick={() => dispatch(stay())}>
         Stay
