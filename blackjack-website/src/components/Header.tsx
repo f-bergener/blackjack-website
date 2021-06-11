@@ -5,7 +5,7 @@ const Header: React.FC = () => {
   return (
     <header>
       <Link to="/">
-        <h1 id="main-header">Freddie's Blackjack Casino</h1>
+        <h1 id="main-header">BlackJack Practice</h1>
       </Link>
     </header>
   );
