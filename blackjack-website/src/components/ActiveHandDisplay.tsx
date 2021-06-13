@@ -22,7 +22,6 @@ const ActiveHandDisplay: React.FC = () => {
   const splitCount = useSelector((state: State) => state.splitCount);
   const splitHand = useSelector((state: State) => state.splitHand);
   const dealerCount = useSelector((state: State) => state.dealerCount);
-  const dealerHand = useSelector((state: State) => state.dealerHand);
   const playerHandBestMove = useSelector(
     (state: State) => state.playerHandBestMove
   );

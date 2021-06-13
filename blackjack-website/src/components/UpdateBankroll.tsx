@@ -17,11 +17,6 @@ const UpdateBankroll: React.FC = () => {
   const doubleDownBoolean = useSelector(
     (state: State) => state.doubleDownBoolean
   );
-  const splitBoolean = useSelector((state: State) => state.splitBoolean);
-  const splitHitBoolean = useSelector((state: State) => state.splitHitBoolean);
-  const splitStayBoolean = useSelector(
-    (state: State) => state.splitStayBoolean
-  );
   const splitHand = useSelector((state: State) => state.splitHand);
 
   const dispatch = useDispatch();
