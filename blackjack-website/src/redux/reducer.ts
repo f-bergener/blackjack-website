@@ -29,6 +29,8 @@ export type State = {
   splitStayBoolean: boolean;
   playerHandBestMove: string;
   splitHandBestMove: string;
+  totalMoves: number;
+  correctMoves: number;
 };
 
 const initialState = {
@@ -52,6 +54,8 @@ const initialState = {
   splitStayBoolean: false,
   playerHandBestMove: "",
   splitHandBestMove: "",
+  totalMoves: 0,
+  correctMoves: 0,
 };
 
 const gameReducer = (state: State = initialState, action: Action) => {
@@ -81,6 +85,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
         splitHandBestMove: "",
       };
     }
+    // --------------------------------------------------------
+    // Modify bet actions
     case ActionConstants.ADD_TO_BET: {
       const newBet = state.bet + +action.payload;
       const newBankroll = state.bankroll - +action.payload;
@@ -103,6 +109,9 @@ const gameReducer = (state: State = initialState, action: Action) => {
         bankroll: newBankroll,
       };
     }
+    // --------------------------------------------------------
+    // --------------------------------------------------------
+    // Game actions
     case ActionConstants.DEAL: {
       const newPlayerHand = [...state.playerHand];
       const newDealerHand = [...state.dealerHand];
@@ -471,6 +480,9 @@ const gameReducer = (state: State = initialState, action: Action) => {
         splitHandBestMove: "",
       };
     }
+    // --------------------------------------------------------
+    // --------------------------------------------------------
+    // Update bankroll and proceed to next hand actions
     case ActionConstants.INCREASE_BANKROLL_RESET: {
       const newBankroll = state.bankroll + state.pot * 2;
       return {
@@ -555,6 +567,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         splitHandBestMove: "",
       };
     }
+    // --------------------------------------------------------
     default:
       return state;
   }
