@@ -5,7 +5,7 @@ export const restartGame = () => {
     type: ActionConstants.RESTART_GAME,
   };
 };
-
+// Modify bet actions
 export const addToBet = (value: number) => {
   return {
     type: ActionConstants.ADD_TO_BET,
@@ -19,7 +19,7 @@ export const removeFromBet = (value: number) => {
     payload: value,
   };
 };
-
+// Game actions
 export const hit = () => {
   return {
     type: ActionConstants.HIT,
@@ -61,7 +61,7 @@ export const deal = () => {
     type: ActionConstants.DEAL,
   };
 };
-
+// Update bankroll and proceed to next hand actions
 export const increaseBankrollReset = () => {
   return {
     type: ActionConstants.INCREASE_BANKROLL_RESET,

@@ -104,7 +104,6 @@ const gameReducer = (state: State = initialState, action: Action) => {
       };
     }
     case ActionConstants.DEAL: {
-      // Start with empty hands for the player and the dealer
       const newPlayerHand = [...state.playerHand];
       const newDealerHand = [...state.dealerHand];
       const newCardDeck = [...state.currentCardDeck];
@@ -200,7 +199,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           ),
         };
       }
-      // Giving the player the ability to double down, but not the ability split
+      // Giving the player the ability to double down, but not the ability to split
       else if (newPlayerCount < 21 && state.bankroll >= newPot) {
         return {
           ...state,
@@ -221,7 +220,10 @@ const gameReducer = (state: State = initialState, action: Action) => {
             newPlayerCount
           ),
         };
-      } else {
+      }
+      // Giving the player the ability to only hit or stay since
+      // they do not have enough chips to double down
+      else {
         return {
           ...state,
           activeGame: true,
@@ -266,6 +268,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
       };
     }
     case ActionConstants.HIT: {
+      // Adding one card to the player's hand
       const newCardDeck = [...state.currentCardDeck];
       const newPlayerHand = [...state.playerHand];
       newPlayerHand.push(newCardDeck.pop()!);
@@ -323,6 +326,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
       }
     }
     case ActionConstants.DOUBLE_DOWN: {
+      // Doubling the player's bet and adding one card to their hand
       const newCardDeck = [...state.currentCardDeck];
       const newPlayerHand = [...state.playerHand];
       newPlayerHand.push(newCardDeck.pop()!);
@@ -331,6 +335,9 @@ const gameReducer = (state: State = initialState, action: Action) => {
       const newBankroll = state.bankroll - state.pot;
       const newPot = state.pot * 2;
       let newDealerCount = state.dealerCount;
+      // Player's count is less than 21 and cannot hit and if
+      // the dealer's count is less than 17, the dealer will hit until their
+      // count reaches 17
       if (newPlayerCount <= 21) {
         while (newDealerCount < 17) {
           newDealerHand.push(newCardDeck.pop()!);
@@ -350,7 +357,9 @@ const gameReducer = (state: State = initialState, action: Action) => {
           doubleDownBoolean: false,
           playerHandBestMove: "",
         };
-      } else {
+      }
+      // Player busted
+      else {
         return {
           ...state,
           pot: newPot,
@@ -366,6 +375,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
       }
     }
     case ActionConstants.SPLIT: {
+      // Creating a second hand and drawing from the deck twice to
+      // get two complete hands
       const newPlayerHand = [...state.playerHand];
       const newSplitHand = [...state.splitHand];
       newSplitHand.push(newPlayerHand.pop()!);
@@ -376,6 +387,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
       const newSplitPot = state.pot;
       const newPlayerCount = calculateCount(newPlayerHand);
       const newSplitCount = calculateCount(newSplitHand);
+      // Removing the ability to split or double down and adding
+      // the ability to hit or stay on the split hand
       return {
         ...state,
         playerHand: newPlayerHand,
@@ -399,10 +412,13 @@ const gameReducer = (state: State = initialState, action: Action) => {
       };
     }
     case ActionConstants.SPLIT_HIT: {
+      // Adding a card to the player's split hand
       const newSplitHand = [...state.splitHand];
       const newCardDeck = [...state.currentCardDeck];
       newSplitHand.push(newCardDeck.pop()!);
       const newSplitCount = calculateCount(newSplitHand);
+      // Removing the ability for the player to take any
+      // actions because the count is 21
       if (newSplitCount === 21) {
         return {
           ...state,
@@ -414,7 +430,9 @@ const gameReducer = (state: State = initialState, action: Action) => {
           splitStayBoolean: false,
           splitHandBestMove: "",
         };
-      } else if (newSplitCount < 21) {
+      }
+      // Count is less than 21, player can still hit or stay
+      else if (newSplitCount < 21) {
         return {
           ...state,
           splitHand: newSplitHand,
@@ -428,7 +446,9 @@ const gameReducer = (state: State = initialState, action: Action) => {
             newSplitCount
           ),
         };
-      } else {
+      }
+      // Player busted
+      else {
         return {
           ...state,
           splitHand: newSplitHand,
