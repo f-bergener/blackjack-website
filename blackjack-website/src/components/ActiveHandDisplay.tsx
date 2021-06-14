@@ -29,8 +29,13 @@ const ActiveHandDisplay: React.FC = () => {
     (state: State) => state.splitHandBestMove
   );
   const stayBoolean = useSelector((state: State) => state.stayBoolean);
+  const correctMoves = useSelector((state: State) => state.correctMoves);
+  const totalMoves = useSelector((state: State) => state.totalMoves);
   return (
     <>
+      <h2>{`${correctMoves}/${totalMoves} / ${Math.ceil(
+        (correctMoves / totalMoves) * 100
+      )}%`}</h2>
       <h2>Bet: ${pot.toLocaleString("en")}</h2>
       {splitPot ? <h2>Split Bet: ${splitPot.toLocaleString("en")}</h2> : <></>}
       <PlayerHand />
