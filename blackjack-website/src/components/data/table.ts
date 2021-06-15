@@ -3,7 +3,25 @@ import { card } from "./getDeck";
 
 const { DOUBLE_DOWN, HIT, SPLIT, STAY } = ActionConstants;
 
-const handRows = {
+type Action = typeof STAY | typeof HIT | typeof SPLIT | typeof DOUBLE_DOWN;
+
+// HandRow interfaces
+interface HandRow {
+  readonly [index: string]: Action;
+  readonly [index: number]: Action;
+}
+
+interface DealerCardIndex {
+  readonly [index: string]: HandRow;
+  readonly [index: number]: HandRow;
+}
+
+interface HandRows {
+  readonly [index: string]: DealerCardIndex;
+  readonly [index: number]: DealerCardIndex;
+}
+
+const handRows: HandRows = {
   A: {
     10: {
       2: STAY,
@@ -362,7 +380,19 @@ const handRows = {
   },
 };
 
-const countRows = {
+// Inter face for CountRows and PostMoveCountRows
+
+interface CountRow {
+  readonly [index: string]: Action;
+  readonly [index: number]: Action;
+}
+
+interface CountRows {
+  readonly [index: string]: CountRow;
+  readonly [index: number]: CountRow;
+}
+
+const countRows: CountRows = {
   20: {
     2: STAY,
     3: STAY,
@@ -605,7 +635,7 @@ const countRows = {
   },
 };
 
-const postMoveCountRows = {
+const postMoveCountRows: CountRows = {
   20: {
     2: STAY,
     3: STAY,
@@ -902,13 +932,13 @@ export const initialHandGetBestMove = (
   let cardTwo = playerHand[1];
   let dealerFace = dealerHand[1].faceValue;
   let dealerNumber = dealerHand[1].numberValue;
+  // Check if the dealer's card is a number card or a K, Q, J, A
   if (dealerNumber) {
     if (
       cardOne.faceValue &&
       cardTwo.faceValue &&
       cardOne.faceValue === cardTwo.faceValue
     ) {
-      // @ts-ignore
       return handRows[cardTwo.faceValue][cardOne.faceValue][dealerNumber];
     }
     if (
@@ -916,10 +946,8 @@ export const initialHandGetBestMove = (
       cardTwo.numberValue &&
       cardOne.numberValue === cardTwo.numberValue
     ) {
-      // @ts-ignore
       return handRows[cardOne.numberValue][cardTwo.numberValue][dealerNumber];
     }
-    // @ts-ignore
     return countRows[playerCount][dealerNumber];
   } else {
     if (
@@ -927,19 +955,15 @@ export const initialHandGetBestMove = (
       cardTwo.faceValue &&
       cardOne.faceValue === cardTwo.faceValue
     ) {
-      // @ts-ignore
       return handRows[cardOne.faceValue][cardTwo.faceValue][dealerFace];
     }
-    // @ts-ignore
     if (
       cardOne.numberValue &&
       cardTwo.numberValue &&
       cardOne.numberValue === cardTwo.numberValue
     ) {
-      // @ts-ignore
       return handRows[cardOne.numberValue][cardTwo.numberValue][dealerFace];
     }
-    // @ts-ignore
     return countRows[playerCount][dealerFace];
   }
 };
@@ -951,8 +975,6 @@ export const postFirstMoveGetBestHand = (
   let dealerFace = dealerHand[1].faceValue;
   let dealerNumber = dealerHand[1].numberValue;
   if (dealerNumber) {
-    // @ts-ignore
     return postMoveCountRows[playerCount][dealerNumber];
-    // @ts-ignore
   } else return postMoveCountRows[playerCount][dealerFace];
 };
