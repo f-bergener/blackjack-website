@@ -31,6 +31,8 @@ export type State = {
   splitHandBestMove: string;
   totalMoves: number;
   correctMoves: number;
+  totalHands: number;
+  handsWon: number;
 };
 
 const initialState = {
@@ -56,6 +58,8 @@ const initialState = {
   splitHandBestMove: "",
   totalMoves: 0,
   correctMoves: 0,
+  totalHands: 0,
+  handsWon: 0,
 };
 
 const gameReducer = (state: State = initialState, action: Action) => {
@@ -85,6 +89,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
         splitHandBestMove: "",
         totalMoves: 0,
         correctMoves: 0,
+        totalHands: 0,
+        handsWon: 0,
       };
     }
     // --------------------------------------------------------
@@ -115,6 +121,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
     // --------------------------------------------------------
     // Game actions
     case ActionConstants.DEAL: {
+      const newTotalHands = state.totalHands + 1;
       const newPlayerHand = [...state.playerHand];
       const newDealerHand = [...state.dealerHand];
       const newCardDeck = [...state.currentCardDeck];
@@ -157,6 +164,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           splitBoolean: false,
           splitHitBoolean: false,
           splitStayBoolean: false,
+          totalHands: newTotalHands,
         };
       }
       // Player wins, so the ability to take any actions is disabled
@@ -181,6 +189,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
           splitBoolean: false,
           splitHitBoolean: false,
           splitStayBoolean: false,
+          totalHands: newTotalHands,
         };
       }
       // Giving the player the ability to split their hand or double down
@@ -208,6 +217,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
             newDealerHand,
             newPlayerCount
           ),
+          totalHands: newTotalHands,
         };
       }
       // Giving the player the ability to double down, but not the ability to split
@@ -230,6 +240,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
             newDealerHand,
             newPlayerCount
           ),
+          totalHands: newTotalHands,
         };
       }
       // Giving the player the ability to only hit or stay since
@@ -253,6 +264,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
             newDealerHand,
             newPlayerCount
           ),
+          totalHands: newTotalHands,
         };
       }
     }
@@ -416,6 +428,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
       }
     }
     case ActionConstants.SPLIT: {
+      const newTotalHands = state.totalHands + 1;
       // Creating a second hand and drawing from the deck twice to
       // get two complete hands
       const newPlayerHand = [...state.playerHand];
@@ -458,6 +471,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         ),
         totalMoves: state.totalMoves + 1,
         correctMoves: newCorrectMoves,
+        totalHands: newTotalHands,
       };
     }
     case ActionConstants.SPLIT_HIT: {
@@ -544,6 +558,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
     // --------------------------------------------------------
     // Update bankroll and proceed to next hand actions
     case ActionConstants.INCREASE_BANKROLL_RESET: {
+      const newHandsWon = state.handsWon + 1;
       const newBankroll = state.bankroll + state.pot * 2;
       return {
         ...state,
@@ -555,9 +570,11 @@ const gameReducer = (state: State = initialState, action: Action) => {
         dealerCount: 0,
         currentCardDeck: getDeck(),
         playerHandBestMove: "",
+        handsWon: newHandsWon,
       };
     }
     case ActionConstants.BLACKJACK_INCREASE_BANKROLL_RESET: {
+      const newHandsWon = state.handsWon + 1;
       const newBankroll = state.bankroll + state.pot * 2 + state.pot * 0.5;
       return {
         ...state,
@@ -568,6 +585,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         playerCount: 0,
         dealerCount: 0,
         currentCardDeck: getDeck(),
+        handsWon: newHandsWon,
       };
     }
     case ActionConstants.DECREASE_BANKROLL_RESET: {
@@ -597,6 +615,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
       };
     }
     case ActionConstants.SPLIT_INCREASE_BANKROLL_RESET: {
+      const newHandsWon = state.handsWon + 1;
       const newBankroll = state.bankroll + state.splitPot * 2;
       return {
         ...state,
@@ -605,6 +624,7 @@ const gameReducer = (state: State = initialState, action: Action) => {
         splitHand: [...hand],
         splitCount: 0,
         splitHandBestMove: "",
+        handsWon: newHandsWon,
       };
     }
     case ActionConstants.SPLIT_DECREASE_BANKROLL_RESET: {
