@@ -575,7 +575,8 @@ const gameReducer = (state: State = initialState, action: Action) => {
     }
     case ActionConstants.BLACKJACK_INCREASE_BANKROLL_RESET: {
       const newHandsWon = state.handsWon + 1;
-      const newBankroll = state.bankroll + state.pot * 2 + state.pot * 0.5;
+      const newBankroll =
+        state.bankroll + state.pot * 2 + Math.ceil(state.pot * 0.5);
       return {
         ...state,
         bankroll: newBankroll,
