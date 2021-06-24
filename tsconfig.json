@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+      "strict": true,
+      "target": "ES6",
+      "outDir": "./dist",
+      "jsx": "react",
+      "allowJs": true,
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "importsNotUsedAsValues": "remove"
+    },
+    "include": ["src/*", "types/index.d.ts"],
+  }
