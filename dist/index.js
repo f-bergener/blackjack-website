@@ -6,14 +6,17 @@ app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/api", require("./api"));
 app.get("/", (req, res, next) => {
-  try {
-    res.send("index.html");
-  } catch (error) {
-    next(error);
-  }
+    try {
+        res.send("index.html");
+    }
+    catch (error) {
+        next(error);
+    }
 });
 const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`App listening on port http://localhost:${PORT}`);
+    console.log(`App listening on port http://localhost:${PORT}`);
 });
+export {};
