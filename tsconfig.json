@@ -9,5 +9,5 @@
       "allowSyntheticDefaultImports": true,
       "importsNotUsedAsValues": "remove"
     },
-    "include": ["src/*", "types/index.d.ts"],
+    "include": ["src/index.ts", "types/index.d.ts"],
   }
