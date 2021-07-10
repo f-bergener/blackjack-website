@@ -1,15 +1,14 @@
 import { Request, Response, NextFunction } from "express";
+import Sequelize from "sequelize";
 const router = require("express").Router();
-const { User } = require("../db/users");
+const { User } = require("../db/index");
 
 module.exports = router;
 
 // Get all users
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const users = await User.findAll({
-      attributes: ["id", "username"],
-    });
+    const users = await User.findAll({ attributes: ["id", "username"] });
     if (!users.length) {
       next({ status: 500, message: "No users" });
     }
@@ -22,7 +21,9 @@ router.get("/", async (req: Request, res: Response, next: NextFunction) => {
 // Create a user
 router.post("/", async (req: Request, res: Response, next: NextFunction) => {
   try {
-      const user = await User.create({req.body})
+    const data = req.body;
+    const user = await User.create(data);
+    res.json(user);
   } catch (error) {
     next(error);
   }

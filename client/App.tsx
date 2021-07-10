@@ -4,7 +4,7 @@ import Header from "./components/Header";
 import Homepage from "./components/Homepage";
 import Game from "./components/Game";
 
-const App: React.FC = () => {
+const App: React.FC = async () => {
   return (
     <Router>
       <Header />

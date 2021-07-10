@@ -1,8 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-
-const express = require("express");
-const morgan = require("morgan");
-const path = require("path");
+import express, { Request, Response, NextFunction } from "express";
+import morgan from "morgan";
+import path from "path";
 
 const app = express();
 

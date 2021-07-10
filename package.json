@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dev": "tsc --watch --preserveWatchOutput",
     "start": "nodemon dist/index.js",
-    "start:dev": "nodemon dist/index.js & webpack -w"
+    "start:dev": "nodemon dist/index.js & webpack -w",
+    "seed": "node scripts/seed.js"
   },
   "repository": {
     "type": "git",
