@@ -157,23 +157,22 @@ User.prototype.generateToken = function () {
     }
 };
 // User class methods
-User.authenticate = function (_a) {
-    var username = _a.username, password = _a.password;
+User.authenticate = function (login) {
     return __awaiter(this, void 0, void 0, function () {
-        var user, _b, error;
-        return __generator(this, function (_c) {
-            switch (_c.label) {
-                case 0: return [4 /*yield*/, this.findOne({ where: { username: username } })];
+        var user, _a, error;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4 /*yield*/, this.findOne({ where: { username: login.username } })];
                 case 1:
-                    user = _c.sent();
-                    _b = !user;
-                    if (_b) return [3 /*break*/, 3];
-                    return [4 /*yield*/, user.correctPassword(password)];
+                    user = _b.sent();
+                    _a = !user;
+                    if (_a) return [3 /*break*/, 3];
+                    return [4 /*yield*/, user.correctPassword(login.password)];
                 case 2:
-                    _b = !(_c.sent());
-                    _c.label = 3;
+                    _a = !(_b.sent());
+                    _b.label = 3;
                 case 3:
-                    if (_b) {
+                    if (_a) {
                         error = Error("Incorrect username/password");
                         throw error;
                     }

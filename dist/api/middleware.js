@@ -1,15 +1,4 @@
 "use strict";
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -47,75 +36,49 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var router = require("express").Router();
 var User = require("../db/index").User;
-var _a = require("./middleware"), getUser = _a.getUser, isAdmin = _a.isAdmin;
-module.exports = router;
-// Get all users
-router.get("/", 
-// getUser,
-// isAdmin,
-function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var users, error_1;
+var getUser = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var token, user, error_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, User.findAll()];
+                console.log("Hit getUser function ------------------------------------");
+                _a.label = 1;
             case 1:
-                users = _a.sent();
-                if (!users.length) {
-                    next({ status: 500, message: "No users" });
-                }
-                res.json(users);
-                return [3 /*break*/, 3];
+                _a.trys.push([1, 3, , 4]);
+                token = req.headers.authorization;
+                return [4 /*yield*/, User.findByToken(token)];
             case 2:
+                user = _a.sent();
+                req.user = user;
+                next();
+                return [3 /*break*/, 4];
+            case 3:
                 error_1 = _a.sent();
                 next(error_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                return [3 /*break*/, 4];
+            case 4: return [2 /*return*/];
         }
     });
-}); });
-// Create a user
-router.post("/", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var data, user, error_2;
+}); };
+var isAdmin = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                data = req.body;
-                return [4 /*yield*/, User.create(data)];
-            case 1:
-                user = _a.sent();
-                res.json(user);
-                return [3 /*break*/, 3];
-            case 2:
-                error_2 = _a.sent();
-                next(error_2);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+        console.log("Hit isAdmin function ------------------------------------");
+        try {
+            if (!req.user.isAdmin) {
+                return [2 /*return*/, res.status(403).send("User is not an admin")];
+            }
+            else {
+                next();
+            }
         }
-    });
-}); });
-// Update a user
-router.put("/", getUser, function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var data, user, error_3;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                data = __assign(__assign({}, req.user), req.body);
-                return [4 /*yield*/, User.update(data)];
-            case 1:
-                user = _a.sent();
-                res.json(user);
-                return [3 /*break*/, 3];
-            case 2:
-                error_3 = _a.sent();
-                next(error_3);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+        catch (error) {
+            next(error);
         }
+        return [2 /*return*/];
     });
-}); });
+}); };
+module.exports = {
+    getUser: getUser,
+    isAdmin: isAdmin,
+};

@@ -122,17 +122,22 @@ User.prototype.generateToken = function () {
   }
 };
 
+interface LogIn {
+  username: String;
+  password: String;
+}
+
 // User class methods
-User.authenticate = async function ({ username, password }) {
-  const user = await this.findOne({ where: { username } });
-  if (!user || !(await user.correctPassword(password))) {
+User.authenticate = async function (login: LogIn) {
+  const user = await this.findOne({ where: { username: login.username } });
+  if (!user || !(await user.correctPassword(login.password))) {
     const error = Error("Incorrect username/password");
     throw error;
   }
   return user.generateToken();
 };
 
-User.findByToken = async (token) => {
+User.findByToken = async (token: String) => {
   try {
     const payload = await jwt.verify(token, process.env.JWT);
     const user = await User.findByPk(payload.id);
