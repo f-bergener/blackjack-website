@@ -46,7 +46,7 @@ router.get("/", function (req, res, next) { return __awaiter(void 0, void 0, voi
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                return [4 /*yield*/, User.findAll({ attributes: ["id", "username"] })];
+                return [4 /*yield*/, User.findAll()];
             case 1:
                 users = _a.sent();
                 if (!users.length) {
@@ -78,6 +78,27 @@ router.post("/", function (req, res, next) { return __awaiter(void 0, void 0, vo
             case 2:
                 error_2 = _a.sent();
                 next(error_2);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); });
+// Update a user
+router.put("/", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var data, user, error_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                data = req.body;
+                return [4 /*yield*/, User.create(data)];
+            case 1:
+                user = _a.sent();
+                res.json(user);
+                return [3 /*break*/, 3];
+            case 2:
+                error_3 = _a.sent();
+                next(error_3);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }

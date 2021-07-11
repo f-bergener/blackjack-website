@@ -8,7 +8,7 @@ module.exports = router;
 // Get all users
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const users = await User.findAll({ attributes: ["id", "username"] });
+    const users = await User.findAll();
     if (!users.length) {
       next({ status: 500, message: "No users" });
     }
@@ -28,3 +28,16 @@ router.post("/", async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 });
+
+// Update a user
+router.put("/", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const data = req.body;
+    const user = await User.create(data);
+    res.json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+export {};
