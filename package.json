@@ -1,12 +1,14 @@
 {
-  "name": "react-redux-typescript-project-starter",
+  "name": "blackjack-practice",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build:dev": "tsc --watch --preserveWatchOutput",
     "start": "nodemon dist/index.js",
-    "start:dev": "nodemon dist/index.js & webpack -w"
+    "start:dev": "nodemon dist/index.js & webpack -w",
+    "seed": "node scripts/seed.js"
   },
   "repository": {
     "type": "git",
@@ -20,14 +22,18 @@
   },
   "homepage": "https://github.com/f-bergener/react-redux-typescript-project-starter#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
+    "pg": "^8.6.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0",
     "redux": "^4.1.0",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "sequelize": "^6.6.4"
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
