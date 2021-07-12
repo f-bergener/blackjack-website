@@ -1,4 +1,5 @@
 export enum ActionConstants {
+  // * * Game Reducer Actions
   RESTART_GAME = "RESTART_GAME",
   // Modify bet actions
   ADD_TO_BET = "ADD_TO_BET",
@@ -19,4 +20,5 @@ export enum ActionConstants {
   SPLIT_INCREASE_BANKROLL_RESET = "SPLIT_INCREASE_BANKROLL_RESET",
   SPLIT_DECREASE_BANKROLL_RESET = "SPLIT_DECREASE_BANKROLL_RESET",
   SPLIT_NO_CHANGE_BANKROLL_RESET = "SPLIT_NO_CHANGE_BANKROLL_RESET",
+  // * * User Reducer Actions
 }
