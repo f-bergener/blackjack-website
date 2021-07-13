@@ -1,12 +1,12 @@
-const { User } = require("../src/db/index");
+// const { User } = require("../src/db/index");
 
-declare global {
-  namespace Express {
-    interface Request {
-      user: User;
-    }
-  }
-}
+// declare global {
+//   namespace Express {
+//     interface Request {
+//       user: User;
+//     }
+//   }
+// }
 
 declare module "*.svg" {
   import React = require("react");

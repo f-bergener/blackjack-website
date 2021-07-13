@@ -5,7 +5,7 @@ import {
   splitDecreaseBankrollReset,
   splitNoChangeBankrollReset,
 } from "../redux/actionCreators";
-import { State } from "../redux/reducer";
+import { State } from "../redux/store";
 
 const SplitUpdateBankroll: React.FC = () => {
   const splitHand = useSelector((state: State) => state.splitHand);

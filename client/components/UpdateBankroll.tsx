@@ -6,7 +6,7 @@ import {
   noChangeBankrollReset,
   increaseBankrollReset,
 } from "../redux/actionCreators";
-import { State } from "../redux/reducer";
+import { State } from "../redux/store";
 
 const UpdateBankroll: React.FC = () => {
   const playerHand = useSelector((state: State) => state.playerHand);

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { State } from "../redux/reducer";
+import { State } from "../redux/store";
 import cardBack from "./data/card-images/card_back.svg";
 import images from "./data/card-images";
 import RegularHand from "./RegularHand";

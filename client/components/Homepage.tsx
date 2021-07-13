@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { State } from "../redux/reducer";
+import { State } from "../redux/store";
 import { restartGame } from "../redux/actionCreators";
 
 const Homepage: React.FC = () => {
@@ -11,6 +11,9 @@ const Homepage: React.FC = () => {
     <>
       <h1>Welcome</h1>
       <h2>Click the button below to start your game</h2>
+      <form>
+        <input type="text" required />
+      </form>
       {activeGame ? (
         <>
           <Link to="/game">

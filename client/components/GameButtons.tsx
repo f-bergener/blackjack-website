@@ -9,7 +9,7 @@ import {
   splitStay,
   stay,
 } from "../redux/actionCreators";
-import { State } from "../redux/reducer";
+import { State } from "../redux/store";
 
 export const Deal: React.FC = () => {
   const dispatch = useDispatch();

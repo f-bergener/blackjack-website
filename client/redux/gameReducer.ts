@@ -5,35 +5,9 @@ import {
   initialHandGetBestMove,
   postFirstMoveGetBestHand,
 } from "../components/data/table";
+import { State } from "./store";
 
 const hand: card[] = [];
-
-export type State = {
-  activeGame: boolean;
-  currentCardDeck: card[];
-  bankroll: number;
-  bet: number;
-  pot: number;
-  splitPot: number;
-  playerHand: card[];
-  dealerHand: card[];
-  splitHand: card[];
-  playerCount: number;
-  dealerCount: number;
-  splitCount: number;
-  hitBoolean: boolean;
-  stayBoolean: boolean;
-  doubleDownBoolean: boolean;
-  splitBoolean: boolean;
-  splitHitBoolean: boolean;
-  splitStayBoolean: boolean;
-  playerHandBestMove: string;
-  splitHandBestMove: string;
-  totalMoves: number;
-  correctMoves: number;
-  totalHands: number;
-  handsWon: number;
-};
 
 const initialState = {
   activeGame: false,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { State } from "../redux/reducer";
+import { State } from "../redux/store";
 import PreDealDisplay from "./PreDealDisplay";
 import ActiveHandDisplay from "./ActiveHandDisplay";
 import { restartGame } from "../redux/actionCreators";

@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { State } from "../redux/reducer";
+import { State } from "../redux/store";
 import {
   DoubleDown,
   Hit,

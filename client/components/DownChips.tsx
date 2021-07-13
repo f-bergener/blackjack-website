@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromBet } from "../redux/actionCreators";
-import { State } from "../redux/reducer";
+import { State } from "../redux/store";
 
 const DownChips: React.FC = () => {
   const bet = useSelector((state: State) => state.bet);
