@@ -11,9 +11,7 @@ const Homepage: React.FC = () => {
     <>
       <h1>Welcome</h1>
       <h2>Click the button below to start your game</h2>
-      <form>
-        <input type="text" required />
-      </form>
+
       {activeGame ? (
         <>
           <Link to="/game">

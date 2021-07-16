@@ -5,6 +5,7 @@ export const restartGame = () => {
     type: ActionConstants.RESTART_GAME,
   };
 };
+// * * Game Reducer Actions
 // Modify bet actions
 export const addToBet = (value: number) => {
   return {
@@ -103,3 +104,9 @@ export const splitNoChangeBankrollReset = () => {
     type: ActionConstants.SPLIT_NO_CHANGE_BANKROLL_RESET,
   };
 };
+
+// * * User reducer actions
+export const setAuth = (auth: String) => ({
+  type: ActionConstants.SET_AUTH,
+  auth,
+});
