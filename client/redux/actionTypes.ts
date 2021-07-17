@@ -70,6 +70,11 @@ interface splitNoChangeBankrollReset {
   type: ActionConstants.SPLIT_NO_CHANGE_BANKROLL_RESET;
 }
 
+interface setAuth {
+  type: ActionConstants.SET_AUTH;
+  payload: Object;
+}
+
 export type Action =
   | restartGame
   // Modify bet actions
@@ -90,4 +95,5 @@ export type Action =
   | noChangeBankrollReset
   | splitIncreaseBankrollReset
   | splitDecreaseBankrollReset
-  | splitNoChangeBankrollReset;
+  | splitNoChangeBankrollReset
+  | setAuth;

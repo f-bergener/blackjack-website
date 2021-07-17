@@ -6,7 +6,8 @@ router.post(
   "/login",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      res.send({ token: await User.authenticate(req.body) });
+      const token = await User.authenticate(req.body);
+      res.send({ token });
     } catch (error) {
       next(error);
     }
@@ -23,17 +24,20 @@ router.post(
         email,
         password,
       });
-      res.send({ token: await user.generateToken() });
+      const token = await user.generateToken();
+      res.send({ token });
     } catch (error) {
       next(error);
     }
   }
 );
 
-router.get("/me", async (req, res, next) => {
+router.get("/me", async (req: Request, res: Response, next: NextFunction) => {
   try {
     res.send(await User.findByToken(req.headers.authorization));
-  } catch (ex) {
-    next(ex);
+  } catch (error) {
+    next(error);
   }
 });
+
+module.exports = router;

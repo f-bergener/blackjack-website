@@ -1,6 +1,8 @@
-import { createStore, applyMiddleware } from "redux";
-import loggingMiddleware from "redux-logger";
+import { combineReducers, createStore, applyMiddleware } from "redux";
+import thunkMiddleware from "redux-thunk";
+import { createLogger } from "redux-logger";
 import gameReducer from "./gameReducer";
+import userReducer from "./userReducer";
 import { card } from "../components/data/getDeck";
 
 export type State = {
@@ -30,6 +32,14 @@ export type State = {
   handsWon: number;
 };
 
-const store = createStore(gameReducer, applyMiddleware(loggingMiddleware));
+const combinedReducer = combineReducers({
+  game: gameReducer,
+  user: userReducer,
+});
+
+const store = createStore(
+  combinedReducer,
+  applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
+);
 
 export default store;

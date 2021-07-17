@@ -10,5 +10,3 @@ router.use((req: Request, res: Response, next: NextFunction) => {
   // error.status = 404;
   next(error);
 });
-
-export {};

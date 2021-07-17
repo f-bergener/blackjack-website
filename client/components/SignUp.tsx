@@ -1,16 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { authenticateSignup } from "../redux/userReducer";
 
 const LogIn: React.FC = () => {
+  const dispatch = useDispatch();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
-    <form>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault();
+        dispatch(authenticateSignup(username, email, password));
+      }}
+    >
       <label>
-        Username: <input type="username" placeholder="text" required />
+        Username:{" "}
+        <input
+          type="text"
+          value={username}
+          onChange={(event) => setUsername(event.target.value)}
+          placeholder="Username"
+          required
+        />
       </label>
       <label>
-        Email: <input type="email" placeholder="Email" required />
+        Email:{" "}
+        <input
+          type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          placeholder="Email"
+          required
+        />
       </label>
       <label>
-        Password: <input type="password" placeholder="Password" required />
+        Password:{" "}
+        <input
+          type="password"
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}
+          placeholder="Password"
+          required
+        />
       </label>
       <button type="submit">Submit</button>
     </form>
