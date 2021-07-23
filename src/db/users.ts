@@ -140,7 +140,23 @@ User.authenticate = async function (login: LogIn) {
 User.findByToken = async (token: String) => {
   try {
     const payload = await jwt.verify(token, process.env.JWT);
-    const user = await User.findByPk(payload.id);
+    const user = await User.findAll({
+      where: { id: payload.id },
+      attributes: [
+        "email",
+        "username",
+        "practiceModeTotalHands",
+        "practiceModeHandsWon",
+        "practiceModeTotalMoves",
+        "practiceModeCorrectMoves",
+        "moneyModeTotalHands",
+        "moneyModeHandsWon",
+        "moneyModeTotalMoves",
+        "moneyModeCorrectMoves",
+        "bankroll",
+        "isAdmin",
+      ],
+    });
     if (!user) {
       throw "error";
     }

@@ -190,7 +190,23 @@ User.findByToken = function (token) { return __awaiter(void 0, void 0, void 0, f
                 return [4 /*yield*/, jwt.verify(token, process.env.JWT)];
             case 1:
                 payload = _a.sent();
-                return [4 /*yield*/, User.findByPk(payload.id)];
+                return [4 /*yield*/, User.findAll({
+                        where: { id: payload.id },
+                        attributes: [
+                            "email",
+                            "username",
+                            "practiceModeTotalHands",
+                            "practiceModeHandsWon",
+                            "practiceModeTotalMoves",
+                            "practiceModeCorrectMoves",
+                            "moneyModeTotalHands",
+                            "moneyModeHandsWon",
+                            "moneyModeTotalMoves",
+                            "moneyModeCorrectMoves",
+                            "bankroll",
+                            "isAdmin",
+                        ],
+                    })];
             case 2:
                 user = _a.sent();
                 if (!user) {

@@ -6,12 +6,9 @@ import { setAuth } from "./actionCreators";
 const TOKEN = "token";
 
 const me = () => {
-  console.log("called me function --------------------------------");
   return async (dispatch) => {
     const token = window.localStorage.getItem(TOKEN);
-    console.log("token is here---------", token);
     if (token) {
-      console.log("in try in me function ---------------------");
       try {
         const { data } = await axios.get("/auth/me", {
           headers: {
@@ -46,7 +43,6 @@ export const authenticateLogin =
 export const authenticateSignup =
   (username: String, email: String, password: String) => async (dispatch) => {
     try {
-      console.log("In Try --------------");
       const { data } = await axios.post("/auth/signup", {
         username,
         email,
