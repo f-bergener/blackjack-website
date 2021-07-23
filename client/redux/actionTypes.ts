@@ -70,8 +70,8 @@ interface splitNoChangeBankrollReset {
   type: ActionConstants.SPLIT_NO_CHANGE_BANKROLL_RESET;
 }
 
-interface setAuth {
-  type: ActionConstants.SET_AUTH;
+interface setUser {
+  type: ActionConstants.SET_USER;
   payload: Object;
 }
 
@@ -96,4 +96,4 @@ export type Action =
   | splitIncreaseBankrollReset
   | splitDecreaseBankrollReset
   | splitNoChangeBankrollReset
-  | setAuth;
+  | setUser;
