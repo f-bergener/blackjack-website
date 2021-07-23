@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Action } from "./actionTypes";
 import { ActionConstants } from "./actionConstants";
-import { setAuth } from "./actionCreators";
+import { setUser } from "./actionCreators";
 
 const TOKEN = "token";
 
@@ -16,7 +16,7 @@ const me = () => {
           },
         });
         console.log(data);
-        dispatch(setAuth(data));
+        dispatch(setUser(data));
       } catch (error) {
         console.error(error);
       }
@@ -61,7 +61,7 @@ const initialState = {};
 
 const userReducer = (state: Object = initialState, action: Action) => {
   switch (action.type) {
-    case ActionConstants.SET_AUTH: {
+    case ActionConstants.SET_USER: {
       return action.payload;
     }
     default:

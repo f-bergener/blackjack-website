@@ -106,6 +106,6 @@ export const splitNoChangeBankrollReset = () => {
 };
 
 // * * User reducer actions
-export const setAuth = (auth: Object) => {
-  return { type: ActionConstants.SET_AUTH, payload: auth };
+export const setUser = (auth: Object) => {
+  return { type: ActionConstants.SET_USER, payload: auth };
 };
