@@ -76,6 +76,10 @@ const userReducer = (state: UserState = initialState, action: Action) => {
     case ActionConstants.SET_USER: {
       return action.payload;
     }
+    case ActionConstants.LOG_OUT: {
+      window.localStorage.removeItem(TOKEN);
+      return initialState;
+    }
     default:
       return state;
   }

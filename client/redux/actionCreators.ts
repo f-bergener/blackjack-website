@@ -109,3 +109,7 @@ export const splitNoChangeBankrollReset = () => {
 export const setUser = (auth: Object) => {
   return { type: ActionConstants.SET_USER, payload: auth };
 };
+
+export const logOut = () => {
+  return { type: ActionConstants.LOG_OUT };
+};

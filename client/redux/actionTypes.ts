@@ -75,12 +75,16 @@ interface setUser {
   payload: Object;
 }
 
+interface logOut {
+  type: ActionConstants.LOG_OUT;
+}
+
 export type Action =
   | restartGame
-  // Modify bet actions
+  // * * Modify bet actions
   | addToBet
   | removeFromBet
-  // Game actions
+  // * * Game actions
   | hit
   | stay
   | doubleDown
@@ -88,7 +92,7 @@ export type Action =
   | splitHit
   | splitStay
   | deal
-  // Update bankroll and proceed to next hand actions
+  // * * Update bankroll and proceed to next hand actions
   | increaseBankrollReset
   | blackjackIncreaseBankrollReset
   | decreaseBankrollReset
@@ -96,4 +100,6 @@ export type Action =
   | splitIncreaseBankrollReset
   | splitDecreaseBankrollReset
   | splitNoChangeBankrollReset
-  | setUser;
+  // * * User Reducer Actions
+  | setUser
+  | logOut;
