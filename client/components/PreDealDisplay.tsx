@@ -7,9 +7,9 @@ import { Deal } from "./GameButtons";
 import Bankrupt from "./Bankrupt";
 
 const PreDealDisplay: React.FC = () => {
-  const bankroll = useSelector((state: State) => state.bankroll);
-  const pot = useSelector((state: State) => state.pot);
-  const bet = useSelector((state: State) => state.bet);
+  const bankroll = useSelector((state: State) => state.game.bankroll);
+  const pot = useSelector((state: State) => state.game.pot);
+  const bet = useSelector((state: State) => state.game.bet);
   const total = bankroll + bet + pot;
   return (
     <>

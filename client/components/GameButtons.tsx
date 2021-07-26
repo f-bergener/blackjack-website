@@ -13,8 +13,15 @@ import { State } from "../redux/store";
 
 export const Deal: React.FC = () => {
   const dispatch = useDispatch();
+  const totalMoves = useSelector((state: State) => state.game.totalMoves);
   return (
-    <button className="button deal-button" onClick={() => dispatch(deal())}>
+    <button
+      className="button deal-button"
+      onClick={() => {
+        dispatch(deal());
+        console.log(totalMoves);
+      }}
+    >
       Deal
     </button>
   );
@@ -22,9 +29,9 @@ export const Deal: React.FC = () => {
 
 export const Hit: React.FC = () => {
   const dispatch = useDispatch();
-  const hitBoolean = useSelector((state: State) => state.hitBoolean);
+  const hitBoolean = useSelector((state: State) => state.game.hitBoolean);
   const splitStayBoolean = useSelector(
-    (state: State) => state.splitStayBoolean
+    (state: State) => state.game.splitStayBoolean
   );
   // Checking if the player has an active split hand since I want the player to complete their split hand before moving forward
   if (hitBoolean && !splitStayBoolean) {
@@ -40,9 +47,9 @@ export const Hit: React.FC = () => {
 
 export const Stay: React.FC = () => {
   const dispatch = useDispatch();
-  const stayBoolean = useSelector((state: State) => state.stayBoolean);
+  const stayBoolean = useSelector((state: State) => state.game.stayBoolean);
   const splitStayBoolean = useSelector(
-    (state: State) => state.splitStayBoolean
+    (state: State) => state.game.splitStayBoolean
   );
   // Checking if the player has an active split hand since I want the player to complete their split hand before moving forward
   if (stayBoolean && !splitStayBoolean) {
@@ -59,7 +66,7 @@ export const Stay: React.FC = () => {
 export const DoubleDown: React.FC = () => {
   const dispatch = useDispatch();
   const doubleDownBoolean = useSelector(
-    (state: State) => state.doubleDownBoolean
+    (state: State) => state.game.doubleDownBoolean
   );
   if (doubleDownBoolean) {
     return (
@@ -77,7 +84,7 @@ export const DoubleDown: React.FC = () => {
 
 export const Split: React.FC = () => {
   const dispatch = useDispatch();
-  const splitBoolean = useSelector((state: State) => state.splitBoolean);
+  const splitBoolean = useSelector((state: State) => state.game.splitBoolean);
   if (splitBoolean) {
     return (
       <button className="button split-button" onClick={() => dispatch(split())}>
@@ -91,7 +98,9 @@ export const Split: React.FC = () => {
 
 export const SplitHit: React.FC = () => {
   const dispatch = useDispatch();
-  const splitHitBoolean = useSelector((state: State) => state.splitHitBoolean);
+  const splitHitBoolean = useSelector(
+    (state: State) => state.game.splitHitBoolean
+  );
   if (splitHitBoolean) {
     return (
       <button
@@ -109,7 +118,7 @@ export const SplitHit: React.FC = () => {
 export const SplitStay: React.FC = () => {
   const dispatch = useDispatch();
   const splitStayBoolean = useSelector(
-    (state: State) => state.splitStayBoolean
+    (state: State) => state.game.splitStayBoolean
   );
   if (splitStayBoolean) {
     return (

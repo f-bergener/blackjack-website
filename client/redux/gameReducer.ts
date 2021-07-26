@@ -5,7 +5,7 @@ import {
   initialHandGetBestMove,
   postFirstMoveGetBestHand,
 } from "../components/data/table";
-import { State } from "./store";
+import { GameState } from "./store";
 
 const hand: card[] = [];
 
@@ -36,7 +36,7 @@ const initialState = {
   handsWon: 0,
 };
 
-const gameReducer = (state: State = initialState, action: Action) => {
+const gameReducer = (state: GameState = initialState, action: Action) => {
   switch (action.type) {
     case ActionConstants.RESTART_GAME: {
       return {

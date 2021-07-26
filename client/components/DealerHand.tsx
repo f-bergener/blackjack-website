@@ -6,8 +6,8 @@ import images from "./data/card-images";
 import RegularHand from "./RegularHand";
 
 const DealerHand: React.FC = () => {
-  const dealerHand = useSelector((state: State) => state.dealerHand);
-  const stayBoolean = useSelector((state: State) => state.stayBoolean);
+  const dealerHand = useSelector((state: State) => state.game.dealerHand);
+  const stayBoolean = useSelector((state: State) => state.game.stayBoolean);
   if (dealerHand.length === 2 && stayBoolean) {
     let card = dealerHand[1];
     if (card.faceValue) {

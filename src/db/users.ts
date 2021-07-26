@@ -28,7 +28,7 @@ const User = db.define("user", {
       notEmpty: true,
     },
   },
-  practiceModeTotalHands: {
+  totalHands: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
     allowNull: false,
@@ -36,7 +36,7 @@ const User = db.define("user", {
       min: 0,
     },
   },
-  practiceModeHandsWon: {
+  handsWon: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
     allowNull: false,
@@ -44,7 +44,7 @@ const User = db.define("user", {
       min: 0,
     },
   },
-  practiceModeTotalMoves: {
+  totalMoves: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
     allowNull: false,
@@ -52,39 +52,7 @@ const User = db.define("user", {
       min: 0,
     },
   },
-  practiceModeCorrectMoves: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-    allowNull: false,
-    validate: {
-      min: 0,
-    },
-  },
-  moneyModeTotalHands: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-    allowNull: false,
-    validate: {
-      min: 0,
-    },
-  },
-  moneyModeHandsWon: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-    allowNull: false,
-    validate: {
-      min: 0,
-    },
-  },
-  moneyModeTotalMoves: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0,
-    allowNull: false,
-    validate: {
-      min: 0,
-    },
-  },
-  moneyModeCorrectMoves: {
+  correctMoves: {
     type: DataTypes.INTEGER,
     defaultValue: 0,
     allowNull: false,
@@ -123,15 +91,15 @@ User.prototype.generateToken = function () {
 };
 
 interface LogIn {
-  username: String;
+  email: String;
   password: String;
 }
 
 // User class methods
 User.authenticate = async function (login: LogIn) {
-  const user = await this.findOne({ where: { username: login.username } });
+  const user = await this.findOne({ where: { email: login.email } });
   if (!user || !(await user.correctPassword(login.password))) {
-    const error = Error("Incorrect username/password");
+    const error = Error("Incorrect email/password");
     throw error;
   }
   return user.generateToken();
@@ -145,14 +113,10 @@ User.findByToken = async (token: String) => {
       attributes: [
         "email",
         "username",
-        "practiceModeTotalHands",
-        "practiceModeHandsWon",
-        "practiceModeTotalMoves",
-        "practiceModeCorrectMoves",
-        "moneyModeTotalHands",
-        "moneyModeHandsWon",
-        "moneyModeTotalMoves",
-        "moneyModeCorrectMoves",
+        "totalHands",
+        "handsWon",
+        "totalMoves",
+        "correctMoves",
         "bankroll",
         "isAdmin",
       ],

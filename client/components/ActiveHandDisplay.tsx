@@ -16,23 +16,23 @@ import SplitUpdateBankroll from "./SplitUpdateBankroll";
 import SplitHand from "./SplitHand";
 
 const ActiveHandDisplay: React.FC = () => {
-  const pot = useSelector((state: State) => state.pot);
-  const splitPot = useSelector((state: State) => state.splitPot);
-  const playerCount = useSelector((state: State) => state.playerCount);
-  const splitCount = useSelector((state: State) => state.splitCount);
-  const splitHand = useSelector((state: State) => state.splitHand);
-  const dealerCount = useSelector((state: State) => state.dealerCount);
+  const pot = useSelector((state: State) => state.game.pot);
+  const splitPot = useSelector((state: State) => state.game.splitPot);
+  const playerCount = useSelector((state: State) => state.game.playerCount);
+  const splitCount = useSelector((state: State) => state.game.splitCount);
+  const splitHand = useSelector((state: State) => state.game.splitHand);
+  const dealerCount = useSelector((state: State) => state.game.dealerCount);
   const playerHandBestMove = useSelector(
-    (state: State) => state.playerHandBestMove
+    (state: State) => state.game.playerHandBestMove
   );
   const splitHandBestMove = useSelector(
-    (state: State) => state.splitHandBestMove
+    (state: State) => state.game.splitHandBestMove
   );
-  const stayBoolean = useSelector((state: State) => state.stayBoolean);
-  const correctMoves = useSelector((state: State) => state.correctMoves);
-  const totalMoves = useSelector((state: State) => state.totalMoves);
-  const handsWon = useSelector((state: State) => state.handsWon);
-  const totalHands = useSelector((state: State) => state.totalHands);
+  const stayBoolean = useSelector((state: State) => state.game.stayBoolean);
+  const correctMoves = useSelector((state: State) => state.game.correctMoves);
+  const totalMoves = useSelector((state: State) => state.game.totalMoves);
+  const handsWon = useSelector((state: State) => state.game.handsWon);
+  const totalHands = useSelector((state: State) => state.game.totalHands);
   return (
     <>
       <h2>

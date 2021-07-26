@@ -4,7 +4,7 @@ import { addToBet } from "../redux/actionCreators";
 import { State } from "../redux/store";
 
 const UpChips: React.FC = () => {
-  const bankroll = useSelector((state: State) => state.bankroll);
+  const bankroll = useSelector((state: State) => state.game.bankroll);
   const dispatch = useDispatch();
 
   const displayIncreaseChips = () => {

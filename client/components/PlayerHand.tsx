@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { State } from "../redux/store";
 
 const PlayerHand: React.FC = () => {
-  const playerHand = useSelector((state: State) => state.playerHand);
+  const playerHand = useSelector((state: State) => state.game.playerHand);
   return RegularHand(playerHand);
 };
 

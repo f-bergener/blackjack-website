@@ -8,18 +8,20 @@ import {
 import { State } from "../redux/store";
 
 const SplitUpdateBankroll: React.FC = () => {
-  const splitHand = useSelector((state: State) => state.splitHand);
-  const splitCount = useSelector((state: State) => state.splitCount);
-  const dealerCount = useSelector((state: State) => state.dealerCount);
-  const hitBoolean = useSelector((state: State) => state.hitBoolean);
-  const stayBoolean = useSelector((state: State) => state.stayBoolean);
+  const splitHand = useSelector((state: State) => state.game.splitHand);
+  const splitCount = useSelector((state: State) => state.game.splitCount);
+  const dealerCount = useSelector((state: State) => state.game.dealerCount);
+  const hitBoolean = useSelector((state: State) => state.game.hitBoolean);
+  const stayBoolean = useSelector((state: State) => state.game.stayBoolean);
   const doubleDownBoolean = useSelector(
-    (state: State) => state.doubleDownBoolean
+    (state: State) => state.game.doubleDownBoolean
   );
-  const splitBoolean = useSelector((state: State) => state.splitBoolean);
-  const splitHitBoolean = useSelector((state: State) => state.splitHitBoolean);
+  const splitBoolean = useSelector((state: State) => state.game.splitBoolean);
+  const splitHitBoolean = useSelector(
+    (state: State) => state.game.splitHitBoolean
+  );
   const splitStayBoolean = useSelector(
-    (state: State) => state.splitStayBoolean
+    (state: State) => state.game.splitStayBoolean
   );
   const dispatch = useDispatch();
 

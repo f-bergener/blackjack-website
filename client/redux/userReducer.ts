@@ -2,11 +2,12 @@ import axios from "axios";
 import { Action } from "./actionTypes";
 import { ActionConstants } from "./actionConstants";
 import { setUser } from "./actionCreators";
+import { UserState } from "./store";
 
-const TOKEN = "token";
+export const TOKEN = "token";
 
-const me = () => {
-  return async (dispatch) => {
+export const me = () => {
+  return async (dispatch: Function) => {
     const token = window.localStorage.getItem(TOKEN);
     if (token) {
       try {
@@ -15,8 +16,9 @@ const me = () => {
             authorization: token,
           },
         });
-        console.log(data);
-        dispatch(setUser(data));
+        const user = data[0];
+        dispatch(setUser(user));
+        localStorage.setItem("user", JSON.stringify(user));
       } catch (error) {
         console.error(error);
       }
@@ -25,7 +27,7 @@ const me = () => {
 };
 
 export const authenticateLogin =
-  (email: String, password: String) => async (dispatch) => {
+  (email: String, password: String) => async (dispatch: Function) => {
     try {
       const { data } = await axios.post("/auth/login", {
         email,
@@ -41,7 +43,8 @@ export const authenticateLogin =
   };
 
 export const authenticateSignup =
-  (username: String, email: String, password: String) => async (dispatch) => {
+  (username: string, email: string, password: String) =>
+  async (dispatch: Function) => {
     try {
       const { data } = await axios.post("/auth/signup", {
         username,
@@ -57,12 +60,26 @@ export const authenticateSignup =
     }
   };
 
-const initialState = {};
+const initialState = {
+  bankroll: 0,
+  correctMoves: 0,
+  handsWon: 0,
+  email: "",
+  isAdmin: false,
+  totalHands: 0,
+  totalMoves: 0,
+  username: "",
+  isLoggedIn: false,
+};
 
-const userReducer = (state: Object = initialState, action: Action) => {
+const userReducer = (state: UserState = initialState, action: Action) => {
   switch (action.type) {
     case ActionConstants.SET_USER: {
-      return action.payload;
+      return { ...action.payload, isLoggedIn: true };
+    }
+    case ActionConstants.LOG_OUT: {
+      window.localStorage.removeItem(TOKEN);
+      return initialState;
     }
     default:
       return state;
