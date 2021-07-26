@@ -32,18 +32,16 @@ export type GameState = {
   handsWon: number;
 };
 
-export type UserState =
-  | {
-      bankroll: number;
-      correctMoves: number;
-      handsWon: number;
-      email: string;
-      isAdmin: boolean;
-      totalHands: number;
-      totalMoves: number;
-      username: string;
-    }
-  | {};
+export type UserState = {
+  bankroll: number;
+  correctMoves: number;
+  handsWon: number;
+  email: string;
+  isAdmin: boolean;
+  totalHands: number;
+  totalMoves: number;
+  username: string;
+};
 
 export type State = {
   game: GameState;

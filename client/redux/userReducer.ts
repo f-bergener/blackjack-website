@@ -2,6 +2,7 @@ import axios from "axios";
 import { Action } from "./actionTypes";
 import { ActionConstants } from "./actionConstants";
 import { setUser } from "./actionCreators";
+import { UserState } from "./store";
 
 const TOKEN = "token";
 
@@ -58,9 +59,18 @@ export const authenticateSignup =
     }
   };
 
-const initialState = {};
+const initialState = {
+  bankroll: 0,
+  correctMoves: 0,
+  handsWon: 0,
+  email: "",
+  isAdmin: false,
+  totalHands: 0,
+  totalMoves: 0,
+  username: "",
+};
 
-const userReducer = (state: Object = initialState, action: Action) => {
+const userReducer = (state: UserState = initialState, action: Action) => {
   switch (action.type) {
     case ActionConstants.SET_USER: {
       return action.payload;
