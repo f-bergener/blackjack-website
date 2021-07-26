@@ -531,7 +531,18 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
     // --------------------------------------------------------
     // --------------------------------------------------------
     // Update bankroll and proceed to next hand actions
-    case ActionConstants.INCREASE_BANKROLL_RESET: {
+    case ActionConstants.NEXT_HAND: {
+      return {
+        ...state,
+        pot: 0,
+        playerHand: [...hand],
+        dealerHand: [...hand],
+        playerCount: 0,
+        dealerCount: 0,
+        currentCardDeck: getDeck(),
+      };
+    }
+    case ActionConstants.INCREASE_BANKROLL: {
       const newHandsWon = state.handsWon + 1;
       const newBankroll = state.bankroll + state.pot * 2;
       return {
@@ -547,7 +558,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         handsWon: newHandsWon,
       };
     }
-    case ActionConstants.BLACKJACK_INCREASE_BANKROLL_RESET: {
+    case ActionConstants.BLACKJACK_INCREASE_BANKROLL: {
       const newHandsWon = state.handsWon + 1;
       const newBankroll =
         state.bankroll + state.pot * 2 + Math.ceil(state.pot * 0.5);
@@ -563,7 +574,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         handsWon: newHandsWon,
       };
     }
-    case ActionConstants.DECREASE_BANKROLL_RESET: {
+    case ActionConstants.DECREASE_BANKROLL: {
       return {
         ...state,
         pot: 0,
@@ -575,7 +586,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         playerHandBestMove: "",
       };
     }
-    case ActionConstants.NO_CHANGE_BANKROLL_RESET: {
+    case ActionConstants.NO_CHANGE_BANKROLL: {
       const newBankroll = state.bankroll + state.pot;
       return {
         ...state,
@@ -589,7 +600,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         playerHandBestMove: "",
       };
     }
-    case ActionConstants.SPLIT_INCREASE_BANKROLL_RESET: {
+    case ActionConstants.SPLIT_INCREASE_BANKROLL: {
       const newHandsWon = state.handsWon + 1;
       const newBankroll = state.bankroll + state.splitPot * 2;
       return {
@@ -602,7 +613,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         handsWon: newHandsWon,
       };
     }
-    case ActionConstants.SPLIT_DECREASE_BANKROLL_RESET: {
+    case ActionConstants.SPLIT_DECREASE_BANKROLL: {
       return {
         ...state,
         splitPot: 0,
@@ -611,7 +622,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         splitHandBestMove: "",
       };
     }
-    case ActionConstants.SPLIT_NO_CHANGE_BANKROLL_RESET: {
+    case ActionConstants.SPLIT_NO_CHANGE_BANKROLL: {
       const newBankroll = state.bankroll + state.splitPot;
       return {
         ...state,

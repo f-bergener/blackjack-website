@@ -42,32 +42,36 @@ interface deal {
   type: ActionConstants.DEAL;
 }
 // Update bankroll and proceed to next hand actions
-interface increaseBankrollReset {
-  type: ActionConstants.INCREASE_BANKROLL_RESET;
+interface increaseBankroll {
+  type: ActionConstants.INCREASE_BANKROLL;
 }
 
-interface blackjackIncreaseBankrollReset {
-  type: ActionConstants.BLACKJACK_INCREASE_BANKROLL_RESET;
+interface blackjackIncreaseBankroll {
+  type: ActionConstants.BLACKJACK_INCREASE_BANKROLL;
 }
 
-interface decreaseBankrollReset {
-  type: ActionConstants.DECREASE_BANKROLL_RESET;
+interface decreaseBankroll {
+  type: ActionConstants.DECREASE_BANKROLL;
 }
 
-interface noChangeBankrollReset {
-  type: ActionConstants.NO_CHANGE_BANKROLL_RESET;
+interface noChangeBankroll {
+  type: ActionConstants.NO_CHANGE_BANKROLL;
 }
 
-interface splitIncreaseBankrollReset {
-  type: ActionConstants.SPLIT_INCREASE_BANKROLL_RESET;
+interface splitIncreaseBankroll {
+  type: ActionConstants.SPLIT_INCREASE_BANKROLL;
 }
 
-interface splitDecreaseBankrollReset {
-  type: ActionConstants.SPLIT_DECREASE_BANKROLL_RESET;
+interface splitDecreaseBankroll {
+  type: ActionConstants.SPLIT_DECREASE_BANKROLL;
 }
 
-interface splitNoChangeBankrollReset {
-  type: ActionConstants.SPLIT_NO_CHANGE_BANKROLL_RESET;
+interface splitNoChangeBankroll {
+  type: ActionConstants.SPLIT_NO_CHANGE_BANKROLL;
+}
+
+interface nextHand {
+  type: ActionConstants.NEXT_HAND;
 }
 
 interface setUser {
@@ -93,13 +97,14 @@ export type Action =
   | splitStay
   | deal
   // * * Update bankroll and proceed to next hand actions
-  | increaseBankrollReset
-  | blackjackIncreaseBankrollReset
-  | decreaseBankrollReset
-  | noChangeBankrollReset
-  | splitIncreaseBankrollReset
-  | splitDecreaseBankrollReset
-  | splitNoChangeBankrollReset
+  | increaseBankroll
+  | blackjackIncreaseBankroll
+  | decreaseBankroll
+  | noChangeBankroll
+  | splitIncreaseBankroll
+  | splitDecreaseBankroll
+  | splitNoChangeBankroll
+  | nextHand
   // * * User Reducer Actions
   | setUser
   | logOut;
