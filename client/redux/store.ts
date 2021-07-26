@@ -41,6 +41,7 @@ export type UserState = {
   totalHands: number;
   totalMoves: number;
   username: string;
+  isLoggedIn: boolean;
 };
 
 export type State = {

@@ -69,12 +69,13 @@ const initialState = {
   totalHands: 0,
   totalMoves: 0,
   username: "",
+  isLoggedIn: false,
 };
 
 const userReducer = (state: UserState = initialState, action: Action) => {
   switch (action.type) {
     case ActionConstants.SET_USER: {
-      return action.payload;
+      return { ...action.payload, isLoggedIn: true };
     }
     case ActionConstants.LOG_OUT: {
       window.localStorage.removeItem(TOKEN);

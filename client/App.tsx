@@ -13,7 +13,7 @@ import { TOKEN } from "./redux/userReducer";
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const token = window.localStorage.getItem(TOKEN);
-  if (token.length) {
+  if (token) {
     dispatch(me());
   }
   return (
