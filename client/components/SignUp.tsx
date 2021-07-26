@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { authenticateSignup } from "../redux/userReducer";
+import history from "../history";
 
 const LogIn: React.FC = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const LogIn: React.FC = () => {
       onSubmit={(event) => {
         event.preventDefault();
         dispatch(authenticateSignup(username, email, password));
+        history.push("/");
       }}
     >
       <label>

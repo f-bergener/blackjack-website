@@ -4,9 +4,9 @@ import { ActionConstants } from "./actionConstants";
 import { setUser } from "./actionCreators";
 import { UserState } from "./store";
 
-const TOKEN = "token";
+export const TOKEN = "token";
 
-const me = () => {
+export const me = () => {
   return async (dispatch: Function) => {
     const token = window.localStorage.getItem(TOKEN);
     if (token) {
@@ -16,8 +16,9 @@ const me = () => {
             authorization: token,
           },
         });
-        console.log(data);
-        dispatch(setUser(data));
+        const user = data[0];
+        dispatch(setUser(user));
+        localStorage.setItem("user", JSON.stringify(user));
       } catch (error) {
         console.error(error);
       }
