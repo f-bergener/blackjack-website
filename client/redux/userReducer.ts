@@ -6,7 +6,7 @@ import { setUser } from "./actionCreators";
 const TOKEN = "token";
 
 const me = () => {
-  return async (dispatch) => {
+  return async (dispatch: Function) => {
     const token = window.localStorage.getItem(TOKEN);
     if (token) {
       try {
@@ -25,7 +25,7 @@ const me = () => {
 };
 
 export const authenticateLogin =
-  (email: String, password: String) => async (dispatch) => {
+  (email: String, password: String) => async (dispatch: Function) => {
     try {
       const { data } = await axios.post("/auth/login", {
         email,
@@ -41,7 +41,8 @@ export const authenticateLogin =
   };
 
 export const authenticateSignup =
-  (username: String, email: String, password: String) => async (dispatch) => {
+  (username: string, email: string, password: String) =>
+  async (dispatch: Function) => {
     try {
       const { data } = await axios.post("/auth/signup", {
         username,

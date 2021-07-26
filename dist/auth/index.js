@@ -44,6 +44,7 @@ router.post("/login", function (req, res, next) { return __awaiter(void 0, void 
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
+                console.log(req.body);
                 return [4 /*yield*/, User.authenticate(req.body)];
             case 1:
                 token = _a.sent();

@@ -5,7 +5,7 @@ import gameReducer from "./gameReducer";
 import userReducer from "./userReducer";
 import { card } from "../components/data/getDeck";
 
-export type State = {
+export type GameState = {
   activeGame: boolean;
   currentCardDeck: card[];
   bankroll: number;
@@ -30,6 +30,24 @@ export type State = {
   correctMoves: number;
   totalHands: number;
   handsWon: number;
+};
+
+export type UserState =
+  | {
+      bankroll: number;
+      correctMoves: number;
+      handsWon: number;
+      email: string;
+      isAdmin: boolean;
+      totalHands: number;
+      totalMoves: number;
+      username: string;
+    }
+  | {};
+
+export type State = {
+  game: GameState;
+  user: UserState;
 };
 
 const combinedReducer = combineReducers({

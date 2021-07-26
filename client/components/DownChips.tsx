@@ -4,7 +4,7 @@ import { removeFromBet } from "../redux/actionCreators";
 import { State } from "../redux/store";
 
 const DownChips: React.FC = () => {
-  const bet = useSelector((state: State) => state.bet);
+  const bet = useSelector((state: State) => state.game.bet);
   const dispatch = useDispatch();
 
   const displayDecreaseChips = () => {

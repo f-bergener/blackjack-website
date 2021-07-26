@@ -5,7 +5,7 @@ import { State } from "../redux/store";
 import { restartGame } from "../redux/actionCreators";
 
 const Homepage: React.FC = () => {
-  const activeGame = useSelector((state: State) => state.activeGame);
+  const activeGame = useSelector((state: State) => state.game.activeGame);
   const dispatch = useDispatch();
   return (
     <>

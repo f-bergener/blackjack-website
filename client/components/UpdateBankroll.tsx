@@ -9,15 +9,15 @@ import {
 import { State } from "../redux/store";
 
 const UpdateBankroll: React.FC = () => {
-  const playerHand = useSelector((state: State) => state.playerHand);
-  const playerCount = useSelector((state: State) => state.playerCount);
-  const dealerCount = useSelector((state: State) => state.dealerCount);
-  const hitBoolean = useSelector((state: State) => state.hitBoolean);
-  const stayBoolean = useSelector((state: State) => state.stayBoolean);
+  const playerHand = useSelector((state: State) => state.game.playerHand);
+  const playerCount = useSelector((state: State) => state.game.playerCount);
+  const dealerCount = useSelector((state: State) => state.game.dealerCount);
+  const hitBoolean = useSelector((state: State) => state.game.hitBoolean);
+  const stayBoolean = useSelector((state: State) => state.game.stayBoolean);
   const doubleDownBoolean = useSelector(
-    (state: State) => state.doubleDownBoolean
+    (state: State) => state.game.doubleDownBoolean
   );
-  const splitHand = useSelector((state: State) => state.splitHand);
+  const splitHand = useSelector((state: State) => state.game.splitHand);
 
   const dispatch = useDispatch();
 

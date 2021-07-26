@@ -65,7 +65,7 @@ var User = db.define("user", {
             notEmpty: true,
         },
     },
-    practiceModeTotalHands: {
+    totalHands: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
         allowNull: false,
@@ -73,7 +73,7 @@ var User = db.define("user", {
             min: 0,
         },
     },
-    practiceModeHandsWon: {
+    handsWon: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
         allowNull: false,
@@ -81,7 +81,7 @@ var User = db.define("user", {
             min: 0,
         },
     },
-    practiceModeTotalMoves: {
+    totalMoves: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
         allowNull: false,
@@ -89,39 +89,7 @@ var User = db.define("user", {
             min: 0,
         },
     },
-    practiceModeCorrectMoves: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-        allowNull: false,
-        validate: {
-            min: 0,
-        },
-    },
-    moneyModeTotalHands: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-        allowNull: false,
-        validate: {
-            min: 0,
-        },
-    },
-    moneyModeHandsWon: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-        allowNull: false,
-        validate: {
-            min: 0,
-        },
-    },
-    moneyModeTotalMoves: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-        allowNull: false,
-        validate: {
-            min: 0,
-        },
-    },
-    moneyModeCorrectMoves: {
+    correctMoves: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
         allowNull: false,
@@ -162,7 +130,7 @@ User.authenticate = function (login) {
         var user, _a, error;
         return __generator(this, function (_b) {
             switch (_b.label) {
-                case 0: return [4 /*yield*/, this.findOne({ where: { username: login.username } })];
+                case 0: return [4 /*yield*/, this.findOne({ where: { email: login.email } })];
                 case 1:
                     user = _b.sent();
                     _a = !user;
@@ -173,7 +141,7 @@ User.authenticate = function (login) {
                     _b.label = 3;
                 case 3:
                     if (_a) {
-                        error = Error("Incorrect username/password");
+                        error = Error("Incorrect email/password");
                         throw error;
                     }
                     return [2 /*return*/, user.generateToken()];

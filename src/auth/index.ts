@@ -6,6 +6,7 @@ router.post(
   "/login",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
+      console.log(req.body);
       const token = await User.authenticate(req.body);
       res.send({ token });
     } catch (error) {
