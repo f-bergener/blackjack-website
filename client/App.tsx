@@ -1,21 +1,13 @@
 import React from "react";
-import { Router, Route } from "react-router-dom";
 import Header from "./components/Header";
-import Homepage from "./components/Homepage";
-import Game from "./components/Game";
-import LogIn from "./components/LogIn";
-import SignUp from "./components/SignUp";
-import history from "./history";
+import Routes from "./Routes";
 
 const App: React.FC = () => {
   return (
-    <Router history={history}>
+    <>
       <Header />
-      <Route exact path="/" component={Homepage} />
-      <Route exact path="/game" component={Game} />
-      <Route exact path="/login" component={LogIn} />
-      <Route exact path="/signup" component={SignUp} />
-    </Router>
+      <Routes />
+    </>
   );
 };
 

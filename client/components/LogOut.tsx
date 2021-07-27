@@ -6,6 +6,7 @@ const LogOut = () => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(logOut());
+    window.localStorage.clear();
   };
   return <button onClick={handleClick}>Log Out</button>;
 };
