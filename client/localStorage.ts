@@ -1,3 +1,5 @@
+import { State } from "./redux/store";
+
 export const loadState = () => {
   try {
     const serialState = localStorage.getItem("state");
@@ -10,7 +12,7 @@ export const loadState = () => {
   }
 };
 
-export const saveState = (state) => {
+export const saveState = (state: State) => {
   try {
     const serialState = JSON.stringify(state);
     localStorage.setItem("state", serialState);
