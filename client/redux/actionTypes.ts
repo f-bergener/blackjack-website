@@ -74,6 +74,10 @@ interface nextHand {
   type: ActionConstants.NEXT_HAND;
 }
 
+interface splitNextHand {
+  type: ActionConstants.SPLIT_NEXT_HAND;
+}
+
 interface setUser {
   type: ActionConstants.SET_USER;
   payload: Object;
@@ -105,6 +109,7 @@ export type Action =
   | splitDecreaseBankroll
   | splitNoChangeBankroll
   | nextHand
+  | splitNextHand
   // * * User Reducer Actions
   | setUser
   | logOut;

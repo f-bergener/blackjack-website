@@ -111,6 +111,12 @@ export const nextHand = () => {
   };
 };
 
+export const splitNextHand = () => {
+  return {
+    type: ActionConstants.SPLIT_NEXT_HAND,
+  };
+};
+
 // * * User reducer actions
 export const setUser = (auth: Object) => {
   return { type: ActionConstants.SET_USER, payload: auth };

@@ -34,6 +34,8 @@ const initialState = {
   correctMoves: 0,
   totalHands: 0,
   handsWon: 0,
+  bankrollUpdated: false,
+  splitBankrollUpdated: false,
 };
 
 const gameReducer = (state: GameState = initialState, action: Action) => {
@@ -539,7 +541,19 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         dealerHand: [...hand],
         playerCount: 0,
         dealerCount: 0,
+        playerHandBestMove: "",
         currentCardDeck: getDeck(),
+        bankrollUpdated: false,
+      };
+    }
+    case ActionConstants.SPLIT_NEXT_HAND: {
+      return {
+        ...state,
+        splitPot: 0,
+        splitHand: [...hand],
+        splitCount: 0,
+        splitHandBestMove: "",
+        splitBankrollUpdated: false,
       };
     }
     case ActionConstants.INCREASE_BANKROLL: {
@@ -548,14 +562,15 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
       return {
         ...state,
         bankroll: newBankroll,
-        pot: 0,
-        playerHand: [...hand],
-        dealerHand: [...hand],
-        playerCount: 0,
-        dealerCount: 0,
-        currentCardDeck: getDeck(),
-        playerHandBestMove: "",
+        // pot: 0,
+        // playerHand: [...hand],
+        // dealerHand: [...hand],
+        // playerCount: 0,
+        // dealerCount: 0,
+        // currentCardDeck: getDeck(),
+        // playerHandBestMove: "",
         handsWon: newHandsWon,
+        bankrollUpdated: true,
       };
     }
     case ActionConstants.BLACKJACK_INCREASE_BANKROLL: {
@@ -565,39 +580,41 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
       return {
         ...state,
         bankroll: newBankroll,
-        pot: 0,
-        playerHand: [...hand],
-        dealerHand: [...hand],
-        playerCount: 0,
-        dealerCount: 0,
-        currentCardDeck: getDeck(),
+        // pot: 0,
+        // playerHand: [...hand],
+        // dealerHand: [...hand],
+        // playerCount: 0,
+        // dealerCount: 0,
+        // currentCardDeck: getDeck(),
         handsWon: newHandsWon,
+        bankrollUpdated: true,
       };
     }
-    case ActionConstants.DECREASE_BANKROLL: {
-      return {
-        ...state,
-        pot: 0,
-        playerHand: [...hand],
-        dealerHand: [...hand],
-        playerCount: 0,
-        dealerCount: 0,
-        currentCardDeck: getDeck(),
-        playerHandBestMove: "",
-      };
-    }
+    // case ActionConstants.DECREASE_BANKROLL: {
+    //   return {
+    //     ...state,
+    //     pot: 0,
+    //     playerHand: [...hand],
+    //     dealerHand: [...hand],
+    //     playerCount: 0,
+    //     dealerCount: 0,
+    //     currentCardDeck: getDeck(),
+    //     playerHandBestMove: "",
+    //   };
+    // }
     case ActionConstants.NO_CHANGE_BANKROLL: {
       const newBankroll = state.bankroll + state.pot;
       return {
         ...state,
         bankroll: newBankroll,
-        pot: 0,
-        playerHand: [...hand],
-        dealerHand: [...hand],
-        playerCount: 0,
-        dealerCount: 0,
-        currentCardDeck: getDeck(),
-        playerHandBestMove: "",
+        // pot: 0,
+        // playerHand: [...hand],
+        // dealerHand: [...hand],
+        // playerCount: 0,
+        // dealerCount: 0,
+        // currentCardDeck: getDeck(),
+        // playerHandBestMove: "",
+        bankrollUpdated: true,
       };
     }
     case ActionConstants.SPLIT_INCREASE_BANKROLL: {
@@ -606,31 +623,35 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
       return {
         ...state,
         bankroll: newBankroll,
-        splitPot: 0,
-        splitHand: [...hand],
-        splitCount: 0,
-        splitHandBestMove: "",
+        // splitPot: 0,
+        // splitHand: [...hand],
+        // splitCount: 0,
+        // splitHandBestMove: "",
         handsWon: newHandsWon,
+        bankrollUpdated: true,
+        splitBankrollUpdated: true,
       };
     }
-    case ActionConstants.SPLIT_DECREASE_BANKROLL: {
-      return {
-        ...state,
-        splitPot: 0,
-        splitHand: [...hand],
-        splitCount: 0,
-        splitHandBestMove: "",
-      };
-    }
+    // case ActionConstants.SPLIT_DECREASE_BANKROLL: {
+    //   return {
+    //     ...state,
+    //     splitPot: 0,
+    //     splitHand: [...hand],
+    //     splitCount: 0,
+    //     splitHandBestMove: "",
+    //   };
+    // }
     case ActionConstants.SPLIT_NO_CHANGE_BANKROLL: {
       const newBankroll = state.bankroll + state.splitPot;
       return {
         ...state,
         bankroll: newBankroll,
-        splitPot: 0,
-        splitHand: [...hand],
-        splitCount: 0,
-        splitHandBestMove: "",
+        // splitPot: 0,
+        // splitHand: [...hand],
+        // splitCount: 0,
+        // splitHandBestMove: "",
+        bankrollUpdated: true,
+        splitBankrollUpdated: true,
       };
     }
     // --------------------------------------------------------

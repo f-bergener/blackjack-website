@@ -30,6 +30,8 @@ export type GameState = {
   correctMoves: number;
   totalHands: number;
   handsWon: number;
+  bankrollUpdated: boolean;
+  splitBankrollUpdated: boolean;
 };
 
 export type UserState = {
