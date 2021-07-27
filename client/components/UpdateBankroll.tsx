@@ -36,7 +36,9 @@ const UpdateBankroll: React.FC = () => {
             <h1>Blackjack</h1>
             <button
               className="next-hand-button"
-              onClick={() => dispatch(nextHand())}
+              onClick={() => {
+                dispatch(nextHand());
+              }}
             >
               Next Hand
             </button>
@@ -49,7 +51,9 @@ const UpdateBankroll: React.FC = () => {
             <h1>Dealer Wins</h1>
             <button
               className="next-hand-button"
-              onClick={() => dispatch(nextHand())}
+              onClick={() => {
+                dispatch(nextHand());
+              }}
             >
               Next Hand
             </button>

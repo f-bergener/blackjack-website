@@ -125,3 +125,7 @@ export const setUser = (auth: Object) => {
 export const logOut = () => {
   return { type: ActionConstants.LOG_OUT };
 };
+
+export const useLocalGameState = () => {
+  return { type: ActionConstants.USE_LOCAL_GAME_STATE };
+};

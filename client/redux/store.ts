@@ -4,6 +4,7 @@ import { createLogger } from "redux-logger";
 import gameReducer from "./gameReducer";
 import userReducer from "./userReducer";
 import { card } from "../components/data/getDeck";
+import { loadState } from "../localStorage";
 
 export type GameState = {
   activeGame: boolean;
@@ -55,9 +56,10 @@ const combinedReducer = combineReducers({
   game: gameReducer,
   user: userReducer,
 });
-
+const persistedState = loadState();
 const store = createStore(
   combinedReducer,
+  persistedState,
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
 );
 

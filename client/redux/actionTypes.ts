@@ -87,6 +87,10 @@ interface logOut {
   type: ActionConstants.LOG_OUT;
 }
 
+interface useLocalGameState {
+  type: ActionConstants.USE_LOCAL_GAME_STATE;
+}
+
 export type Action =
   | restartGame
   // * * Modify bet actions
@@ -112,4 +116,5 @@ export type Action =
   | splitNextHand
   // * * User Reducer Actions
   | setUser
-  | logOut;
+  | logOut
+  | useLocalGameState;

@@ -25,4 +25,5 @@ export enum ActionConstants {
   // * * User Reducer Actions
   SET_USER = "SET_USER",
   LOG_OUT = "LOG_OUT",
+  USE_LOCAL_GAME_STATE = "USE_LOCAL_GAME_STATE",
 }
