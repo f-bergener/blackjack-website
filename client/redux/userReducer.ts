@@ -18,7 +18,6 @@ export const me = () => {
         });
         const user = data[0];
         dispatch(setUser(user));
-        localStorage.setItem("user", JSON.stringify(user));
       } catch (error) {
         console.error(error);
       }

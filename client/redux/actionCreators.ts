@@ -63,45 +63,57 @@ export const deal = () => {
   };
 };
 // Update bankroll and proceed to next hand actions
-export const increaseBankrollReset = () => {
+export const increaseBankroll = () => {
   return {
-    type: ActionConstants.INCREASE_BANKROLL_RESET,
+    type: ActionConstants.INCREASE_BANKROLL,
   };
 };
 
-export const blackjackIncreaseBankrollReset = () => {
+export const blackjackIncreaseBankroll = () => {
   return {
-    type: ActionConstants.BLACKJACK_INCREASE_BANKROLL_RESET,
+    type: ActionConstants.BLACKJACK_INCREASE_BANKROLL,
   };
 };
 
-export const decreaseBankrollReset = () => {
+export const decreaseBankroll = () => {
   return {
-    type: ActionConstants.DECREASE_BANKROLL_RESET,
+    type: ActionConstants.DECREASE_BANKROLL,
   };
 };
 
-export const noChangeBankrollReset = () => {
+export const noChangeBankroll = () => {
   return {
-    type: ActionConstants.NO_CHANGE_BANKROLL_RESET,
+    type: ActionConstants.NO_CHANGE_BANKROLL,
   };
 };
 
-export const splitIncreaseBankrollReset = () => {
+export const splitIncreaseBankroll = () => {
   return {
-    type: ActionConstants.SPLIT_INCREASE_BANKROLL_RESET,
+    type: ActionConstants.SPLIT_INCREASE_BANKROLL,
   };
 };
 
-export const splitDecreaseBankrollReset = () => {
+export const splitDecreaseBankroll = () => {
   return {
-    type: ActionConstants.SPLIT_DECREASE_BANKROLL_RESET,
+    type: ActionConstants.SPLIT_DECREASE_BANKROLL,
   };
 };
 
-export const splitNoChangeBankrollReset = () => {
+export const splitNoChangeBankroll = () => {
   return {
-    type: ActionConstants.SPLIT_NO_CHANGE_BANKROLL_RESET,
+    type: ActionConstants.SPLIT_NO_CHANGE_BANKROLL,
+  };
+};
+
+export const nextHand = () => {
+  return {
+    type: ActionConstants.NEXT_HAND,
+  };
+};
+
+export const splitNextHand = () => {
+  return {
+    type: ActionConstants.SPLIT_NEXT_HAND,
   };
 };
 
@@ -112,4 +124,8 @@ export const setUser = (auth: Object) => {
 
 export const logOut = () => {
   return { type: ActionConstants.LOG_OUT };
+};
+
+export const useLocalGameState = () => {
+  return { type: ActionConstants.USE_LOCAL_GAME_STATE };
 };

@@ -1,9 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  splitIncreaseBankrollReset,
-  splitDecreaseBankrollReset,
-  splitNoChangeBankrollReset,
+  splitIncreaseBankroll,
+  // splitDecreaseBankroll,
+  splitNoChangeBankroll,
+  splitNextHand,
 } from "../redux/actionCreators";
 import { State } from "../redux/store";
 
@@ -23,41 +24,51 @@ const SplitUpdateBankroll: React.FC = () => {
   const splitStayBoolean = useSelector(
     (state: State) => state.game.splitStayBoolean
   );
+  const splitBankrollUpdated = useSelector(
+    (state: State) => state.game.splitBankrollUpdated
+  );
   const dispatch = useDispatch();
 
   const splitUpdateBankroll = () => {
     if (splitHand.length === 2) {
       if (splitCount === 21 && dealerCount !== 21) {
+        if (splitBankrollUpdated === false) {
+          dispatch(splitIncreaseBankroll());
+        }
         return (
           <>
             <h1>You Win on the Split Hand</h1>
             <button
               className="next-hand-button"
-              onClick={() => dispatch(splitIncreaseBankrollReset())}
+              onClick={() => dispatch(splitNextHand())}
             >
               Next
             </button>
           </>
         );
       } else if (splitCount !== 21 && dealerCount === 21) {
+        // dispatch(splitDecreaseBankroll());
         return (
           <>
             <h1>Dealer Beat your Split Hand</h1>
             <button
               className="next-hand-button"
-              onClick={() => dispatch(splitDecreaseBankrollReset())}
+              onClick={() => dispatch(splitNextHand())}
             >
               Next
             </button>
           </>
         );
       } else if (splitCount < 21 && dealerCount > 21) {
+        if (splitBankrollUpdated === false) {
+          dispatch(splitIncreaseBankroll());
+        }
         return (
           <>
             <h1>You Win on the Split Hand</h1>
             <button
               className="next-hand-button"
-              onClick={() => dispatch(splitIncreaseBankrollReset())}
+              onClick={() => dispatch(splitNextHand())}
             >
               Next
             </button>
@@ -65,36 +76,43 @@ const SplitUpdateBankroll: React.FC = () => {
         );
       } else if (splitCount <= 21 && dealerCount <= 21) {
         if (splitCount === dealerCount) {
+          if (splitBankrollUpdated === false) {
+            dispatch(splitNoChangeBankroll());
+          }
           return (
             <>
               <h1>Push on your Split Hand</h1>
               <button
                 className="next-hand-button"
-                onClick={() => dispatch(splitNoChangeBankrollReset())}
+                onClick={() => dispatch(splitNextHand())}
               >
                 Next
               </button>
             </>
           );
         } else if (splitCount > dealerCount) {
+          if (splitBankrollUpdated === false) {
+            dispatch(splitIncreaseBankroll());
+          }
           return (
             <>
               <h1>You Win on the Split Hand</h1>
               <button
                 className="next-hand-button"
-                onClick={() => dispatch(splitIncreaseBankrollReset())}
+                onClick={() => dispatch(splitNextHand())}
               >
                 Next
               </button>
             </>
           );
         } else {
+          // dispatch(splitDecreaseBankroll());
           return (
             <>
               <h1>Dealer Beat your Split Hand</h1>
               <button
                 className="next-hand-button"
-                onClick={() => dispatch(splitDecreaseBankrollReset())}
+                onClick={() => dispatch(splitNextHand())}
               >
                 Next
               </button>
@@ -105,36 +123,43 @@ const SplitUpdateBankroll: React.FC = () => {
     } else if (splitHand.length > 2) {
       if (splitCount < 21 && dealerCount < 21) {
         if (splitCount === dealerCount) {
+          if (splitBankrollUpdated === false) {
+            dispatch(splitNoChangeBankroll());
+          }
           return (
             <>
               <h1>Push</h1>
               <button
                 className="next-hand-button"
-                onClick={() => dispatch(splitNoChangeBankrollReset())}
+                onClick={() => dispatch(splitNextHand())}
               >
                 Next
               </button>
             </>
           );
         } else if (splitCount > dealerCount) {
+          if (splitBankrollUpdated === false) {
+            dispatch(splitIncreaseBankroll());
+          }
           return (
             <>
               <h1>You Win on the Split Hand</h1>
               <button
                 className="next-hand-button"
-                onClick={() => dispatch(splitIncreaseBankrollReset())}
+                onClick={() => dispatch(splitNextHand())}
               >
                 Next
               </button>
             </>
           );
         } else if (splitCount < dealerCount) {
+          // dispatch(splitDecreaseBankroll());
           return (
             <>
               <h1>Dealer Beat your Split Hand</h1>
               <button
                 className="next-hand-button"
-                onClick={() => dispatch(splitDecreaseBankrollReset())}
+                onClick={() => dispatch(splitNextHand())}
               >
                 Next
               </button>
@@ -142,60 +167,71 @@ const SplitUpdateBankroll: React.FC = () => {
           );
         }
       } else if (splitCount > 21 && dealerCount < 21) {
+        // dispatch(splitDecreaseBankroll());
         return (
           <>
             <h1>Dealer Beat your Split Hand</h1>
             <button
               className="next-hand-button"
-              onClick={() => dispatch(splitDecreaseBankrollReset())}
+              onClick={() => dispatch(splitNextHand())}
             >
               Next
             </button>
           </>
         );
       } else if (splitCount < 21 && dealerCount > 21) {
+        if (splitBankrollUpdated === false) {
+          dispatch(splitIncreaseBankroll());
+        }
         return (
           <>
             <h1>You Win on the Split Hand</h1>
             <button
               className="next-hand-button"
-              onClick={() => dispatch(splitIncreaseBankrollReset())}
+              onClick={() => dispatch(splitNextHand())}
             >
               Next
             </button>
           </>
         );
       } else if (splitCount === 21 && dealerCount !== 21) {
+        if (splitBankrollUpdated === false) {
+          dispatch(splitIncreaseBankroll());
+        }
         return (
           <>
             <h1>You Win on the Split Hand</h1>
             <button
               className="next-hand-button"
-              onClick={() => dispatch(splitIncreaseBankrollReset())}
+              onClick={() => dispatch(splitNextHand())}
             >
               Next
             </button>
           </>
         );
       } else if (splitCount !== 21 && dealerCount === 21) {
+        // dispatch(splitDecreaseBankroll());
         return (
           <>
             <h1>Dealer Beat your Split Hand</h1>
             <button
               className="next-hand-button"
-              onClick={() => dispatch(splitDecreaseBankrollReset())}
+              onClick={() => dispatch(splitNextHand())}
             >
               Next
             </button>
           </>
         );
       } else if (splitCount === 21 && dealerCount === 21) {
+        if (splitBankrollUpdated === false) {
+          dispatch(splitNoChangeBankroll());
+        }
         return (
           <>
             <h1>Push on your Split Hand</h1>
             <button
               className="next-hand-button"
-              onClick={() => dispatch(splitDecreaseBankrollReset())}
+              onClick={() => dispatch(splitNextHand())}
             >
               Next
             </button>
