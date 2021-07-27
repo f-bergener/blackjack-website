@@ -126,6 +126,6 @@ export const logOut = () => {
   return { type: ActionConstants.LOG_OUT };
 };
 
-export const useLocalGameState = () => {
-  return { type: ActionConstants.USE_LOCAL_GAME_STATE };
+export const clearState = () => {
+  return { type: ActionConstants.CLEAR_STATE };
 };

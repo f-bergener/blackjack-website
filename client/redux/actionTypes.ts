@@ -87,8 +87,8 @@ interface logOut {
   type: ActionConstants.LOG_OUT;
 }
 
-interface useLocalGameState {
-  type: ActionConstants.USE_LOCAL_GAME_STATE;
+interface clearState {
+  type: ActionConstants.CLEAR_STATE;
 }
 
 export type Action =
@@ -117,4 +117,4 @@ export type Action =
   // * * User Reducer Actions
   | setUser
   | logOut
-  | useLocalGameState;
+  | clearState;

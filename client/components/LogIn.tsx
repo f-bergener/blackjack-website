@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { authenticateLogin } from "../redux/userReducer";
+import { clearState } from "../redux/actionCreators";
 import history from "../history";
 
 const LogIn: React.FC = () => {
@@ -13,6 +14,7 @@ const LogIn: React.FC = () => {
       onSubmit={(event) => {
         event.preventDefault();
         dispatch(authenticateLogin(email, password));
+        dispatch(clearState());
         history.push("/");
       }}
     >
