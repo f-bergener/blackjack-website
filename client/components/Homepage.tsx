@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { State } from "../redux/store";
-import { restartGame } from "../redux/actionCreators";
+// import { restartGame } from "../redux/actionCreators";
 import LogOut from "./LogOut";
 
 const Homepage: React.FC = () => {
@@ -20,11 +20,11 @@ const Homepage: React.FC = () => {
           <Link to="/game">
             <button id="start-button">Continue Game</button>
           </Link>
-          <Link to="/game">
+          {/* <Link to="/game">
             <button id="start-button" onClick={() => dispatch(restartGame())}>
               Restart Game
             </button>
-          </Link>
+          </Link> */}
         </>
       ) : (
         <Link to="/game">

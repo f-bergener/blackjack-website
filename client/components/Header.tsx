@@ -11,6 +11,9 @@ const Header: React.FC = () => {
       <Link to="/">
         <h1 id="main-header">BlackJack Practice</h1>
       </Link>
+      <Link to="/profilepage">
+        <h2>Profile</h2>
+      </Link>
       {isLoggedIn ? (
         <LogOut />
       ) : (
