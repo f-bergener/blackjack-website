@@ -8,18 +8,20 @@ import {
   splitHit,
   splitStay,
   stay,
+  postDealUpdate,
+  postMoveUpdate,
 } from "../redux/actionCreators";
+import { ActionConstants } from "../redux/actionConstants";
 import { State } from "../redux/store";
 
 export const Deal: React.FC = () => {
   const dispatch = useDispatch();
-  const totalMoves = useSelector((state: State) => state.game.totalMoves);
   return (
     <button
       className="button deal-button"
       onClick={() => {
         dispatch(deal());
-        console.log(totalMoves);
+        dispatch(postDealUpdate());
       }}
     >
       Deal
@@ -33,10 +35,23 @@ export const Hit: React.FC = () => {
   const splitStayBoolean = useSelector(
     (state: State) => state.game.splitStayBoolean
   );
+  const playerHandBestMove = useSelector(
+    (state: State) => state.game.playerHandBestMove
+  );
   // Checking if the player has an active split hand since I want the player to complete their split hand before moving forward
   if (hitBoolean && !splitStayBoolean) {
     return (
-      <button className="button hit-button" onClick={() => dispatch(hit())}>
+      <button
+        className="button hit-button"
+        onClick={() => {
+          if (playerHandBestMove === ActionConstants.HIT) {
+            dispatch(postMoveUpdate(true));
+          } else {
+            dispatch(postMoveUpdate(false));
+          }
+          dispatch(hit());
+        }}
+      >
         Hit
       </button>
     );
@@ -51,10 +66,23 @@ export const Stay: React.FC = () => {
   const splitStayBoolean = useSelector(
     (state: State) => state.game.splitStayBoolean
   );
+  const playerHandBestMove = useSelector(
+    (state: State) => state.game.playerHandBestMove
+  );
   // Checking if the player has an active split hand since I want the player to complete their split hand before moving forward
   if (stayBoolean && !splitStayBoolean) {
     return (
-      <button className="button stay-button" onClick={() => dispatch(stay())}>
+      <button
+        className="button stay-button"
+        onClick={() => {
+          if (playerHandBestMove === ActionConstants.STAY) {
+            dispatch(postMoveUpdate(true));
+          } else {
+            dispatch(postMoveUpdate(false));
+          }
+          dispatch(stay());
+        }}
+      >
         Stay
       </button>
     );
@@ -68,11 +96,21 @@ export const DoubleDown: React.FC = () => {
   const doubleDownBoolean = useSelector(
     (state: State) => state.game.doubleDownBoolean
   );
+  const playerHandBestMove = useSelector(
+    (state: State) => state.game.playerHandBestMove
+  );
   if (doubleDownBoolean) {
     return (
       <button
         className="button double-down-button"
-        onClick={() => dispatch(doubleDown())}
+        onClick={() => {
+          if (playerHandBestMove === ActionConstants.DOUBLE_DOWN) {
+            dispatch(postMoveUpdate(true));
+          } else {
+            dispatch(postMoveUpdate(false));
+          }
+          dispatch(doubleDown());
+        }}
       >
         Double Down
       </button>
@@ -85,9 +123,23 @@ export const DoubleDown: React.FC = () => {
 export const Split: React.FC = () => {
   const dispatch = useDispatch();
   const splitBoolean = useSelector((state: State) => state.game.splitBoolean);
+  const playerHandBestMove = useSelector(
+    (state: State) => state.game.playerHandBestMove
+  );
   if (splitBoolean) {
     return (
-      <button className="button split-button" onClick={() => dispatch(split())}>
+      <button
+        className="button split-button"
+        onClick={() => {
+          if (playerHandBestMove === ActionConstants.SPLIT) {
+            dispatch(postMoveUpdate(true));
+          } else {
+            dispatch(postMoveUpdate(false));
+          }
+          dispatch(split());
+          dispatch(postDealUpdate());
+        }}
+      >
         Split
       </button>
     );
@@ -101,11 +153,21 @@ export const SplitHit: React.FC = () => {
   const splitHitBoolean = useSelector(
     (state: State) => state.game.splitHitBoolean
   );
+  const splitHandBestMove = useSelector(
+    (state: State) => state.game.splitHandBestMove
+  );
   if (splitHitBoolean) {
     return (
       <button
         className="button hit-button"
-        onClick={() => dispatch(splitHit())}
+        onClick={() => {
+          if (splitHandBestMove === ActionConstants.SPLIT_HIT) {
+            dispatch(postMoveUpdate(true));
+          } else {
+            dispatch(postMoveUpdate(false));
+          }
+          dispatch(splitHit());
+        }}
       >
         Hit
       </button>
@@ -120,11 +182,21 @@ export const SplitStay: React.FC = () => {
   const splitStayBoolean = useSelector(
     (state: State) => state.game.splitStayBoolean
   );
+  const splitHandBestMove = useSelector(
+    (state: State) => state.game.splitHandBestMove
+  );
   if (splitStayBoolean) {
     return (
       <button
         className="button stay-button"
-        onClick={() => dispatch(splitStay())}
+        onClick={() => {
+          if (splitHandBestMove === ActionConstants.SPLIT_STAY) {
+            dispatch(postMoveUpdate(true));
+          } else {
+            dispatch(postMoveUpdate(false));
+          }
+          dispatch(splitStay());
+        }}
       >
         Stay
       </button>

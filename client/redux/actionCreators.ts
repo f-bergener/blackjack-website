@@ -116,6 +116,10 @@ export const splitNextHand = () => {
     type: ActionConstants.SPLIT_NEXT_HAND,
   };
 };
+// Clear game state action
+export const clearState = () => {
+  return { type: ActionConstants.CLEAR_STATE };
+};
 
 // * * User reducer actions
 export const setUser = (auth: Object) => {
@@ -126,6 +130,15 @@ export const logOut = () => {
   return { type: ActionConstants.LOG_OUT };
 };
 
-export const clearState = () => {
-  return { type: ActionConstants.CLEAR_STATE };
+export const postMoveUpdate = (correctMoveBoolean: boolean) => {
+  return {
+    type: ActionConstants.POST_MOVE_UPDATE,
+    payload: correctMoveBoolean,
+  };
+};
+
+export const postDealUpdate = () => {
+  return {
+    type: ActionConstants.POST_DEAL_UPDATE,
+  };
 };

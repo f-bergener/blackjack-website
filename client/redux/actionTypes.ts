@@ -91,6 +91,15 @@ interface clearState {
   type: ActionConstants.CLEAR_STATE;
 }
 
+interface postMoveUpdate {
+  type: ActionConstants.POST_MOVE_UPDATE;
+  payload: boolean;
+}
+
+interface postDealUpdate {
+  type: ActionConstants.POST_DEAL_UPDATE;
+}
+
 export type Action =
   | restartGame
   // * * Modify bet actions
@@ -117,4 +126,6 @@ export type Action =
   // * * User Reducer Actions
   | setUser
   | logOut
-  | clearState;
+  | clearState
+  | postMoveUpdate
+  | postDealUpdate;
