@@ -81,6 +81,14 @@ var User = db.define("user", {
             min: 0,
         },
     },
+    handsPushed: {
+        type: DataTypes.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+        validate: {
+            min: 0,
+        },
+    },
     totalMoves: {
         type: DataTypes.INTEGER,
         defaultValue: 0,
@@ -165,6 +173,7 @@ User.findByToken = function (token) { return __awaiter(void 0, void 0, void 0, f
                             "username",
                             "totalHands",
                             "handsWon",
+                            "handsPushed",
                             "totalMoves",
                             "correctMoves",
                             "bankroll",

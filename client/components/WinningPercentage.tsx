@@ -5,24 +5,34 @@ import { State } from "../redux/store";
 
 const WinningPercentage: React.FC = () => {
   const user = useSelector((state: State) => state.user);
-  const { handsWon, totalHands } = user;
+  const { handsWon, handsPushed, totalHands } = user;
   const winningPercentage = Math.round((handsWon / totalHands) * 100);
-  const losingPercentage = Math.round(100 - winningPercentage);
+  const pushPercentage = Math.round((handsPushed / totalHands) * 100);
+  const losingPercentage = Math.round(100 - winningPercentage - pushPercentage);
+  console.log(winningPercentage, pushPercentage, losingPercentage);
   const data = {
-    labels: ["Won", "Lost"],
+    labels: ["Won", "Pushed", "Lost"],
     datasets: [
       {
         label: "# of Votes",
-        data: [winningPercentage, losingPercentage],
-        backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(255, 99, 132, 0.2)"],
-        borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
+        data: [winningPercentage, pushPercentage, losingPercentage],
+        backgroundColor: [
+          "rgba(75, 192, 192, 0.2)",
+          "rgba(255, 159, 64, 0.2)",
+          "rgba(255, 99, 132, 0.2)",
+        ],
+        borderColor: [
+          "rgba(75, 192, 192, 1)",
+          "rgba(255, 159, 64, 1)",
+          "rgba(255, 99, 132, 1)",
+        ],
         borderWidth: 1,
       },
     ],
   };
   return (
     <div>
-      <h3>Hand Winning %</h3>
+      <h3>Hand Outcome %</h3>
       <Pie data={data} />
     </div>
   );
