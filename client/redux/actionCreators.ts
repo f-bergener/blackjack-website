@@ -1,8 +1,8 @@
 import { ActionConstants } from "./actionConstants";
 
-export const restartGame = () => {
+export const resetBankroll = () => {
   return {
-    type: ActionConstants.RESTART_GAME,
+    type: ActionConstants.RESET_BANKROLL,
   };
 };
 // * * Game Reducer Actions

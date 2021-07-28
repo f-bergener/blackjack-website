@@ -1,7 +1,7 @@
 import { ActionConstants } from "./actionConstants";
 
-interface restartGame {
-  type: ActionConstants.RESTART_GAME;
+interface resetBankroll {
+  type: ActionConstants.RESET_BANKROLL;
 }
 // Modify bet actions
 interface addToBet {
@@ -111,7 +111,7 @@ interface updateUserBankroll {
 }
 
 export type Action =
-  | restartGame
+  | resetBankroll
   // * * Modify bet actions
   | addToBet
   | removeFromBet
