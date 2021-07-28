@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   splitIncreaseBankroll,
-  // splitDecreaseBankroll,
   splitNoChangeBankroll,
   splitNextHand,
   updateUserBankroll,
@@ -35,7 +34,7 @@ const SplitUpdateBankroll: React.FC = () => {
       if (splitCount === 21 && dealerCount !== 21) {
         if (splitBankrollUpdated === false) {
           dispatch(splitIncreaseBankroll());
-          dispatch(updateUserBankroll());
+          dispatch(updateUserBankroll(true));
         }
         return (
           <>
@@ -49,7 +48,7 @@ const SplitUpdateBankroll: React.FC = () => {
           </>
         );
       } else if (splitCount !== 21 && dealerCount === 21) {
-        // dispatch(splitDecreaseBankroll());
+        dispatch(updateUserBankroll(false));
         return (
           <>
             <h1>Dealer Beat your Split Hand</h1>
@@ -64,7 +63,7 @@ const SplitUpdateBankroll: React.FC = () => {
       } else if (splitCount < 21 && dealerCount > 21) {
         if (splitBankrollUpdated === false) {
           dispatch(splitIncreaseBankroll());
-          dispatch(updateUserBankroll());
+          dispatch(updateUserBankroll(true));
         }
         return (
           <>
@@ -81,7 +80,7 @@ const SplitUpdateBankroll: React.FC = () => {
         if (splitCount === dealerCount) {
           if (splitBankrollUpdated === false) {
             dispatch(splitNoChangeBankroll());
-            dispatch(updateUserBankroll());
+            dispatch(updateUserBankroll(false));
           }
           return (
             <>
@@ -97,7 +96,7 @@ const SplitUpdateBankroll: React.FC = () => {
         } else if (splitCount > dealerCount) {
           if (splitBankrollUpdated === false) {
             dispatch(splitIncreaseBankroll());
-            dispatch(updateUserBankroll());
+            dispatch(updateUserBankroll(true));
           }
           return (
             <>
@@ -111,7 +110,7 @@ const SplitUpdateBankroll: React.FC = () => {
             </>
           );
         } else {
-          // dispatch(splitDecreaseBankroll());
+          dispatch(updateUserBankroll(false));
           return (
             <>
               <h1>Dealer Beat your Split Hand</h1>
@@ -130,7 +129,7 @@ const SplitUpdateBankroll: React.FC = () => {
         if (splitCount === dealerCount) {
           if (splitBankrollUpdated === false) {
             dispatch(splitNoChangeBankroll());
-            dispatch(updateUserBankroll());
+            dispatch(updateUserBankroll(false));
           }
           return (
             <>
@@ -146,7 +145,7 @@ const SplitUpdateBankroll: React.FC = () => {
         } else if (splitCount > dealerCount) {
           if (splitBankrollUpdated === false) {
             dispatch(splitIncreaseBankroll());
-            dispatch(updateUserBankroll());
+            dispatch(updateUserBankroll(true));
           }
           return (
             <>
@@ -160,7 +159,7 @@ const SplitUpdateBankroll: React.FC = () => {
             </>
           );
         } else if (splitCount < dealerCount) {
-          // dispatch(splitDecreaseBankroll());
+          dispatch(updateUserBankroll(false));
           return (
             <>
               <h1>Dealer Beat your Split Hand</h1>
@@ -174,7 +173,7 @@ const SplitUpdateBankroll: React.FC = () => {
           );
         }
       } else if (splitCount > 21 && dealerCount < 21) {
-        // dispatch(splitDecreaseBankroll());
+        dispatch(updateUserBankroll(false));
         return (
           <>
             <h1>Dealer Beat your Split Hand</h1>
@@ -189,7 +188,7 @@ const SplitUpdateBankroll: React.FC = () => {
       } else if (splitCount < 21 && dealerCount > 21) {
         if (splitBankrollUpdated === false) {
           dispatch(splitIncreaseBankroll());
-          dispatch(updateUserBankroll());
+          dispatch(updateUserBankroll(true));
         }
         return (
           <>
@@ -205,7 +204,7 @@ const SplitUpdateBankroll: React.FC = () => {
       } else if (splitCount === 21 && dealerCount !== 21) {
         if (splitBankrollUpdated === false) {
           dispatch(splitIncreaseBankroll());
-          dispatch(updateUserBankroll());
+          dispatch(updateUserBankroll(true));
         }
         return (
           <>
@@ -219,7 +218,7 @@ const SplitUpdateBankroll: React.FC = () => {
           </>
         );
       } else if (splitCount !== 21 && dealerCount === 21) {
-        // dispatch(splitDecreaseBankroll());
+        dispatch(updateUserBankroll(false));
         return (
           <>
             <h1>Dealer Beat your Split Hand</h1>
@@ -234,7 +233,7 @@ const SplitUpdateBankroll: React.FC = () => {
       } else if (splitCount === 21 && dealerCount === 21) {
         if (splitBankrollUpdated === false) {
           dispatch(splitNoChangeBankroll());
-          dispatch(updateUserBankroll());
+          dispatch(updateUserBankroll(false));
         }
         return (
           <>

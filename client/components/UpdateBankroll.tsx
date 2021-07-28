@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   blackjackIncreaseBankroll,
-  // decreaseBankroll,
   noChangeBankroll,
   increaseBankroll,
   nextHand,
@@ -31,7 +30,7 @@ const UpdateBankroll: React.FC = () => {
       if (playerCount === 21 && dealerCount !== 21) {
         if (bankrollUpdated === false) {
           dispatch(blackjackIncreaseBankroll());
-          dispatch(updateUserBankroll());
+          dispatch(updateUserBankroll(true));
         }
         return (
           <>
@@ -47,7 +46,7 @@ const UpdateBankroll: React.FC = () => {
           </>
         );
       } else if (playerCount !== 21 && dealerCount === 21) {
-        // dispatch(decreaseBankroll());
+        dispatch(updateUserBankroll(false));
         return (
           <>
             <h1>Dealer Wins</h1>
@@ -64,7 +63,7 @@ const UpdateBankroll: React.FC = () => {
       } else if (playerCount < 21 && dealerCount > 21) {
         if (bankrollUpdated === false) {
           dispatch(increaseBankroll());
-          dispatch(updateUserBankroll());
+          dispatch(updateUserBankroll(true));
         }
         return (
           <>
@@ -81,7 +80,7 @@ const UpdateBankroll: React.FC = () => {
         if (playerCount === dealerCount) {
           if (bankrollUpdated === false) {
             dispatch(noChangeBankroll());
-            dispatch(updateUserBankroll());
+            dispatch(updateUserBankroll(false));
           }
           return (
             <>
@@ -97,7 +96,7 @@ const UpdateBankroll: React.FC = () => {
         } else if (playerCount > dealerCount) {
           if (bankrollUpdated === false) {
             dispatch(increaseBankroll());
-            dispatch(updateUserBankroll());
+            dispatch(updateUserBankroll(true));
           }
           return (
             <>
@@ -111,7 +110,7 @@ const UpdateBankroll: React.FC = () => {
             </>
           );
         } else {
-          // dispatch(decreaseBankroll())
+          dispatch(updateUserBankroll(false));
           return (
             <>
               <h1>Dealer Wins</h1>
@@ -130,7 +129,7 @@ const UpdateBankroll: React.FC = () => {
         if (playerCount === dealerCount) {
           if (bankrollUpdated === false) {
             dispatch(noChangeBankroll());
-            dispatch(updateUserBankroll());
+            dispatch(updateUserBankroll(false));
           }
           return (
             <>
@@ -146,7 +145,7 @@ const UpdateBankroll: React.FC = () => {
         } else if (playerCount > dealerCount) {
           if (bankrollUpdated === false) {
             dispatch(increaseBankroll());
-            dispatch(updateUserBankroll());
+            dispatch(updateUserBankroll(true));
           }
           return (
             <>
@@ -160,7 +159,7 @@ const UpdateBankroll: React.FC = () => {
             </>
           );
         } else if (playerCount < dealerCount) {
-          // dispatch(decreaseBankroll());
+          dispatch(updateUserBankroll(false));
           return (
             <>
               <h1>Dealer Wins</h1>
@@ -174,7 +173,7 @@ const UpdateBankroll: React.FC = () => {
           );
         }
       } else if (playerCount > 21 && dealerCount < 21) {
-        // dispatch(decreaseBankroll())
+        dispatch(updateUserBankroll(false));
         return (
           <>
             <h1>Dealer Wins</h1>
@@ -189,7 +188,7 @@ const UpdateBankroll: React.FC = () => {
       } else if (playerCount < 21 && dealerCount > 21) {
         if (bankrollUpdated === false) {
           dispatch(increaseBankroll());
-          dispatch(updateUserBankroll());
+          dispatch(updateUserBankroll(true));
         }
         return (
           <>
@@ -205,7 +204,7 @@ const UpdateBankroll: React.FC = () => {
       } else if (playerCount === 21 && dealerCount !== 21) {
         if (bankrollUpdated === false) {
           dispatch(increaseBankroll());
-          dispatch(updateUserBankroll());
+          dispatch(updateUserBankroll(true));
         }
         return (
           <>
@@ -219,7 +218,7 @@ const UpdateBankroll: React.FC = () => {
           </>
         );
       } else if (playerCount !== 21 && dealerCount === 21) {
-        // dispatch(decreaseBankroll());
+        dispatch(updateUserBankroll(false));
         return (
           <>
             <h1>Dealer Wins</h1>
@@ -232,7 +231,8 @@ const UpdateBankroll: React.FC = () => {
           </>
         );
       } else if (playerCount === 21 && dealerCount === 21) {
-        // dispatch(decreaseBankroll());
+        dispatch(noChangeBankroll());
+        dispatch(updateUserBankroll(false));
         return (
           <>
             <h1>Push</h1>
