@@ -14,13 +14,12 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use("/api", require("./api"));
 app.use("/auth", require("./auth"));
-app.get("/", function (req, res, next) {
-    try {
-        res.send("index.html");
-    }
-    catch (error) {
-        next(error);
-    }
+app.get("/*", function (req, res) {
+    res.sendFile(path_1.default.join(__dirname, "../public/index.html"), function (error) {
+        if (error) {
+            res.status(500).send(error);
+        }
+    });
 });
 var PORT = 3000;
 app.listen(PORT, function () {

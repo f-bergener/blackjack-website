@@ -654,10 +654,14 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         splitBankrollUpdated: true,
       };
     }
-    case ActionConstants.USE_LOCAL_GAME_STATE: {
-      const localStorageState = window.localStorage.getItem("state");
-      const gameState = JSON.parse(localStorageState).game;
-      return gameState;
+    case ActionConstants.SET_BANKROLL: {
+      return {
+        ...state,
+        bankroll: action.payload,
+      };
+    }
+    case ActionConstants.CLEAR_STATE: {
+      return initialState;
     }
     // --------------------------------------------------------
     default:

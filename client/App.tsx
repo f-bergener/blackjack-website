@@ -1,21 +1,22 @@
-import React from "react";
-import { Router, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { State } from "./redux/store";
+import { setBankroll } from "./redux/actionCreators";
 import Header from "./components/Header";
-import Homepage from "./components/Homepage";
-import Game from "./components/Game";
-import LogIn from "./components/LogIn";
-import SignUp from "./components/SignUp";
-import history from "./history";
+import Routes from "./Routes";
 
 const App: React.FC = () => {
+  const dispatch = useDispatch();
+  const isLoggedIn = useSelector((state: State) => state.user.isLoggedIn);
+  const bankroll = useSelector((state: State) => state.game.bankroll);
+  useEffect(() => {
+    dispatch(setBankroll(bankroll));
+  }, [isLoggedIn]);
   return (
-    <Router history={history}>
+    <>
       <Header />
-      <Route exact path="/" component={Homepage} />
-      <Route exact path="/game" component={Game} />
-      <Route exact path="/login" component={LogIn} />
-      <Route exact path="/signup" component={SignUp} />
-    </Router>
+      <Routes />
+    </>
   );
 };
 

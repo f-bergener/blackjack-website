@@ -87,8 +87,26 @@ interface logOut {
   type: ActionConstants.LOG_OUT;
 }
 
-interface useLocalGameState {
-  type: ActionConstants.USE_LOCAL_GAME_STATE;
+interface clearState {
+  type: ActionConstants.CLEAR_STATE;
+}
+
+interface postMoveUpdate {
+  type: ActionConstants.POST_MOVE_UPDATE;
+  payload: boolean;
+}
+
+interface postDealUpdate {
+  type: ActionConstants.POST_DEAL_UPDATE;
+}
+
+interface setBankroll {
+  type: ActionConstants.SET_BANKROLL;
+  payload: number;
+}
+
+interface updateUserBankroll {
+  type: ActionConstants.UPDATE_USER_BANKROLL;
 }
 
 export type Action =
@@ -117,4 +135,8 @@ export type Action =
   // * * User Reducer Actions
   | setUser
   | logOut
-  | useLocalGameState;
+  | clearState
+  | postMoveUpdate
+  | postDealUpdate
+  | setBankroll
+  | updateUserBankroll;

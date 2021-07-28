@@ -13,12 +13,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api", require("./api"));
 app.use("/auth", require("./auth"));
 
-app.get("/", (req: Request, res: Response, next: NextFunction) => {
-  try {
-    res.send("index.html");
-  } catch (error) {
-    next(error);
-  }
+app.get("/*", (req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname, "../public/index.html"), (error) => {
+    if (error) {
+      res.status(500).send(error);
+    }
+  });
 });
 
 const PORT = 3000;

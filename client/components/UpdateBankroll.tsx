@@ -6,6 +6,7 @@ import {
   noChangeBankroll,
   increaseBankroll,
   nextHand,
+  updateUserBankroll,
 } from "../redux/actionCreators";
 import { State } from "../redux/store";
 
@@ -30,6 +31,7 @@ const UpdateBankroll: React.FC = () => {
       if (playerCount === 21 && dealerCount !== 21) {
         if (bankrollUpdated === false) {
           dispatch(blackjackIncreaseBankroll());
+          dispatch(updateUserBankroll());
         }
         return (
           <>
@@ -62,6 +64,7 @@ const UpdateBankroll: React.FC = () => {
       } else if (playerCount < 21 && dealerCount > 21) {
         if (bankrollUpdated === false) {
           dispatch(increaseBankroll());
+          dispatch(updateUserBankroll());
         }
         return (
           <>
@@ -78,6 +81,7 @@ const UpdateBankroll: React.FC = () => {
         if (playerCount === dealerCount) {
           if (bankrollUpdated === false) {
             dispatch(noChangeBankroll());
+            dispatch(updateUserBankroll());
           }
           return (
             <>
@@ -93,6 +97,7 @@ const UpdateBankroll: React.FC = () => {
         } else if (playerCount > dealerCount) {
           if (bankrollUpdated === false) {
             dispatch(increaseBankroll());
+            dispatch(updateUserBankroll());
           }
           return (
             <>
@@ -125,6 +130,7 @@ const UpdateBankroll: React.FC = () => {
         if (playerCount === dealerCount) {
           if (bankrollUpdated === false) {
             dispatch(noChangeBankroll());
+            dispatch(updateUserBankroll());
           }
           return (
             <>
@@ -140,6 +146,7 @@ const UpdateBankroll: React.FC = () => {
         } else if (playerCount > dealerCount) {
           if (bankrollUpdated === false) {
             dispatch(increaseBankroll());
+            dispatch(updateUserBankroll());
           }
           return (
             <>
@@ -182,6 +189,7 @@ const UpdateBankroll: React.FC = () => {
       } else if (playerCount < 21 && dealerCount > 21) {
         if (bankrollUpdated === false) {
           dispatch(increaseBankroll());
+          dispatch(updateUserBankroll());
         }
         return (
           <>
@@ -197,6 +205,7 @@ const UpdateBankroll: React.FC = () => {
       } else if (playerCount === 21 && dealerCount !== 21) {
         if (bankrollUpdated === false) {
           dispatch(increaseBankroll());
+          dispatch(updateUserBankroll());
         }
         return (
           <>

@@ -64,10 +64,9 @@ const initialState = {
   correctMoves: 0,
   handsWon: 0,
   email: "",
-  isAdmin: false,
   totalHands: 0,
   totalMoves: 0,
-  username: "",
+  username: "Guest User",
   isLoggedIn: false,
 };
 
@@ -79,6 +78,31 @@ const userReducer = (state: UserState = initialState, action: Action) => {
     case ActionConstants.LOG_OUT: {
       window.localStorage.removeItem(TOKEN);
       return initialState;
+    }
+    case ActionConstants.POST_MOVE_UPDATE: {
+      const newTotalMoves = state.totalMoves + 1;
+      const newCorrectMoves =
+        action.payload === true ? state.correctMoves + 1 : state.correctMoves;
+      return {
+        ...state,
+        correctMoves: newCorrectMoves,
+        totalMoves: newTotalMoves,
+      };
+    }
+    case ActionConstants.POST_DEAL_UPDATE: {
+      const newTotalHands = state.totalHands + 1;
+      return {
+        ...state,
+        totalHands: newTotalHands,
+      };
+    }
+    case ActionConstants.UPDATE_USER_BANKROLL: {
+      const localStorageState = window.localStorage.getItem("state");
+      const bankroll = JSON.parse(localStorageState).game.bankroll;
+      return {
+        ...state,
+        bankroll: bankroll,
+      };
     }
     default:
       return state;

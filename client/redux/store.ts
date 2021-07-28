@@ -40,7 +40,6 @@ export type UserState = {
   correctMoves: number;
   handsWon: number;
   email: string;
-  isAdmin: boolean;
   totalHands: number;
   totalMoves: number;
   username: string;
