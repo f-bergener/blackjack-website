@@ -59,10 +59,15 @@ export const authenticateSignup =
     }
   };
 
+export const won = "won";
+export const pushed = "pushed";
+export const lost = "lost";
+
 const initialState = {
   bankroll: 0,
   correctMoves: 0,
   handsWon: 0,
+  handsPushed: 0,
   email: "",
   totalHands: 0,
   totalMoves: 0,
@@ -99,12 +104,19 @@ const userReducer = (state: UserState = initialState, action: Action) => {
     case ActionConstants.UPDATE_USER_BANKROLL: {
       const localStorageState = window.localStorage.getItem("state");
       const bankroll = JSON.parse(localStorageState).game.bankroll;
-      if (action.payload === true) {
+      if (action.payload === won) {
         const newHandsWon = state.handsWon + 1;
         return {
           ...state,
           bankroll: bankroll,
           handsWon: newHandsWon,
+        };
+      } else if (action.payload === pushed) {
+        const newHandsPushed = state.handsPushed + 1;
+        return {
+          ...state,
+          bankroll: bankroll,
+          handsPushed: newHandsPushed,
         };
       } else {
         return {

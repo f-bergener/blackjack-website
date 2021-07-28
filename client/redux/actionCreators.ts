@@ -150,9 +150,9 @@ export const setBankroll = (userBankroll: number) => {
   };
 };
 
-export const updateUserBankroll = (wonHand: boolean) => {
+export const updateUserBankroll = (handOutcome: string) => {
   return {
     type: ActionConstants.UPDATE_USER_BANKROLL,
-    payload: wonHand,
+    payload: handOutcome,
   };
 };

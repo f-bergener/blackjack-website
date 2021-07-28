@@ -34,6 +34,7 @@ const initialState = {
   correctMoves: 0,
   totalHands: 0,
   handsWon: 0,
+  handsPushed: 0,
   bankrollUpdated: false,
   splitBankrollUpdated: false,
 };
@@ -603,6 +604,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
     //   };
     // }
     case ActionConstants.NO_CHANGE_BANKROLL: {
+      const newHandsPushed = state.handsPushed + 1;
       const newBankroll = state.bankroll + state.pot;
       return {
         ...state,
@@ -614,6 +616,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         // dealerCount: 0,
         // currentCardDeck: getDeck(),
         // playerHandBestMove: "",
+        handsPushed: newHandsPushed,
         bankrollUpdated: true,
       };
     }
@@ -642,6 +645,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
     //   };
     // }
     case ActionConstants.SPLIT_NO_CHANGE_BANKROLL: {
+      const newHandsPushed = state.handsPushed + 1;
       const newBankroll = state.bankroll + state.splitPot;
       return {
         ...state,
@@ -650,6 +654,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         // splitHand: [...hand],
         // splitCount: 0,
         // splitHandBestMove: "",
+        handsPushed: newHandsPushed,
         bankrollUpdated: true,
         splitBankrollUpdated: true,
       };
