@@ -14,6 +14,7 @@ import {
 } from "../redux/actionCreators";
 import { ActionConstants } from "../redux/actionConstants";
 import { State } from "../redux/store";
+import { lost } from "../redux/userReducer";
 
 export const Deal: React.FC = () => {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ export const Deal: React.FC = () => {
       onClick={() => {
         dispatch(deal());
         dispatch(postDealUpdate());
-        dispatch(updateUserBankroll(false));
+        dispatch(updateUserBankroll(lost));
       }}
     >
       Deal
@@ -112,7 +113,7 @@ export const DoubleDown: React.FC = () => {
             dispatch(postMoveUpdate(false));
           }
           dispatch(doubleDown());
-          dispatch(updateUserBankroll(false));
+          dispatch(updateUserBankroll(lost));
         }}
       >
         Double Down
@@ -141,7 +142,7 @@ export const Split: React.FC = () => {
           }
           dispatch(split());
           dispatch(postDealUpdate());
-          dispatch(updateUserBankroll(false));
+          dispatch(updateUserBankroll(lost));
         }}
       >
         Split

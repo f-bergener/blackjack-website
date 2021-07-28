@@ -51,6 +51,7 @@ var getUser = function (req, res, next) { return __awaiter(void 0, void 0, void 
             case 2:
                 user = _a.sent();
                 req.user = user;
+                console.log(user);
                 next();
                 return [3 /*break*/, 4];
             case 3:

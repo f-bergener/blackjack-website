@@ -100,13 +100,14 @@ router.post("/", function (req, res, next) { return __awaiter(void 0, void 0, vo
 }); });
 // Update a user
 router.put("/", getUser, function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var data, user, error_3;
+    var id, data, user, error_3;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                data = __assign(__assign({}, req.user), req.body);
-                return [4 /*yield*/, User.update(data)];
+                id = req.user[0].dataValues.id;
+                data = __assign(__assign({}, req.user[0].dataValues), req.body);
+                return [4 /*yield*/, User.update(data, { where: { id: id } })];
             case 1:
                 user = _a.sent();
                 res.json(user);

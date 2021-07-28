@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { State } from "../redux/store";
 import { resetBankroll, updateUserBankroll } from "../redux/actionCreators";
+import { lost } from "../redux/userReducer";
 
 const Bankrupt: React.FC = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const Bankrupt: React.FC = () => {
         <button
           onClick={() => {
             dispatch(resetBankroll());
-            dispatch(updateUserBankroll(false));
+            dispatch(updateUserBankroll(lost));
           }}
         >
           Reset Bankroll

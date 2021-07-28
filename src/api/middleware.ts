@@ -7,6 +7,7 @@ const getUser = async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization;
     const user = await User.findByToken(token);
     req.user = user;
+    console.log(user);
     next();
   } catch (error) {
     next(error);
