@@ -168,7 +168,6 @@ User.findByToken = function (token) { return __awaiter(void 0, void 0, void 0, f
                             "totalMoves",
                             "correctMoves",
                             "bankroll",
-                            "isAdmin",
                         ],
                     })];
             case 2:

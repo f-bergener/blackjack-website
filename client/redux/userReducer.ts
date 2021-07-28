@@ -64,10 +64,9 @@ const initialState = {
   correctMoves: 0,
   handsWon: 0,
   email: "",
-  isAdmin: false,
   totalHands: 0,
   totalMoves: 0,
-  username: "",
+  username: "Guest User",
   isLoggedIn: false,
 };
 

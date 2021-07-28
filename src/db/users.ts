@@ -118,7 +118,6 @@ User.findByToken = async (token: String) => {
         "totalMoves",
         "correctMoves",
         "bankroll",
-        "isAdmin",
       ],
     });
     if (!user) {
