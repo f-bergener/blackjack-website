@@ -8,7 +8,7 @@ import { restartGame } from "../redux/actionCreators";
 
 const Game: React.FC = () => {
   const pot = useSelector((state: State) => state.game.pot);
-  const bankroll = useSelector((state: State) => state.game.bankroll);
+  const bankroll = useSelector((state: State) => state.user.bankroll);
   const activeGame = useSelector((state: State) => state.game.activeGame);
 
   const dispatch = useDispatch();

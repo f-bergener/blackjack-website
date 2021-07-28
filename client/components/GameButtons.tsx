@@ -23,7 +23,7 @@ export const Deal: React.FC = () => {
       onClick={() => {
         dispatch(deal());
         dispatch(postDealUpdate());
-        dispatch(updateUserBankroll());
+        dispatch(updateUserBankroll(false));
       }}
     >
       Deal
@@ -112,7 +112,7 @@ export const DoubleDown: React.FC = () => {
             dispatch(postMoveUpdate(false));
           }
           dispatch(doubleDown());
-          dispatch(updateUserBankroll());
+          dispatch(updateUserBankroll(false));
         }}
       >
         Double Down
@@ -141,7 +141,7 @@ export const Split: React.FC = () => {
           }
           dispatch(split());
           dispatch(postDealUpdate());
-          dispatch(updateUserBankroll());
+          dispatch(updateUserBankroll(false));
         }}
       >
         Split

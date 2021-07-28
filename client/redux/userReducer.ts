@@ -99,10 +99,19 @@ const userReducer = (state: UserState = initialState, action: Action) => {
     case ActionConstants.UPDATE_USER_BANKROLL: {
       const localStorageState = window.localStorage.getItem("state");
       const bankroll = JSON.parse(localStorageState).game.bankroll;
-      return {
-        ...state,
-        bankroll: bankroll,
-      };
+      if (action.payload === true) {
+        const newHandsWon = state.handsWon + 1;
+        return {
+          ...state,
+          bankroll: bankroll,
+          handsWon: newHandsWon,
+        };
+      } else {
+        return {
+          ...state,
+          bankroll: bankroll,
+        };
+      }
     }
     default:
       return state;

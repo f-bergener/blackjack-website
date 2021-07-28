@@ -107,6 +107,7 @@ interface setBankroll {
 
 interface updateUserBankroll {
   type: ActionConstants.UPDATE_USER_BANKROLL;
+  payload: boolean;
 }
 
 export type Action =
