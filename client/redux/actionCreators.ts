@@ -142,3 +142,16 @@ export const postDealUpdate = () => {
     type: ActionConstants.POST_DEAL_UPDATE,
   };
 };
+
+export const setBankroll = (userBankroll: number) => {
+  return {
+    type: ActionConstants.SET_BANKROLL,
+    payload: userBankroll,
+  };
+};
+
+export const updateUserBankroll = () => {
+  return {
+    type: ActionConstants.UPDATE_USER_BANKROLL,
+  };
+};

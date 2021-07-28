@@ -10,6 +10,7 @@ import {
   stay,
   postDealUpdate,
   postMoveUpdate,
+  updateUserBankroll,
 } from "../redux/actionCreators";
 import { ActionConstants } from "../redux/actionConstants";
 import { State } from "../redux/store";
@@ -22,6 +23,7 @@ export const Deal: React.FC = () => {
       onClick={() => {
         dispatch(deal());
         dispatch(postDealUpdate());
+        dispatch(updateUserBankroll());
       }}
     >
       Deal
@@ -110,6 +112,7 @@ export const DoubleDown: React.FC = () => {
             dispatch(postMoveUpdate(false));
           }
           dispatch(doubleDown());
+          dispatch(updateUserBankroll());
         }}
       >
         Double Down
@@ -138,6 +141,7 @@ export const Split: React.FC = () => {
           }
           dispatch(split());
           dispatch(postDealUpdate());
+          dispatch(updateUserBankroll());
         }}
       >
         Split

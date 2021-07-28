@@ -654,6 +654,12 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         splitBankrollUpdated: true,
       };
     }
+    case ActionConstants.SET_BANKROLL: {
+      return {
+        ...state,
+        bankroll: action.payload,
+      };
+    }
     case ActionConstants.CLEAR_STATE: {
       return initialState;
     }

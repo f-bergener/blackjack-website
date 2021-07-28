@@ -81,9 +81,8 @@ const userReducer = (state: UserState = initialState, action: Action) => {
     }
     case ActionConstants.POST_MOVE_UPDATE: {
       const newTotalMoves = state.totalMoves + 1;
-      const newCorrectMoves = action.payload
-        ? state.correctMoves + 1
-        : state.correctMoves;
+      const newCorrectMoves =
+        action.payload === true ? state.correctMoves + 1 : state.correctMoves;
       return {
         ...state,
         correctMoves: newCorrectMoves,
@@ -95,6 +94,14 @@ const userReducer = (state: UserState = initialState, action: Action) => {
       return {
         ...state,
         totalHands: newTotalHands,
+      };
+    }
+    case ActionConstants.UPDATE_USER_BANKROLL: {
+      const localStorageState = window.localStorage.getItem("state");
+      const bankroll = JSON.parse(localStorageState).game.bankroll;
+      return {
+        ...state,
+        bankroll: bankroll,
       };
     }
     default:

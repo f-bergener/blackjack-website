@@ -100,6 +100,15 @@ interface postDealUpdate {
   type: ActionConstants.POST_DEAL_UPDATE;
 }
 
+interface setBankroll {
+  type: ActionConstants.SET_BANKROLL;
+  payload: number;
+}
+
+interface updateUserBankroll {
+  type: ActionConstants.UPDATE_USER_BANKROLL;
+}
+
 export type Action =
   | restartGame
   // * * Modify bet actions
@@ -128,4 +137,6 @@ export type Action =
   | logOut
   | clearState
   | postMoveUpdate
-  | postDealUpdate;
+  | postDealUpdate
+  | setBankroll
+  | updateUserBankroll;
