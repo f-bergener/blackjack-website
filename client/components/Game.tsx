@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { State } from "../redux/store";
 import PreDealDisplay from "./PreDealDisplay";
 import ActiveHandDisplay from "./ActiveHandDisplay";
-import { restartGame } from "../redux/actionCreators";
+// import { resetBankroll, updateUserBankroll } from "../redux/actionCreators";
 
 const Game: React.FC = () => {
   const pot = useSelector((state: State) => state.game.pot);
   const bankroll = useSelector((state: State) => state.user.bankroll);
-  const activeGame = useSelector((state: State) => state.game.activeGame);
+  // const activeGame = useSelector((state: State) => state.game.activeGame);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   return (
     <>
@@ -20,11 +20,18 @@ const Game: React.FC = () => {
       <Link to="/">
         <button>Back to Home</button>
       </Link>
-      {activeGame ? (
-        <button onClick={() => dispatch(restartGame())}>Restart Game</button>
+      {/* {activeGame ? (
+        <button
+          onClick={() => {
+            dispatch(resetBankroll());
+            dispatch(updateUserBankroll(false));
+          }}
+        >
+          Reset Bankroll
+        </button>
       ) : (
         <></>
-      )}
+      )} */}
     </>
   );
 };

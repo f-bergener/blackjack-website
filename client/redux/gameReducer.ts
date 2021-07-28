@@ -40,7 +40,7 @@ const initialState = {
 
 const gameReducer = (state: GameState = initialState, action: Action) => {
   switch (action.type) {
-    case ActionConstants.RESTART_GAME: {
+    case ActionConstants.RESET_BANKROLL: {
       return {
         ...state,
         activeGame: false,
@@ -63,10 +63,10 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         splitStayBoolean: false,
         playerHandBestMove: "",
         splitHandBestMove: "",
-        totalMoves: 0,
-        correctMoves: 0,
-        totalHands: 0,
-        handsWon: 0,
+        // totalMoves: 0,
+        // correctMoves: 0,
+        // totalHands: 0,
+        // handsWon: 0,
       };
     }
     // --------------------------------------------------------

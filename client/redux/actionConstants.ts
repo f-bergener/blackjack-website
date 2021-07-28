@@ -1,6 +1,6 @@
 export enum ActionConstants {
   // * * Game Reducer Actions
-  RESTART_GAME = "RESTART_GAME",
+  RESET_BANKROLL = "RESET_BANKROLL",
   // * * Modify bet actions
   ADD_TO_BET = "ADD_TO_BET",
   REMOVE_FROM_BET = "REMOVE_FROM_BET",
