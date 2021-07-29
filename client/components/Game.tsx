@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { State } from "../redux/store";
 import PreDealDisplay from "./PreDealDisplay";
@@ -10,6 +10,7 @@ import { TOKEN } from "../redux/userReducer";
 
 const Game: React.FC = () => {
   const pot = useSelector((state: State) => state.game.pot);
+  const bet = useSelector((state: State) => state.game.bet);
   const bankroll = useSelector((state: State) => state.user.bankroll);
   const correctMoves = useSelector((state: State) => state.user.correctMoves);
   const handsWon = useSelector((state: State) => state.user.handsWon);
@@ -47,8 +48,16 @@ const Game: React.FC = () => {
 
   return (
     <>
-      <h2>Bankroll: ${bankroll.toLocaleString("en")}</h2>
-      {token.length ? <button onClick={sendData}>Save Progress</button> : <></>}
+      <h2>Bankroll: ${(bankroll - bet).toLocaleString("en")}</h2>
+      {token ? (
+        token.length ? (
+          <button onClick={sendData}>Save Progress</button>
+        ) : (
+          <></>
+        )
+      ) : (
+        <></>
+      )}
       {!pot ? <PreDealDisplay /> : <ActiveHandDisplay />}
       <Link to="/">
         <button>Back to Home</button>

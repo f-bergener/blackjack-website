@@ -117,8 +117,8 @@ export const splitNextHand = () => {
   };
 };
 // Clear game state action
-export const clearState = () => {
-  return { type: ActionConstants.CLEAR_STATE };
+export const clearGameState = () => {
+  return { type: ActionConstants.CLEAR_GAME_STATE };
 };
 
 // * * User reducer actions
@@ -154,5 +154,11 @@ export const updateUserBankroll = (handOutcome: string) => {
   return {
     type: ActionConstants.UPDATE_USER_BANKROLL,
     payload: handOutcome,
+  };
+};
+
+export const clearUserState = () => {
+  return {
+    type: ActionConstants.CLEAR_USER_STATE,
   };
 };

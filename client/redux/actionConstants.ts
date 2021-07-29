@@ -23,7 +23,7 @@ export enum ActionConstants {
   NEXT_HAND = "NEXT_HAND",
   SPLIT_NEXT_HAND = "SPLIT_NEXT_HAND",
   // * * Clear game state
-  CLEAR_STATE = "CLEAR_STATE",
+  CLEAR_GAME_STATE = "CLEAR_GAME_STATE",
   // * * User Reducer Actions
   SET_USER = "SET_USER",
   LOG_OUT = "LOG_OUT",
@@ -31,4 +31,5 @@ export enum ActionConstants {
   POST_DEAL_UPDATE = "POST_DEAL_UPDATE",
   SET_BANKROLL = "SET_BANKROLL",
   UPDATE_USER_BANKROLL = "UPDATE_USER_BANKROLL",
+  CLEAR_USER_STATE = "CLEAR_USER_STATE",
 }

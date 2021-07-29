@@ -168,16 +168,6 @@ User.findByToken = function (token) { return __awaiter(void 0, void 0, void 0, f
                 payload = _a.sent();
                 return [4 /*yield*/, User.findAll({
                         where: { id: payload.id },
-                        // attributes: [
-                        //   "email",
-                        //   "username",
-                        //   "totalHands",
-                        //   "handsWon",
-                        //   "handsPushed",
-                        //   "totalMoves",
-                        //   "correctMoves",
-                        //   "bankroll",
-                        // ],
                     })];
             case 2:
                 user = _a.sent();

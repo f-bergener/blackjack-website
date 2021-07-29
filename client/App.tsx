@@ -8,7 +8,7 @@ import Routes from "./Routes";
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const isLoggedIn = useSelector((state: State) => state.user.isLoggedIn);
-  const bankroll = useSelector((state: State) => state.game.bankroll);
+  const bankroll = useSelector((state: State) => state.user.bankroll);
   useEffect(() => {
     dispatch(setBankroll(bankroll));
   }, [isLoggedIn]);

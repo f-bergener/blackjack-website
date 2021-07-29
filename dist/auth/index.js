@@ -88,18 +88,29 @@ router.post("/signup", function (req, res, next) { return __awaiter(void 0, void
     });
 }); });
 router.get("/me", function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, _b, error_3;
-    return __generator(this, function (_c) {
-        switch (_c.label) {
+    var user, _a, email, username, totalHands, handsWon, handsPushed, totalMoves, correctMoves, bankroll, data, error_3;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
             case 0:
-                _c.trys.push([0, 2, , 3]);
-                _b = (_a = res).send;
+                _b.trys.push([0, 2, , 3]);
                 return [4 /*yield*/, User.findByToken(req.headers.authorization)];
             case 1:
-                _b.apply(_a, [_c.sent()]);
+                user = _b.sent();
+                _a = user[0].dataValues, email = _a.email, username = _a.username, totalHands = _a.totalHands, handsWon = _a.handsWon, handsPushed = _a.handsPushed, totalMoves = _a.totalMoves, correctMoves = _a.correctMoves, bankroll = _a.bankroll;
+                data = {
+                    email: email,
+                    username: username,
+                    totalHands: totalHands,
+                    handsWon: handsWon,
+                    handsPushed: handsPushed,
+                    totalMoves: totalMoves,
+                    correctMoves: correctMoves,
+                    bankroll: bankroll,
+                };
+                res.send(data);
                 return [3 /*break*/, 3];
             case 2:
-                error_3 = _c.sent();
+                error_3 = _b.sent();
                 next(error_3);
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];

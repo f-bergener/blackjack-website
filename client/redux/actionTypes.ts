@@ -87,8 +87,8 @@ interface logOut {
   type: ActionConstants.LOG_OUT;
 }
 
-interface clearState {
-  type: ActionConstants.CLEAR_STATE;
+interface clearGameState {
+  type: ActionConstants.CLEAR_GAME_STATE;
 }
 
 interface postMoveUpdate {
@@ -108,6 +108,10 @@ interface setBankroll {
 interface updateUserBankroll {
   type: ActionConstants.UPDATE_USER_BANKROLL;
   payload: string;
+}
+
+interface clearUserState {
+  type: ActionConstants.CLEAR_USER_STATE;
 }
 
 export type Action =
@@ -136,8 +140,9 @@ export type Action =
   // * * User Reducer Actions
   | setUser
   | logOut
-  | clearState
+  | clearGameState
   | postMoveUpdate
   | postDealUpdate
   | setBankroll
-  | updateUserBankroll;
+  | updateUserBankroll
+  | clearUserState;

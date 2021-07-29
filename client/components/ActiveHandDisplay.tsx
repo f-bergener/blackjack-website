@@ -35,7 +35,7 @@ const ActiveHandDisplay: React.FC = () => {
   const totalHands = useSelector((state: State) => state.game.totalHands);
   return (
     <>
-      <h2>
+      {/* <h2>
         Accuracy:{" "}
         {`${correctMoves}/${totalMoves} / ${
           totalMoves ? Math.ceil((correctMoves / totalMoves) * 100) : "0"
@@ -46,7 +46,7 @@ const ActiveHandDisplay: React.FC = () => {
         {`${handsWon}/${totalHands} / ${
           totalHands ? Math.ceil((handsWon / totalHands) * 100) : "0"
         }%`}
-      </h2>
+      </h2> */}
       <h2>Bet: ${pot.toLocaleString("en")}</h2>
       {splitPot ? <h2>Split Bet: ${splitPot.toLocaleString("en")}</h2> : <></>}
       <PlayerHand />

@@ -665,7 +665,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         bankroll: action.payload,
       };
     }
-    case ActionConstants.CLEAR_STATE: {
+    case ActionConstants.CLEAR_GAME_STATE: {
       return initialState;
     }
     // --------------------------------------------------------
