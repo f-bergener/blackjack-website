@@ -118,16 +118,6 @@ User.findByToken = async (token: String) => {
     const payload = await jwt.verify(token, process.env.JWT);
     const user = await User.findAll({
       where: { id: payload.id },
-      attributes: [
-        "email",
-        "username",
-        "totalHands",
-        "handsWon",
-        "handsPushed",
-        "totalMoves",
-        "correctMoves",
-        "bankroll",
-      ],
     });
     if (!user) {
       throw "error";

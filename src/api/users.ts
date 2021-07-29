@@ -40,8 +40,9 @@ router.put(
   getUser,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const data = { ...req.user, ...req.body };
-      const user = await User.update(data);
+      const id = req.user[0].dataValues.id;
+      const data = { ...req.user[0].dataValues, ...req.body };
+      const user = await User.update(data, { where: { id } });
       res.json(user);
     } catch (error) {
       next(error);

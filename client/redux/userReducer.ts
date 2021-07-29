@@ -16,7 +16,8 @@ export const me = () => {
             authorization: token,
           },
         });
-        const user = data[0];
+        const user = data;
+        console.log(user);
         dispatch(setUser(user));
       } catch (error) {
         console.error(error);
@@ -64,7 +65,7 @@ export const pushed = "pushed";
 export const lost = "lost";
 
 const initialState = {
-  bankroll: 0,
+  bankroll: 5000,
   correctMoves: 0,
   handsWon: 0,
   handsPushed: 0,
@@ -124,6 +125,9 @@ const userReducer = (state: UserState = initialState, action: Action) => {
           bankroll: bankroll,
         };
       }
+    }
+    case ActionConstants.CLEAR_USER_STATE: {
+      return initialState;
     }
     default:
       return state;

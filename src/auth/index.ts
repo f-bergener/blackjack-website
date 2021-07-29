@@ -35,7 +35,28 @@ router.post(
 
 router.get("/me", async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.send(await User.findByToken(req.headers.authorization));
+    const user = await User.findByToken(req.headers.authorization);
+    const {
+      email,
+      username,
+      totalHands,
+      handsWon,
+      handsPushed,
+      totalMoves,
+      correctMoves,
+      bankroll,
+    } = user[0].dataValues;
+    const data = {
+      email,
+      username,
+      totalHands,
+      handsWon,
+      handsPushed,
+      totalMoves,
+      correctMoves,
+      bankroll,
+    };
+    res.send(data);
   } catch (error) {
     next(error);
   }

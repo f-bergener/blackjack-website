@@ -4,11 +4,13 @@ import { addToBet } from "../redux/actionCreators";
 import { State } from "../redux/store";
 
 const UpChips: React.FC = () => {
-  const bankroll = useSelector((state: State) => state.game.bankroll);
+  const bet = useSelector((state: State) => state.game.bet);
+  const bankroll = useSelector((state: State) => state.user.bankroll);
+  const remainingBankroll = bankroll - bet;
   const dispatch = useDispatch();
 
   const displayIncreaseChips = () => {
-    if (bankroll >= 5000) {
+    if (remainingBankroll >= 5000) {
       return (
         <div className="increase-chips seven">
           <div
@@ -62,7 +64,7 @@ const UpChips: React.FC = () => {
           </div>
         </div>
       );
-    } else if (bankroll >= 2500) {
+    } else if (remainingBankroll >= 2500) {
       return (
         <div className="increase-chips six">
           <div
@@ -109,7 +111,7 @@ const UpChips: React.FC = () => {
           </div>
         </div>
       );
-    } else if (bankroll >= 1000) {
+    } else if (remainingBankroll >= 1000) {
       return (
         <div className="increase-chips five">
           <div
@@ -149,7 +151,7 @@ const UpChips: React.FC = () => {
           </div>
         </div>
       );
-    } else if (bankroll >= 500) {
+    } else if (remainingBankroll >= 500) {
       return (
         <div className="increase-chips four">
           <div
@@ -182,7 +184,7 @@ const UpChips: React.FC = () => {
           </div>
         </div>
       );
-    } else if (bankroll >= 100) {
+    } else if (remainingBankroll >= 100) {
       return (
         <div className="increase-chips three">
           <div
@@ -208,7 +210,7 @@ const UpChips: React.FC = () => {
           </div>
         </div>
       );
-    } else if (bankroll >= 10) {
+    } else if (remainingBankroll >= 10) {
       return (
         <div className="increase-chips two">
           <div
@@ -227,7 +229,7 @@ const UpChips: React.FC = () => {
           </div>
         </div>
       );
-    } else if (bankroll >= 1) {
+    } else if (remainingBankroll >= 1) {
       return (
         <div className="increase-chips one">
           <div
