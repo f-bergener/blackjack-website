@@ -9,7 +9,7 @@ import { loadState } from "../localStorage";
 export type GameState = {
   activeGame: boolean;
   currentCardDeck: card[];
-  bankroll: number;
+  // bankroll: number;
   bet: number;
   pot: number;
   splitPot: number;
@@ -27,11 +27,11 @@ export type GameState = {
   splitStayBoolean: boolean;
   playerHandBestMove: string;
   splitHandBestMove: string;
-  totalMoves: number;
-  correctMoves: number;
-  totalHands: number;
-  handsWon: number;
-  handsPushed: number;
+  // totalMoves: number;
+  // correctMoves: number;
+  // totalHands: number;
+  // handsWon: number;
+  // handsPushed: number;
   bankrollUpdated: boolean;
   splitBankrollUpdated: boolean;
 };

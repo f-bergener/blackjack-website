@@ -14,17 +14,18 @@ import {
 } from "../redux/actionCreators";
 import { ActionConstants } from "../redux/actionConstants";
 import { State } from "../redux/store";
-import { lost } from "../redux/userReducer";
 
 export const Deal: React.FC = () => {
   const dispatch = useDispatch();
+  const bankroll = useSelector((state: State) => state.user.bankroll);
+  const bet = useSelector((state: State) => state.game.bet);
   return (
     <button
       className="button deal-button"
       onClick={() => {
-        dispatch(deal());
+        dispatch(deal(bankroll));
         dispatch(postDealUpdate());
-        dispatch(updateUserBankroll(lost));
+        dispatch(updateUserBankroll(-bet));
       }}
     >
       Deal
@@ -102,6 +103,7 @@ export const DoubleDown: React.FC = () => {
   const playerHandBestMove = useSelector(
     (state: State) => state.game.playerHandBestMove
   );
+  const pot = useSelector((state: State) => state.game.pot);
   if (doubleDownBoolean) {
     return (
       <button
@@ -113,7 +115,7 @@ export const DoubleDown: React.FC = () => {
             dispatch(postMoveUpdate(false));
           }
           dispatch(doubleDown());
-          dispatch(updateUserBankroll(lost));
+          dispatch(updateUserBankroll(-pot));
         }}
       >
         Double Down
@@ -130,6 +132,7 @@ export const Split: React.FC = () => {
   const playerHandBestMove = useSelector(
     (state: State) => state.game.playerHandBestMove
   );
+  const pot = useSelector((state: State) => state.game.pot);
   if (splitBoolean) {
     return (
       <button
@@ -142,7 +145,7 @@ export const Split: React.FC = () => {
           }
           dispatch(split());
           dispatch(postDealUpdate());
-          dispatch(updateUserBankroll(lost));
+          dispatch(updateUserBankroll(-pot));
         }}
       >
         Split
