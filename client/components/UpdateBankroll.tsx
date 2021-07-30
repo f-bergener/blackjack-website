@@ -24,7 +24,6 @@ const UpdateBankroll: React.FC = () => {
     (state: State) => state.game.bankrollUpdated
   );
   const dispatch = useDispatch();
-  let count = 0;
 
   const updateBankroll = () => {
     if (playerHand.length === 2) {

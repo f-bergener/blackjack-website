@@ -276,6 +276,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           hitBoolean: false,
           stayBoolean: false,
           doubleDownBoolean: false,
+          splitBoolean: false,
           playerHandBestMove: "",
         };
       }
@@ -435,6 +436,10 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         playerHandBestMove: "",
         currentCardDeck: getDeck(),
         bankrollUpdated: false,
+        hitBoolean: false,
+        stayBoolean: false,
+        doubleDownBoolean: false,
+        splitBoolean: false,
       };
     }
     case ActionConstants.SPLIT_NEXT_HAND: {
@@ -445,6 +450,10 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         splitCount: 0,
         splitHandBestMove: "",
         splitBankrollUpdated: false,
+        hitBoolean: false,
+        stayBoolean: false,
+        doubleDownBoolean: false,
+        splitBoolean: false,
       };
     }
     case ActionConstants.CLEAR_GAME_STATE: {

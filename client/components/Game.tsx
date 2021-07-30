@@ -5,20 +5,18 @@ import { State } from "../redux/store";
 import PreDealDisplay from "./PreDealDisplay";
 import ActiveHandDisplay from "./ActiveHandDisplay";
 import SendData from "./SendData";
-// import { resetBankroll, updateUserBankroll } from "../redux/actionCreators";
+import MoveFeedback from "./MoveFeedback";
 
 const Game: React.FC = () => {
   const pot = useSelector((state: State) => state.game.pot);
   const bet = useSelector((state: State) => state.game.bet);
   const bankroll = useSelector((state: State) => state.user.bankroll);
   const playerHand = useSelector((state: State) => state.game.playerHand);
-  // const activeGame = useSelector((state: State) => state.game.activeGame);
-
-  // const dispatch = useDispatch();
 
   return (
     <>
       <h2>Bankroll: ${(bankroll - bet).toLocaleString("en")}</h2>
+      {playerHand.length > 0 ? <MoveFeedback /> : <></>}
       {playerHand.length === 0 ? <SendData /> : <></>}
       {!pot ? <PreDealDisplay /> : <ActiveHandDisplay />}
       <Link to="/">

@@ -85,10 +85,16 @@ export const logOut = () => {
   return { type: ActionConstants.LOG_OUT };
 };
 
-export const postMoveUpdate = (correctMoveBoolean: boolean) => {
+export const postMoveUpdate = (
+  moveWasCorrect: boolean,
+  lastMove: string,
+  correctLastMove: string
+) => {
   return {
     type: ActionConstants.POST_MOVE_UPDATE,
-    payload: correctMoveBoolean,
+    moveWasCorrect,
+    lastMove,
+    correctLastMove,
   };
 };
 

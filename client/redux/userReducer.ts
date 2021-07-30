@@ -17,7 +17,6 @@ export const me = () => {
           },
         });
         const user = data;
-        console.log(user);
         dispatch(setUser(user));
       } catch (error) {
         console.error(error);
@@ -75,12 +74,21 @@ const initialState = {
   totalMoves: 0,
   username: "Guest User",
   isLoggedIn: false,
+  lastMoveCorrect: false,
+  lastMove: "",
+  correctLastMove: "",
+  moveUpdated: false,
 };
 
 const userReducer = (state: UserState = initialState, action: Action) => {
   switch (action.type) {
     case ActionConstants.SET_USER: {
-      return { ...action.payload, isLoggedIn: true };
+      return {
+        ...action.payload,
+        isLoggedIn: true,
+        lastMoveCorrect: false,
+        moveUpdated: false,
+      };
     }
     case ActionConstants.LOG_OUT: {
       window.localStorage.removeItem(TOKEN);
@@ -89,11 +97,17 @@ const userReducer = (state: UserState = initialState, action: Action) => {
     case ActionConstants.POST_MOVE_UPDATE: {
       const newTotalMoves = state.totalMoves + 1;
       const newCorrectMoves =
-        action.payload === true ? state.correctMoves + 1 : state.correctMoves;
+        action.moveWasCorrect === true
+          ? state.correctMoves + 1
+          : state.correctMoves;
       return {
         ...state,
         correctMoves: newCorrectMoves,
         totalMoves: newTotalMoves,
+        lastMoveCorrect: action.moveWasCorrect,
+        lastMove: action.lastMove,
+        correctLastMove: action.correctLastMove,
+        moveUpdated: true,
       };
     }
     case ActionConstants.POST_DEAL_UPDATE: {
@@ -101,6 +115,10 @@ const userReducer = (state: UserState = initialState, action: Action) => {
       return {
         ...state,
         totalHands: newTotalHands,
+        lastMoveCorrect: false,
+        lastMove: "",
+        correctLastMove: "",
+        moveUpdated: false,
       };
     }
     case ActionConstants.UPDATE_USER_CORRECT_HANDS: {

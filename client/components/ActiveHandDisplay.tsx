@@ -33,6 +33,10 @@ const ActiveHandDisplay: React.FC = () => {
   // const totalMoves = useSelector((state: State) => state.user.totalMoves);
   // const handsWon = useSelector((state: State) => state.user.handsWon);
   // const totalHands = useSelector((state: State) => state.user.totalHands);
+  // const splitMoveUpdated = useSelector(
+  //   (state: State) => state.user.splitMoveUpdated
+  // );
+
   return (
     <>
       {/* <h2>

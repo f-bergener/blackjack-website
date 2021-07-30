@@ -67,7 +67,9 @@ interface clearGameState {
 
 interface postMoveUpdate {
   type: ActionConstants.POST_MOVE_UPDATE;
-  payload: boolean;
+  moveWasCorrect: boolean;
+  lastMove: string;
+  correctLastMove: string;
 }
 
 interface postDealUpdate {

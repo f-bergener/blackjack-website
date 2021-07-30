@@ -40,6 +40,10 @@ export type UserState = {
   totalMoves: number;
   username: string;
   isLoggedIn: boolean;
+  lastMoveCorrect: boolean;
+  lastMove: string;
+  correctLastMove: string;
+  moveUpdated: boolean;
 };
 
 export type State = {
