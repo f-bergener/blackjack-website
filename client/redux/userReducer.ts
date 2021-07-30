@@ -63,6 +63,7 @@ export const authenticateSignup =
 export const won = "won";
 export const pushed = "pushed";
 export const lost = "lost";
+export const handDealt = "handDealt";
 
 const initialState = {
   bankroll: 5000,
@@ -102,29 +103,29 @@ const userReducer = (state: UserState = initialState, action: Action) => {
         totalHands: newTotalHands,
       };
     }
-    case ActionConstants.UPDATE_USER_BANKROLL: {
-      const localStorageState = window.localStorage.getItem("state");
-      const bankroll = JSON.parse(localStorageState).game.bankroll;
-      if (action.payload === won) {
+    case ActionConstants.UPDATE_USER_CORRECT_HANDS: {
+      if (action.handOutcome === won) {
         const newHandsWon = state.handsWon + 1;
         return {
           ...state,
-          bankroll: bankroll,
           handsWon: newHandsWon,
         };
-      } else if (action.payload === pushed) {
+      } else if (action.handOutcome === pushed) {
         const newHandsPushed = state.handsPushed + 1;
         return {
           ...state,
-          bankroll: bankroll,
           handsPushed: newHandsPushed,
         };
       } else {
-        return {
-          ...state,
-          bankroll: bankroll,
-        };
+        return state;
       }
+    }
+    case ActionConstants.UPDATE_USER_BANKROLL: {
+      const newBankroll = state.bankroll + action.amount;
+      return {
+        ...state,
+        bankroll: newBankroll,
+      };
     }
     case ActionConstants.CLEAR_USER_STATE: {
       return initialState;

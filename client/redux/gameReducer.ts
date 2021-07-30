@@ -12,7 +12,7 @@ const hand: card[] = [];
 const initialState = {
   activeGame: false,
   currentCardDeck: getDeck(),
-  bankroll: 5000,
+  // bankroll: 5000,
   bet: 0,
   pot: 0,
   splitPot: 0,
@@ -30,75 +30,75 @@ const initialState = {
   splitStayBoolean: false,
   playerHandBestMove: "",
   splitHandBestMove: "",
-  totalMoves: 0,
-  correctMoves: 0,
-  totalHands: 0,
-  handsWon: 0,
-  handsPushed: 0,
+  // totalMoves: 0,
+  // correctMoves: 0,
+  // totalHands: 0,
+  // handsWon: 0,
+  // handsPushed: 0,
   bankrollUpdated: false,
   splitBankrollUpdated: false,
 };
 
 const gameReducer = (state: GameState = initialState, action: Action) => {
   switch (action.type) {
-    case ActionConstants.RESET_BANKROLL: {
-      return {
-        ...state,
-        activeGame: false,
-        currentCardDeck: getDeck(),
-        bankroll: 5000,
-        bet: 0,
-        pot: 0,
-        splitPot: 0,
-        playerHand: [...hand],
-        dealerHand: [...hand],
-        splitHand: [...hand],
-        playerCount: 0,
-        dealerCount: 0,
-        splitCount: 0,
-        hitBoolean: false,
-        stayBoolean: false,
-        doubleDownBoolean: false,
-        splitBoolean: false,
-        splitHitBoolean: false,
-        splitStayBoolean: false,
-        playerHandBestMove: "",
-        splitHandBestMove: "",
-        // totalMoves: 0,
-        // correctMoves: 0,
-        // totalHands: 0,
-        // handsWon: 0,
-      };
-    }
+    // case ActionConstants.RESET_BANKROLL: {
+    //   return {
+    //     ...state,
+    //     activeGame: false,
+    //     currentCardDeck: getDeck(),
+    //     bankroll: 5000,
+    //     bet: 0,
+    //     pot: 0,
+    //     splitPot: 0,
+    //     playerHand: [...hand],
+    //     dealerHand: [...hand],
+    //     splitHand: [...hand],
+    //     playerCount: 0,
+    //     dealerCount: 0,
+    //     splitCount: 0,
+    //     hitBoolean: false,
+    //     stayBoolean: false,
+    //     doubleDownBoolean: false,
+    //     splitBoolean: false,
+    //     splitHitBoolean: false,
+    //     splitStayBoolean: false,
+    //     playerHandBestMove: "",
+    //     splitHandBestMove: "",
+    //     // totalMoves: 0,
+    //     // correctMoves: 0,
+    //     // totalHands: 0,
+    //     // handsWon: 0,
+    //   };
+    // }
     // --------------------------------------------------------
     // Modify bet actions
     case ActionConstants.ADD_TO_BET: {
       const newBet = state.bet + +action.payload;
-      const newBankroll = state.bankroll - +action.payload;
+      // const newBankroll = state.bankroll - +action.payload;
       return {
         ...state,
         bet: newBet,
-        bankroll: newBankroll,
+        // bankroll: newBankroll,
       };
     }
     case ActionConstants.REMOVE_FROM_BET: {
       let newBet = state.bet - +action.payload;
-      let newBankroll = state.bankroll + +action.payload;
+      // let newBankroll = state.bankroll + +action.payload;
       if (newBet < 0) {
-        newBankroll = -newBet + newBankroll;
+        // newBankroll = -newBet + newBankroll;
         newBet = 0;
       }
       return {
         ...state,
         bet: newBet,
-        bankroll: newBankroll,
+        // bankroll: newBankroll,
       };
     }
     // --------------------------------------------------------
     // --------------------------------------------------------
     // Game actions
     case ActionConstants.DEAL: {
-      const newTotalHands = state.totalHands + 1;
+      // const newTotalHands = state.totalHands + 1;
       const newPlayerHand = [...state.playerHand];
       const newDealerHand = [...state.dealerHand];
       const newCardDeck = [...state.currentCardDeck];
@@ -118,6 +118,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
       let newDealerCount = calculateCount(newDealerHand);
       const newBet = 0;
       const newPot = state.bet;
+      const leftoverBankroll = action.bankroll - newPot;
       // Add cards to the dealer's hand until the count is greater
       // than or equal to 17 if the player's count is 21 after the cards are dealt
       if (newPlayerCount === 21 && newDealerCount < 17) {
@@ -141,7 +142,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           splitBoolean: false,
           splitHitBoolean: false,
           splitStayBoolean: false,
-          totalHands: newTotalHands,
+          // totalHands: newTotalHands,
         };
       }
       // Player wins, so the ability to take any actions is disabled
@@ -166,14 +167,14 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           splitBoolean: false,
           splitHitBoolean: false,
           splitStayBoolean: false,
-          totalHands: newTotalHands,
+          // totalHands: newTotalHands,
         };
       }
       // Giving the player the ability to split their hand or double down
       else if (
         newPlayerHand[0].faceValue === newPlayerHand[1].faceValue &&
         newPlayerHand[0].numberValue === newPlayerHand[1].numberValue &&
-        state.bankroll >= newPot
+        leftoverBankroll >= newPot
       ) {
         return {
           ...state,
@@ -194,11 +195,11 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
             newDealerHand,
             newPlayerCount
           ),
-          totalHands: newTotalHands,
+          // totalHands: newTotalHands,
         };
       }
       // Giving the player the ability to double down, but not the ability to split
-      else if (newPlayerCount < 21 && state.bankroll >= newPot) {
+      else if (newPlayerCount < 21 && leftoverBankroll >= newPot) {
         return {
           ...state,
           activeGame: true,
@@ -217,7 +218,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
             newDealerHand,
             newPlayerCount
           ),
-          totalHands: newTotalHands,
+          // totalHands: newTotalHands,
         };
       }
       // Giving the player the ability to only hit or stay since
@@ -241,7 +242,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
             newDealerHand,
             newPlayerCount
           ),
-          totalHands: newTotalHands,
+          // totalHands: newTotalHands,
         };
       }
     }
@@ -254,12 +255,12 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         newDealerHand.push(newCardDeck.pop()!);
         newDealerCount = calculateCount(newDealerHand);
       }
-      let newCorrectMoves: number;
-      if (state.playerHandBestMove === ActionConstants.STAY) {
-        newCorrectMoves = state.correctMoves + 1;
-      } else {
-        newCorrectMoves = state.correctMoves;
-      }
+      // let newCorrectMoves: number;
+      // if (state.playerHandBestMove === ActionConstants.STAY) {
+      //   newCorrectMoves = state.correctMoves + 1;
+      // } else {
+      //   newCorrectMoves = state.correctMoves;
+      // }
       return {
         ...state,
         dealerHand: newDealerHand,
@@ -271,8 +272,8 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         splitBoolean: false,
         playerHandBestMove: "",
         splitHandBestMove: "",
-        totalMoves: state.totalMoves + 1,
-        correctMoves: newCorrectMoves,
+        // totalMoves: state.totalMoves + 1,
+        // correctMoves: newCorrectMoves,
       };
     }
     case ActionConstants.HIT: {
@@ -283,12 +284,12 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
       const newPlayerCount = calculateCount(newPlayerHand);
       let newDealerCount = state.dealerCount;
       const newDealerHand = [...state.dealerHand];
-      let newCorrectMoves: number;
-      if (state.playerHandBestMove === ActionConstants.HIT) {
-        newCorrectMoves = state.correctMoves + 1;
-      } else {
-        newCorrectMoves = state.correctMoves;
-      }
+      // let newCorrectMoves: number;
+      // if (state.playerHandBestMove === ActionConstants.HIT) {
+      //   newCorrectMoves = state.correctMoves + 1;
+      // } else {
+      //   newCorrectMoves = state.correctMoves;
+      // }
       // Add cards to the dealer's hand until the count is greater
       // than or equal to 17 if the player's count is 21 after the player hits
       if (newPlayerCount === 21) {
@@ -308,8 +309,8 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           doubleDownBoolean: false,
           splitBoolean: false,
           playerHandBestMove: "",
-          totalMoves: state.totalMoves + 1,
-          correctMoves: newCorrectMoves,
+          // totalMoves: state.totalMoves + 1,
+          // correctMoves: newCorrectMoves,
         };
       }
       // Removing the ability to double down or split after the player hits
@@ -325,8 +326,8 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
             newDealerHand,
             newPlayerCount
           ),
-          totalMoves: state.totalMoves + 1,
-          correctMoves: newCorrectMoves,
+          // totalMoves: state.totalMoves + 1,
+          // correctMoves: newCorrectMoves,
         };
       }
       // Player busted so removing the ability to take any actions
@@ -340,8 +341,8 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           stayBoolean: false,
           doubleDownBoolean: false,
           playerHandBestMove: "",
-          totalMoves: state.totalMoves + 1,
-          correctMoves: newCorrectMoves,
+          // totalMoves: state.totalMoves + 1,
+          // correctMoves: newCorrectMoves,
         };
       }
     }
@@ -352,15 +353,14 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
       newPlayerHand.push(newCardDeck.pop()!);
       const newPlayerCount = calculateCount(newPlayerHand);
       const newDealerHand = [...state.dealerHand];
-      const newBankroll = state.bankroll - state.pot;
       const newPot = state.pot * 2;
       let newDealerCount = state.dealerCount;
       let newCorrectMoves: number;
-      if (state.playerHandBestMove === ActionConstants.DOUBLE_DOWN) {
-        newCorrectMoves = state.correctMoves + 1;
-      } else {
-        newCorrectMoves = state.correctMoves;
-      }
+      // if (state.playerHandBestMove === ActionConstants.DOUBLE_DOWN) {
+      //   newCorrectMoves = state.correctMoves + 1;
+      // } else {
+      //   newCorrectMoves = state.correctMoves;
+      // }
       // Player's count is less than 21 and cannot hit and if
       // the dealer's count is less than 17, the dealer will hit until their
       // count reaches 17
@@ -372,7 +372,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         return {
           ...state,
           pot: newPot,
-          bankroll: newBankroll,
+          // bankroll: newBankroll,
           playerHand: newPlayerHand,
           currentCardDeck: newCardDeck,
           playerCount: newPlayerCount,
@@ -382,8 +382,8 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           stayBoolean: false,
           doubleDownBoolean: false,
           playerHandBestMove: "",
-          totalMoves: state.totalMoves + 1,
-          correctMoves: newCorrectMoves,
+          // totalMoves: state.totalMoves + 1,
+          // correctMoves: newCorrectMoves,
         };
       }
       // Player busted
@@ -391,7 +391,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         return {
           ...state,
           pot: newPot,
-          bankroll: newBankroll,
+          // bankroll: newBankroll,
           playerHand: newPlayerHand,
           currentCardDeck: newCardDeck,
           playerCount: newPlayerCount,
@@ -399,13 +399,13 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           stayBoolean: false,
           doubleDownBoolean: false,
           playerHandBestMove: "",
-          totalMoves: state.totalMoves + 1,
-          correctMoves: newCorrectMoves,
+          // totalMoves: state.totalMoves + 1,
+          // correctMoves: newCorrectMoves,
         };
       }
     }
     case ActionConstants.SPLIT: {
-      const newTotalHands = state.totalHands + 1;
+      // const newTotalHands = state.totalHands + 1;
       // Creating a second hand and drawing from the deck twice to
       // get two complete hands
       const newPlayerHand = [...state.playerHand];
@@ -414,16 +414,16 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
       const newCardDeck = [...state.currentCardDeck];
       newPlayerHand.push(newCardDeck.pop()!);
       newSplitHand.push(newCardDeck.pop()!);
-      const newBankroll = state.bankroll - state.pot;
+      // const newBankroll = state.bankroll - state.pot;
       const newSplitPot = state.pot;
       const newPlayerCount = calculateCount(newPlayerHand);
       const newSplitCount = calculateCount(newSplitHand);
-      let newCorrectMoves: number;
-      if (state.playerHandBestMove === ActionConstants.SPLIT) {
-        newCorrectMoves = state.correctMoves + 1;
-      } else {
-        newCorrectMoves = state.correctMoves;
-      }
+      // let newCorrectMoves: number;
+      // if (state.playerHandBestMove === ActionConstants.SPLIT) {
+      //   newCorrectMoves = state.correctMoves + 1;
+      // } else {
+      //   newCorrectMoves = state.correctMoves;
+      // }
       // Removing the ability to split or double down and adding
       // the ability to hit or stay on the split hand
       return {
@@ -432,7 +432,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         splitHand: newSplitHand,
         playerCount: newPlayerCount,
         splitCount: newSplitCount,
-        bankroll: newBankroll,
+        // bankroll: newBankroll,
         splitPot: newSplitPot,
         doubleDownBoolean: false,
         splitBoolean: false,
@@ -446,9 +446,9 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           state.dealerHand,
           newSplitCount
         ),
-        totalMoves: state.totalMoves + 1,
-        correctMoves: newCorrectMoves,
-        totalHands: newTotalHands,
+        // totalMoves: state.totalMoves + 1,
+        // correctMoves: newCorrectMoves,
+        // totalHands: newTotalHands,
       };
     }
     case ActionConstants.SPLIT_HIT: {
@@ -457,12 +457,12 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
       const newCardDeck = [...state.currentCardDeck];
       newSplitHand.push(newCardDeck.pop()!);
       const newSplitCount = calculateCount(newSplitHand);
-      let newCorrectMoves: number;
-      if (state.playerHandBestMove === ActionConstants.HIT) {
-        newCorrectMoves = state.correctMoves + 1;
-      } else {
-        newCorrectMoves = state.correctMoves;
-      }
+      // let newCorrectMoves: number;
+      // if (state.playerHandBestMove === ActionConstants.HIT) {
+      //   newCorrectMoves = state.correctMoves + 1;
+      // } else {
+      //   newCorrectMoves = state.correctMoves;
+      // }
       // Removing the ability for the player to take any
       // actions because the count is 21
       if (newSplitCount === 21) {
@@ -475,8 +475,8 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           splitHitBoolean: false,
           splitStayBoolean: false,
           splitHandBestMove: "",
-          totalMoves: state.totalMoves + 1,
-          correctMoves: newCorrectMoves,
+          // totalMoves: state.totalMoves + 1,
+          // correctMoves: newCorrectMoves,
         };
       }
       // Count is less than 21, player can still hit or stay
@@ -493,8 +493,8 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
             state.dealerHand,
             newSplitCount
           ),
-          totalMoves: state.totalMoves + 1,
-          correctMoves: newCorrectMoves,
+          // totalMoves: state.totalMoves + 1,
+          // correctMoves: newCorrectMoves,
         };
       }
       // Player busted
@@ -508,18 +508,18 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           splitHitBoolean: false,
           splitStayBoolean: false,
           splitHandBestMove: "",
-          totalMoves: state.totalMoves + 1,
-          correctMoves: newCorrectMoves,
+          // totalMoves: state.totalMoves + 1,
+          // correctMoves: newCorrectMoves,
         };
       }
     }
     case ActionConstants.SPLIT_STAY: {
-      let newCorrectMoves: number;
-      if (state.playerHandBestMove === ActionConstants.STAY) {
-        newCorrectMoves = state.correctMoves + 1;
-      } else {
-        newCorrectMoves = state.correctMoves;
-      }
+      // let newCorrectMoves: number;
+      // if (state.playerHandBestMove === ActionConstants.STAY) {
+      //   newCorrectMoves = state.correctMoves + 1;
+      // } else {
+      //   newCorrectMoves = state.correctMoves;
+      // }
       return {
         ...state,
         splitBoolean: false,
@@ -527,8 +527,8 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         splitStayBoolean: false,
         doubleDownBoolean: false,
         splitHandBestMove: "",
-        totalMoves: state.totalMoves + 1,
-        correctMoves: newCorrectMoves,
+        // totalMoves: state.totalMoves + 1,
+        // correctMoves: newCorrectMoves,
       };
     }
     // --------------------------------------------------------
@@ -557,40 +557,40 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         splitBankrollUpdated: false,
       };
     }
-    case ActionConstants.INCREASE_BANKROLL: {
-      const newHandsWon = state.handsWon + 1;
-      const newBankroll = state.bankroll + state.pot * 2;
-      return {
-        ...state,
-        bankroll: newBankroll,
-        // pot: 0,
-        // playerHand: [...hand],
-        // dealerHand: [...hand],
-        // playerCount: 0,
-        // dealerCount: 0,
-        // currentCardDeck: getDeck(),
-        // playerHandBestMove: "",
-        handsWon: newHandsWon,
-        bankrollUpdated: true,
-      };
-    }
-    case ActionConstants.BLACKJACK_INCREASE_BANKROLL: {
-      const newHandsWon = state.handsWon + 1;
-      const newBankroll =
-        state.bankroll + state.pot * 2 + Math.ceil(state.pot * 0.5);
-      return {
-        ...state,
-        bankroll: newBankroll,
-        // pot: 0,
-        // playerHand: [...hand],
-        // dealerHand: [...hand],
-        // playerCount: 0,
-        // dealerCount: 0,
-        // currentCardDeck: getDeck(),
-        handsWon: newHandsWon,
-        bankrollUpdated: true,
-      };
-    }
+    // case ActionConstants.INCREASE_BANKROLL: {
+    // const newHandsWon = state.handsWon + 1;
+    // const newBankroll = state.bankroll + state.pot * 2;
+    // return {
+    // ...state,
+    // bankroll: newBankroll,
+    // pot: 0,
+    // playerHand: [...hand],
+    // dealerHand: [...hand],
+    // playerCount: 0,
+    // dealerCount: 0,
+    // currentCardDeck: getDeck(),
+    // playerHandBestMove: "",
+    // handsWon: newHandsWon,
+    //     bankrollUpdated: true,
+    //   };
+    // }
+    // case ActionConstants.BLACKJACK_INCREASE_BANKROLL: {
+    // const newHandsWon = state.handsWon + 1;
+    // const newBankroll =
+    //   state.bankroll + state.pot * 2 + Math.ceil(state.pot * 0.5);
+    // return {
+    //   ...state,
+    // bankroll: newBankroll,
+    // pot: 0,
+    // playerHand: [...hand],
+    // dealerHand: [...hand],
+    // playerCount: 0,
+    // dealerCount: 0,
+    // currentCardDeck: getDeck(),
+    // handsWon: newHandsWon,
+    //   bankrollUpdated: true,
+    // };
+    // }
     // case ActionConstants.DECREASE_BANKROLL: {
     //   return {
     //     ...state,
@@ -603,38 +603,38 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
     //     playerHandBestMove: "",
     //   };
     // }
-    case ActionConstants.NO_CHANGE_BANKROLL: {
-      const newHandsPushed = state.handsPushed + 1;
-      const newBankroll = state.bankroll + state.pot;
-      return {
-        ...state,
-        bankroll: newBankroll,
-        // pot: 0,
-        // playerHand: [...hand],
-        // dealerHand: [...hand],
-        // playerCount: 0,
-        // dealerCount: 0,
-        // currentCardDeck: getDeck(),
-        // playerHandBestMove: "",
-        handsPushed: newHandsPushed,
-        bankrollUpdated: true,
-      };
-    }
-    case ActionConstants.SPLIT_INCREASE_BANKROLL: {
-      const newHandsWon = state.handsWon + 1;
-      const newBankroll = state.bankroll + state.splitPot * 2;
-      return {
-        ...state,
-        bankroll: newBankroll,
-        // splitPot: 0,
-        // splitHand: [...hand],
-        // splitCount: 0,
-        // splitHandBestMove: "",
-        handsWon: newHandsWon,
-        bankrollUpdated: true,
-        splitBankrollUpdated: true,
-      };
-    }
+    // case ActionConstants.NO_CHANGE_BANKROLL: {
+    // const newHandsPushed = state.handsPushed + 1;
+    // const newBankroll = state.bankroll + state.pot;
+    // return {
+    //   ...state,
+    // bankroll: newBankroll,
+    // pot: 0,
+    // playerHand: [...hand],
+    // dealerHand: [...hand],
+    // playerCount: 0,
+    // dealerCount: 0,
+    // currentCardDeck: getDeck(),
+    // playerHandBestMove: "",
+    // handsPushed: newHandsPushed,
+    //     bankrollUpdated: true,
+    //   };
+    // }
+    // case ActionConstants.SPLIT_INCREASE_BANKROLL: {
+    // const newHandsWon = state.handsWon + 1;
+    // const newBankroll = state.bankroll + state.splitPot * 2;
+    // return {
+    //   ...state,
+    // bankroll: newBankroll,
+    // splitPot: 0,
+    // splitHand: [...hand],
+    // splitCount: 0,
+    // splitHandBestMove: "",
+    // handsWon: newHandsWon,
+    //   bankrollUpdated: true,
+    //   splitBankrollUpdated: true,
+    // };
+    // }
     // case ActionConstants.SPLIT_DECREASE_BANKROLL: {
     //   return {
     //     ...state,
@@ -644,27 +644,51 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
     //     splitHandBestMove: "",
     //   };
     // }
-    case ActionConstants.SPLIT_NO_CHANGE_BANKROLL: {
-      const newHandsPushed = state.handsPushed + 1;
-      const newBankroll = state.bankroll + state.splitPot;
+    // case ActionConstants.SPLIT_NO_CHANGE_BANKROLL: {
+    // const newHandsPushed = state.handsPushed + 1;
+    // const newBankroll = state.bankroll + state.splitPot;
+    // return {
+    // ...state,
+    // bankroll: newBankroll,
+    // splitPot: 0,
+    // splitHand: [...hand],
+    // splitCount: 0,
+    // splitHandBestMove: "",
+    // handsPushed: newHandsPushed,
+    //     bankrollUpdated: true,
+    //     splitBankrollUpdated: true,
+    //   };
+    // }
+    case ActionConstants.UPDATE_BANKROLL_AND_RESET_HAND: {
       return {
         ...state,
-        bankroll: newBankroll,
+        // pot: 0,
+        // playerHand: [...hand],
+        // dealerHand: [...hand],
+        // playerCount: 0,
+        // dealerCount: 0,
+        // currentCardDeck: getDeck(),
+        // playerHandBestMove: "",
+        bankrollUpdated: true,
+      };
+    }
+    case ActionConstants.SPLIT_UPDATE_BANKROLL_AND_RESET_HAND: {
+      return {
+        ...state,
         // splitPot: 0,
         // splitHand: [...hand],
         // splitCount: 0,
         // splitHandBestMove: "",
-        handsPushed: newHandsPushed,
-        bankrollUpdated: true,
+        // bankrollUpdated: true,
         splitBankrollUpdated: true,
       };
     }
-    case ActionConstants.SET_BANKROLL: {
-      return {
-        ...state,
-        bankroll: action.payload,
-      };
-    }
+    // case ActionConstants.SET_BANKROLL: {
+    //   return {
+    //     ...state,
+    //     bankroll: action.payload,
+    //   };
+    // }
     case ActionConstants.CLEAR_GAME_STATE: {
       return initialState;
     }

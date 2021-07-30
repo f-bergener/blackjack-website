@@ -29,10 +29,10 @@ const ActiveHandDisplay: React.FC = () => {
     (state: State) => state.game.splitHandBestMove
   );
   const stayBoolean = useSelector((state: State) => state.game.stayBoolean);
-  const correctMoves = useSelector((state: State) => state.game.correctMoves);
-  const totalMoves = useSelector((state: State) => state.game.totalMoves);
-  const handsWon = useSelector((state: State) => state.game.handsWon);
-  const totalHands = useSelector((state: State) => state.game.totalHands);
+  // const correctMoves = useSelector((state: State) => state.user.correctMoves);
+  // const totalMoves = useSelector((state: State) => state.user.totalMoves);
+  // const handsWon = useSelector((state: State) => state.user.handsWon);
+  // const totalHands = useSelector((state: State) => state.user.totalHands);
   return (
     <>
       {/* <h2>
