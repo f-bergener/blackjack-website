@@ -1,10 +1,5 @@
 import { ActionConstants } from "./actionConstants";
 
-// export const resetBankroll = () => {
-//   return {
-//     type: ActionConstants.RESET_BANKROLL,
-//   };
-// };
 // * * Game Reducer Actions
 // Modify bet actions
 export const addToBet = (value: number) => {
@@ -64,59 +59,6 @@ export const deal = (bankroll: number) => {
   };
 };
 // Update bankroll and proceed to next hand actions
-// export const increaseBankroll = () => {
-//   return {
-//     type: ActionConstants.INCREASE_BANKROLL,
-//   };
-// };
-
-// export const blackjackIncreaseBankroll = () => {
-//   return {
-//     type: ActionConstants.BLACKJACK_INCREASE_BANKROLL,
-//   };
-// };
-
-// export const decreaseBankroll = () => {
-//   return {
-//     type: ActionConstants.DECREASE_BANKROLL,
-//   };
-// };
-
-// export const noChangeBankroll = () => {
-//   return {
-//     type: ActionConstants.NO_CHANGE_BANKROLL,
-//   };
-// };
-
-// export const splitIncreaseBankroll = () => {
-//   return {
-//     type: ActionConstants.SPLIT_INCREASE_BANKROLL,
-//   };
-// };
-
-// export const splitDecreaseBankroll = () => {
-//   return {
-//     type: ActionConstants.SPLIT_DECREASE_BANKROLL,
-//   };
-// };
-
-// export const splitNoChangeBankroll = () => {
-//   return {
-//     type: ActionConstants.SPLIT_NO_CHANGE_BANKROLL,
-//   };
-// };
-
-export const updateBankrollAndResetHand = () => {
-  return {
-    type: ActionConstants.UPDATE_BANKROLL_AND_RESET_HAND,
-  };
-};
-
-export const splitUpdateBankrollAndResetHand = () => {
-  return {
-    type: ActionConstants.SPLIT_UPDATE_BANKROLL_AND_RESET_HAND,
-  };
-};
 
 export const nextHand = () => {
   return {
@@ -155,13 +97,6 @@ export const postDealUpdate = () => {
     type: ActionConstants.POST_DEAL_UPDATE,
   };
 };
-
-// export const setBankroll = (userBankroll: number) => {
-//   return {
-//     type: ActionConstants.SET_BANKROLL,
-//     payload: userBankroll,
-//   };
-// };
 
 export const updateUserCorrectHands = (handOutcome: string) => {
   return {
