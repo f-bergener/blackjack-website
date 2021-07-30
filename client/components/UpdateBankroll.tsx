@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  bankrollUpdate,
   nextHand,
   updateUserBankroll,
   updateUserCorrectHands,
@@ -19,19 +20,26 @@ const UpdateBankroll: React.FC = () => {
   );
   const splitHand = useSelector((state: State) => state.game.splitHand);
   const pot = useSelector((state: State) => state.game.pot);
+  const bankrollUpdated = useSelector(
+    (state: State) => state.game.bankrollUpdated
+  );
   const dispatch = useDispatch();
+  let count = 0;
 
   const updateBankroll = () => {
     if (playerHand.length === 2) {
       if (playerCount === 21 && dealerCount !== 21) {
-        dispatch(updateUserCorrectHands(won));
+        if (bankrollUpdated === false) {
+          dispatch(updateUserBankroll(pot * 2.5));
+          dispatch(updateUserCorrectHands(won));
+          dispatch(bankrollUpdate());
+        }
         return (
           <>
             <h1>Blackjack</h1>
             <button
               className="next-hand-button"
               onClick={() => {
-                dispatch(updateUserBankroll(pot * 2.5));
                 dispatch(nextHand());
               }}
             >
@@ -55,14 +63,17 @@ const UpdateBankroll: React.FC = () => {
           </>
         );
       } else if (playerCount < 21 && dealerCount > 21) {
-        dispatch(updateUserCorrectHands(won));
+        if (bankrollUpdated === false) {
+          dispatch(updateUserBankroll(pot * 2));
+          dispatch(updateUserCorrectHands(won));
+          dispatch(bankrollUpdate());
+        }
         return (
           <>
             <h1>You Win</h1>
             <button
               className="next-hand-button"
               onClick={() => {
-                dispatch(updateUserBankroll(pot * 2));
                 dispatch(nextHand());
               }}
             >
@@ -72,14 +83,17 @@ const UpdateBankroll: React.FC = () => {
         );
       } else if (playerCount <= 21 && dealerCount <= 21) {
         if (playerCount === dealerCount) {
-          dispatch(updateUserCorrectHands(pushed));
+          if (bankrollUpdated === false) {
+            dispatch(updateUserBankroll(pot));
+            dispatch(updateUserCorrectHands(pushed));
+            dispatch(bankrollUpdate());
+          }
           return (
             <>
               <h1>Push</h1>
               <button
                 className="next-hand-button"
                 onClick={() => {
-                  dispatch(updateUserBankroll(pot));
                   dispatch(nextHand());
                 }}
               >
@@ -88,14 +102,17 @@ const UpdateBankroll: React.FC = () => {
             </>
           );
         } else if (playerCount > dealerCount) {
-          dispatch(updateUserCorrectHands(won));
+          if (bankrollUpdated === false) {
+            dispatch(updateUserBankroll(pot * 2));
+            dispatch(updateUserCorrectHands(won));
+            dispatch(bankrollUpdate());
+          }
           return (
             <>
               <h1>You Win</h1>
               <button
                 className="next-hand-button"
                 onClick={() => {
-                  dispatch(updateUserBankroll(pot * 2));
                   dispatch(nextHand());
                 }}
               >
@@ -123,14 +140,17 @@ const UpdateBankroll: React.FC = () => {
     } else if (playerHand.length > 2) {
       if (playerCount < 21 && dealerCount < 21) {
         if (playerCount === dealerCount) {
-          dispatch(updateUserCorrectHands(pushed));
+          if (bankrollUpdated === false) {
+            dispatch(updateUserBankroll(pot));
+            dispatch(updateUserCorrectHands(pushed));
+            dispatch(bankrollUpdate());
+          }
           return (
             <>
               <h1>Push</h1>
               <button
                 className="next-hand-button"
                 onClick={() => {
-                  dispatch(updateUserBankroll(pot));
                   dispatch(nextHand());
                 }}
               >
@@ -139,14 +159,17 @@ const UpdateBankroll: React.FC = () => {
             </>
           );
         } else if (playerCount > dealerCount) {
-          dispatch(updateUserCorrectHands(won));
+          if (bankrollUpdated === false) {
+            dispatch(updateUserBankroll(pot * 2));
+            dispatch(updateUserCorrectHands(won));
+            dispatch(bankrollUpdate());
+          }
           return (
             <>
               <h1>You Win</h1>
               <button
                 className="next-hand-button"
                 onClick={() => {
-                  dispatch(updateUserBankroll(pot * 2));
                   dispatch(nextHand());
                 }}
               >
@@ -186,14 +209,17 @@ const UpdateBankroll: React.FC = () => {
           </>
         );
       } else if (playerCount < 21 && dealerCount > 21) {
-        dispatch(updateUserCorrectHands(won));
+        if (bankrollUpdated === false) {
+          dispatch(updateUserBankroll(pot * 2));
+          dispatch(updateUserCorrectHands(won));
+          dispatch(bankrollUpdate());
+        }
         return (
           <>
             <h1>You Win</h1>
             <button
               className="next-hand-button"
               onClick={() => {
-                dispatch(updateUserBankroll(pot * 2));
                 dispatch(nextHand());
               }}
             >
@@ -202,14 +228,17 @@ const UpdateBankroll: React.FC = () => {
           </>
         );
       } else if (playerCount === 21 && dealerCount !== 21) {
-        dispatch(updateUserCorrectHands(won));
+        if (bankrollUpdated === false) {
+          dispatch(updateUserBankroll(pot * 2));
+          dispatch(updateUserCorrectHands(won));
+          dispatch(bankrollUpdate());
+        }
         return (
           <>
             <h1>You Win</h1>
             <button
               className="next-hand-button"
               onClick={() => {
-                dispatch(updateUserBankroll(pot * 2));
                 dispatch(nextHand());
               }}
             >
@@ -233,14 +262,17 @@ const UpdateBankroll: React.FC = () => {
           </>
         );
       } else if (playerCount === 21 && dealerCount === 21) {
-        dispatch(updateUserCorrectHands(pushed));
+        if (bankrollUpdated === false) {
+          dispatch(updateUserBankroll(pot));
+          dispatch(updateUserCorrectHands(pushed));
+          dispatch(bankrollUpdate());
+        }
         return (
           <>
             <h1>Push</h1>
             <button
               className="next-hand-button"
               onClick={() => {
-                dispatch(updateUserBankroll(pot));
                 dispatch(nextHand());
               }}
             >

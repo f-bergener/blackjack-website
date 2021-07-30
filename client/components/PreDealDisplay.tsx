@@ -10,10 +10,11 @@ const PreDealDisplay: React.FC = () => {
   const bankroll = useSelector((state: State) => state.user.bankroll);
   const pot = useSelector((state: State) => state.game.pot);
   const bet = useSelector((state: State) => state.game.bet);
+  const playerHand = useSelector((state: State) => state.game.playerHand);
   const total = bankroll + bet + pot;
   return (
     <>
-      {!total ? (
+      {!total && !playerHand.length ? (
         <Bankrupt />
       ) : (
         <>

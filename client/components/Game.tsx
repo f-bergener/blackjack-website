@@ -19,7 +19,7 @@ const Game: React.FC = () => {
   return (
     <>
       <h2>Bankroll: ${(bankroll - bet).toLocaleString("en")}</h2>
-      {playerHand.length ? <SendData /> : <></>}
+      {playerHand.length === 0 ? <SendData /> : <></>}
       {!pot ? <PreDealDisplay /> : <ActiveHandDisplay />}
       <Link to="/">
         <button>Back to Home</button>

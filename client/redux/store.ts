@@ -26,6 +26,8 @@ export type GameState = {
   splitStayBoolean: boolean;
   playerHandBestMove: string;
   splitHandBestMove: string;
+  bankrollUpdated: boolean;
+  splitBankrollUpdated: boolean;
 };
 
 export type UserState = {

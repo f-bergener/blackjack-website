@@ -23,9 +23,9 @@ export const Deal: React.FC = () => {
     <button
       className="button deal-button"
       onClick={() => {
-        dispatch(deal(bankroll));
         dispatch(postDealUpdate());
         dispatch(updateUserBankroll(-bet));
+        dispatch(deal(bankroll));
       }}
     >
       Deal
@@ -114,8 +114,8 @@ export const DoubleDown: React.FC = () => {
           } else {
             dispatch(postMoveUpdate(false));
           }
-          dispatch(doubleDown());
           dispatch(updateUserBankroll(-pot));
+          dispatch(doubleDown());
         }}
       >
         Double Down
@@ -143,9 +143,9 @@ export const Split: React.FC = () => {
           } else {
             dispatch(postMoveUpdate(false));
           }
+          dispatch(updateUserBankroll(-pot));
           dispatch(split());
           dispatch(postDealUpdate());
-          dispatch(updateUserBankroll(-pot));
         }}
       >
         Split

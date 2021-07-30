@@ -117,3 +117,15 @@ export const clearUserState = () => {
     type: ActionConstants.CLEAR_USER_STATE,
   };
 };
+
+export const bankrollUpdate = () => {
+  return {
+    type: ActionConstants.BANKROLL_UPDATE,
+  };
+};
+
+export const splitBankrollUpdate = () => {
+  return {
+    type: ActionConstants.SPLIT_BANKROLL_UPDATE,
+  };
+};
