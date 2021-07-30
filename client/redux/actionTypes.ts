@@ -43,41 +43,6 @@ interface deal {
   bankroll: number;
 }
 // Update bankroll and proceed to next hand actions
-// interface increaseBankroll {
-//   type: ActionConstants.INCREASE_BANKROLL;
-// }
-
-// interface blackjackIncreaseBankroll {
-//   type: ActionConstants.BLACKJACK_INCREASE_BANKROLL;
-// }
-
-// interface decreaseBankroll {
-//   type: ActionConstants.DECREASE_BANKROLL;
-// }
-
-// interface noChangeBankroll {
-//   type: ActionConstants.NO_CHANGE_BANKROLL;
-// }
-
-// interface splitIncreaseBankroll {
-//   type: ActionConstants.SPLIT_INCREASE_BANKROLL;
-// }
-
-// interface splitDecreaseBankroll {
-//   type: ActionConstants.SPLIT_DECREASE_BANKROLL;
-// }
-
-// interface splitNoChangeBankroll {
-//   type: ActionConstants.SPLIT_NO_CHANGE_BANKROLL;
-// }
-
-interface updateBankrollAndResetHand {
-  type: ActionConstants.UPDATE_BANKROLL_AND_RESET_HAND;
-}
-
-interface splitUpdateBankrollAndResetHand {
-  type: ActionConstants.SPLIT_UPDATE_BANKROLL_AND_RESET_HAND;
-}
 
 interface nextHand {
   type: ActionConstants.NEXT_HAND;
@@ -109,11 +74,6 @@ interface postDealUpdate {
   type: ActionConstants.POST_DEAL_UPDATE;
 }
 
-// interface setBankroll {
-//   type: ActionConstants.SET_BANKROLL;
-//   payload: number;
-// }
-
 interface updateUserCorrectHands {
   type: ActionConstants.UPDATE_USER_CORRECT_HANDS;
   handOutcome: string;
@@ -129,7 +89,6 @@ interface clearUserState {
 }
 
 export type Action =
-  // | resetBankroll
   // * * Modify bet actions
   | addToBet
   | removeFromBet
@@ -142,15 +101,6 @@ export type Action =
   | splitStay
   | deal
   // * * Update bankroll and proceed to next hand actions
-  // | increaseBankroll
-  // | blackjackIncreaseBankroll
-  // | decreaseBankroll
-  // | noChangeBankroll
-  // | splitIncreaseBankroll
-  // | splitDecreaseBankroll
-  // | splitNoChangeBankroll
-  | updateBankrollAndResetHand
-  | splitUpdateBankrollAndResetHand
   | nextHand
   | splitNextHand
   // * * User Reducer Actions
@@ -159,7 +109,6 @@ export type Action =
   | clearGameState
   | postMoveUpdate
   | postDealUpdate
-  // | setBankroll
   | updateUserCorrectHands
   | updateUserBankroll
   | clearUserState;
