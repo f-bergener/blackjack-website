@@ -4,7 +4,7 @@ import axios from "axios";
 import { State } from "../redux/store";
 import { TOKEN } from "../redux/userReducer";
 
-const SendData = () => {
+const SendData: React.FC = () => {
   const correctMoves = useSelector((state: State) => state.user.correctMoves);
   const handsWon = useSelector((state: State) => state.user.handsWon);
   const handsPushed = useSelector((state: State) => state.user.handsPushed);

@@ -88,6 +88,14 @@ interface clearUserState {
   type: ActionConstants.CLEAR_USER_STATE;
 }
 
+interface bankrollUpdate {
+  type: ActionConstants.BANKROLL_UPDATE;
+}
+
+interface splitBankrollUpdate {
+  type: ActionConstants.SPLIT_BANKROLL_UPDATE;
+}
+
 export type Action =
   // * * Modify bet actions
   | addToBet
@@ -111,4 +119,6 @@ export type Action =
   | postDealUpdate
   | updateUserCorrectHands
   | updateUserBankroll
-  | clearUserState;
+  | clearUserState
+  | bankrollUpdate
+  | splitBankrollUpdate;

@@ -29,6 +29,8 @@ const initialState = {
   splitStayBoolean: false,
   playerHandBestMove: "",
   splitHandBestMove: "",
+  bankrollUpdated: false,
+  splitBankrollUpdated: false,
 };
 
 const gameReducer = (state: GameState = initialState, action: Action) => {
@@ -447,6 +449,12 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
     }
     case ActionConstants.CLEAR_GAME_STATE: {
       return initialState;
+    }
+    case ActionConstants.BANKROLL_UPDATE: {
+      return { ...state, bankrollUpdated: true };
+    }
+    case ActionConstants.SPLIT_BANKROLL_UPDATE: {
+      return { ...state, splitBankrollUpdated: true };
     }
     // --------------------------------------------------------
     default:

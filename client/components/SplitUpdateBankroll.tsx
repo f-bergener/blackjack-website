@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  splitBankrollUpdate,
   splitNextHand,
   updateUserBankroll,
   updateUserCorrectHands,
@@ -25,19 +26,25 @@ const SplitUpdateBankroll: React.FC = () => {
     (state: State) => state.game.splitStayBoolean
   );
   const splitPot = useSelector((state: State) => state.game.splitPot);
+  const splitBankrollUpdated = useSelector(
+    (state: State) => state.game.splitBankrollUpdated
+  );
   const dispatch = useDispatch();
 
   const splitUpdateBankroll = () => {
     if (splitHand.length === 2) {
       if (splitCount === 21 && dealerCount !== 21) {
-        dispatch(updateUserCorrectHands(won));
+        if (splitBankrollUpdated === false) {
+          dispatch(updateUserCorrectHands(won));
+          dispatch(updateUserBankroll(splitPot * 2));
+          dispatch(splitBankrollUpdate());
+        }
         return (
           <>
             <h1>You Win on the Split Hand</h1>
             <button
               className="next-hand-button"
               onClick={() => {
-                dispatch(updateUserBankroll(splitPot * 2));
                 dispatch(splitNextHand());
               }}
             >
@@ -61,14 +68,17 @@ const SplitUpdateBankroll: React.FC = () => {
           </>
         );
       } else if (splitCount < 21 && dealerCount > 21) {
-        dispatch(updateUserCorrectHands(won));
+        if (splitBankrollUpdated === false) {
+          dispatch(updateUserCorrectHands(won));
+          dispatch(updateUserBankroll(splitPot * 2));
+          dispatch(splitBankrollUpdate());
+        }
         return (
           <>
             <h1>You Win on the Split Hand</h1>
             <button
               className="next-hand-button"
               onClick={() => {
-                dispatch(updateUserBankroll(splitPot * 2));
                 dispatch(splitNextHand());
               }}
             >
@@ -78,14 +88,17 @@ const SplitUpdateBankroll: React.FC = () => {
         );
       } else if (splitCount <= 21 && dealerCount <= 21) {
         if (splitCount === dealerCount) {
-          dispatch(updateUserCorrectHands(pushed));
+          if (splitBankrollUpdated === false) {
+            dispatch(updateUserCorrectHands(pushed));
+            dispatch(updateUserBankroll(splitPot));
+            dispatch(splitBankrollUpdate());
+          }
           return (
             <>
               <h1>Push on your Split Hand</h1>
               <button
                 className="next-hand-button"
                 onClick={() => {
-                  dispatch(updateUserBankroll(splitPot));
                   dispatch(splitNextHand());
                 }}
               >
@@ -94,14 +107,17 @@ const SplitUpdateBankroll: React.FC = () => {
             </>
           );
         } else if (splitCount > dealerCount) {
-          dispatch(updateUserCorrectHands(won));
+          if (splitBankrollUpdated === false) {
+            dispatch(updateUserCorrectHands(won));
+            dispatch(updateUserBankroll(splitPot * 2));
+            dispatch(splitBankrollUpdate());
+          }
           return (
             <>
               <h1>You Win on the Split Hand</h1>
               <button
                 className="next-hand-button"
                 onClick={() => {
-                  dispatch(updateUserBankroll(splitPot * 2));
                   dispatch(splitNextHand());
                 }}
               >
@@ -129,14 +145,17 @@ const SplitUpdateBankroll: React.FC = () => {
     } else if (splitHand.length > 2) {
       if (splitCount < 21 && dealerCount < 21) {
         if (splitCount === dealerCount) {
-          dispatch(updateUserCorrectHands(pushed));
+          if (splitBankrollUpdated === false) {
+            dispatch(updateUserCorrectHands(pushed));
+            dispatch(updateUserBankroll(splitPot));
+            dispatch(splitBankrollUpdate());
+          }
           return (
             <>
               <h1>Push</h1>
               <button
                 className="next-hand-button"
                 onClick={() => {
-                  dispatch(updateUserBankroll(splitPot));
                   dispatch(splitNextHand());
                 }}
               >
@@ -145,14 +164,17 @@ const SplitUpdateBankroll: React.FC = () => {
             </>
           );
         } else if (splitCount > dealerCount) {
-          dispatch(updateUserCorrectHands(won));
+          if (splitBankrollUpdated === false) {
+            dispatch(updateUserCorrectHands(won));
+            dispatch(updateUserBankroll(splitPot * 2));
+            dispatch(splitBankrollUpdate());
+          }
           return (
             <>
               <h1>You Win on the Split Hand</h1>
               <button
                 className="next-hand-button"
                 onClick={() => {
-                  dispatch(updateUserBankroll(splitPot * 2));
                   dispatch(splitNextHand());
                 }}
               >
@@ -192,14 +214,17 @@ const SplitUpdateBankroll: React.FC = () => {
           </>
         );
       } else if (splitCount < 21 && dealerCount > 21) {
-        dispatch(updateUserCorrectHands(won));
+        if (splitBankrollUpdated === false) {
+          dispatch(updateUserCorrectHands(won));
+          dispatch(updateUserBankroll(splitPot * 2));
+          dispatch(splitBankrollUpdate());
+        }
         return (
           <>
             <h1>You Win on the Split Hand</h1>
             <button
               className="next-hand-button"
               onClick={() => {
-                dispatch(updateUserBankroll(splitPot * 2));
                 dispatch(splitNextHand());
               }}
             >
@@ -208,14 +233,17 @@ const SplitUpdateBankroll: React.FC = () => {
           </>
         );
       } else if (splitCount === 21 && dealerCount !== 21) {
-        dispatch(updateUserCorrectHands(won));
+        if (splitBankrollUpdated === false) {
+          dispatch(updateUserCorrectHands(won));
+          dispatch(updateUserBankroll(splitPot * 2));
+          dispatch(splitBankrollUpdate());
+        }
         return (
           <>
             <h1>You Win on the Split Hand</h1>
             <button
               className="next-hand-button"
               onClick={() => {
-                dispatch(updateUserBankroll(splitPot * 2));
                 dispatch(splitNextHand());
               }}
             >
@@ -239,14 +267,17 @@ const SplitUpdateBankroll: React.FC = () => {
           </>
         );
       } else if (splitCount === 21 && dealerCount === 21) {
-        dispatch(updateUserCorrectHands(pushed));
+        if (splitBankrollUpdated === false) {
+          dispatch(updateUserCorrectHands(pushed));
+          dispatch(updateUserBankroll(splitPot));
+          dispatch(splitBankrollUpdate());
+        }
         return (
           <>
             <h1>Push on your Split Hand</h1>
             <button
               className="next-hand-button"
               onClick={() => {
-                dispatch(updateUserBankroll(splitPot));
                 dispatch(splitNextHand());
               }}
             >
