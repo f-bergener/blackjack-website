@@ -10,6 +10,7 @@ import {
   stay,
   postDealUpdate,
   postMoveUpdate,
+  postSplitUpdate,
   updateUserBankroll,
 } from "../redux/actionCreators";
 import { ActionConstants } from "../redux/actionConstants";
@@ -49,9 +50,13 @@ export const Hit: React.FC = () => {
         className="button hit-button"
         onClick={() => {
           if (playerHandBestMove === ActionConstants.HIT) {
-            dispatch(postMoveUpdate(true));
+            dispatch(
+              postMoveUpdate(true, ActionConstants.HIT, playerHandBestMove)
+            );
           } else {
-            dispatch(postMoveUpdate(false));
+            dispatch(
+              postMoveUpdate(false, ActionConstants.HIT, playerHandBestMove)
+            );
           }
           dispatch(hit());
         }}
@@ -80,9 +85,13 @@ export const Stay: React.FC = () => {
         className="button stay-button"
         onClick={() => {
           if (playerHandBestMove === ActionConstants.STAY) {
-            dispatch(postMoveUpdate(true));
+            dispatch(
+              postMoveUpdate(true, ActionConstants.STAY, playerHandBestMove)
+            );
           } else {
-            dispatch(postMoveUpdate(false));
+            dispatch(
+              postMoveUpdate(false, ActionConstants.STAY, playerHandBestMove)
+            );
           }
           dispatch(stay());
         }}
@@ -110,9 +119,21 @@ export const DoubleDown: React.FC = () => {
         className="button double-down-button"
         onClick={() => {
           if (playerHandBestMove === ActionConstants.DOUBLE_DOWN) {
-            dispatch(postMoveUpdate(true));
+            dispatch(
+              postMoveUpdate(
+                true,
+                ActionConstants.DOUBLE_DOWN,
+                playerHandBestMove
+              )
+            );
           } else {
-            dispatch(postMoveUpdate(false));
+            dispatch(
+              postMoveUpdate(
+                false,
+                ActionConstants.DOUBLE_DOWN,
+                playerHandBestMove
+              )
+            );
           }
           dispatch(updateUserBankroll(-pot));
           dispatch(doubleDown());
@@ -139,13 +160,17 @@ export const Split: React.FC = () => {
         className="button split-button"
         onClick={() => {
           if (playerHandBestMove === ActionConstants.SPLIT) {
-            dispatch(postMoveUpdate(true));
+            dispatch(
+              postMoveUpdate(true, ActionConstants.SPLIT, playerHandBestMove)
+            );
           } else {
-            dispatch(postMoveUpdate(false));
+            dispatch(
+              postMoveUpdate(false, ActionConstants.SPLIT, playerHandBestMove)
+            );
           }
           dispatch(updateUserBankroll(-pot));
           dispatch(split());
-          dispatch(postDealUpdate());
+          dispatch(postSplitUpdate());
         }}
       >
         Split
@@ -170,9 +195,17 @@ export const SplitHit: React.FC = () => {
         className="button hit-button"
         onClick={() => {
           if (splitHandBestMove === ActionConstants.SPLIT_HIT) {
-            dispatch(postMoveUpdate(true));
+            dispatch(
+              postMoveUpdate(true, ActionConstants.SPLIT_HIT, splitHandBestMove)
+            );
           } else {
-            dispatch(postMoveUpdate(false));
+            dispatch(
+              postMoveUpdate(
+                false,
+                ActionConstants.SPLIT_HIT,
+                splitHandBestMove
+              )
+            );
           }
           dispatch(splitHit());
         }}
@@ -199,9 +232,21 @@ export const SplitStay: React.FC = () => {
         className="button stay-button"
         onClick={() => {
           if (splitHandBestMove === ActionConstants.SPLIT_STAY) {
-            dispatch(postMoveUpdate(true));
+            dispatch(
+              postMoveUpdate(
+                true,
+                ActionConstants.SPLIT_STAY,
+                splitHandBestMove
+              )
+            );
           } else {
-            dispatch(postMoveUpdate(false));
+            dispatch(
+              postMoveUpdate(
+                false,
+                ActionConstants.SPLIT_STAY,
+                splitHandBestMove
+              )
+            );
           }
           dispatch(splitStay());
         }}

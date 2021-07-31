@@ -67,11 +67,17 @@ interface clearGameState {
 
 interface postMoveUpdate {
   type: ActionConstants.POST_MOVE_UPDATE;
-  payload: boolean;
+  moveWasCorrect: boolean;
+  lastMove: string;
+  correctLastMove: string;
 }
 
 interface postDealUpdate {
   type: ActionConstants.POST_DEAL_UPDATE;
+}
+
+interface postSplitUpdate {
+  type: ActionConstants.POST_SPLIT_UPDATE;
 }
 
 interface updateUserCorrectHands {
@@ -117,6 +123,7 @@ export type Action =
   | clearGameState
   | postMoveUpdate
   | postDealUpdate
+  | postSplitUpdate
   | updateUserCorrectHands
   | updateUserBankroll
   | clearUserState

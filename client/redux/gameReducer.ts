@@ -276,6 +276,7 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           hitBoolean: false,
           stayBoolean: false,
           doubleDownBoolean: false,
+          splitBoolean: false,
           playerHandBestMove: "",
         };
       }
@@ -355,10 +356,8 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           state.dealerHand,
           newPlayerCount
         ),
-        splitHandBestMove: postFirstMoveGetBestHand(
-          state.dealerHand,
-          newSplitCount
-        ),
+        splitHandBestMove:
+          "SPLIT_" + postFirstMoveGetBestHand(state.dealerHand, newSplitCount),
       };
     }
     case ActionConstants.SPLIT_HIT: {
@@ -391,10 +390,9 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           splitBoolean: false,
           splitHitBoolean: true,
           splitStayBoolean: true,
-          splitHandBestMove: postFirstMoveGetBestHand(
-            state.dealerHand,
-            newSplitCount
-          ),
+          splitHandBestMove:
+            "SPLIT_" +
+            postFirstMoveGetBestHand(state.dealerHand, newSplitCount),
         };
       }
       // Player busted
@@ -435,6 +433,10 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         playerHandBestMove: "",
         currentCardDeck: getDeck(),
         bankrollUpdated: false,
+        hitBoolean: false,
+        stayBoolean: false,
+        doubleDownBoolean: false,
+        splitBoolean: false,
       };
     }
     case ActionConstants.SPLIT_NEXT_HAND: {
@@ -445,6 +447,10 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
         splitCount: 0,
         splitHandBestMove: "",
         splitBankrollUpdated: false,
+        hitBoolean: false,
+        stayBoolean: false,
+        doubleDownBoolean: false,
+        splitBoolean: false,
       };
     }
     case ActionConstants.CLEAR_GAME_STATE: {
