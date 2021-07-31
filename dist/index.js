@@ -21,7 +21,7 @@ app.get("/*", function (req, res) {
         }
     });
 });
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
     console.log("App listening on port http://localhost:" + PORT);
 });
