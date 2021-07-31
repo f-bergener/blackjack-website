@@ -5,6 +5,7 @@ import Game from "./components/Game";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import ProfilePage from "./components/ProfilePage";
+import StrategyTable from "./components/StrategyTable";
 
 const Routes = () => {
   return (
@@ -14,6 +15,7 @@ const Routes = () => {
       <Route path="/login" component={LogIn} />
       <Route path="/signup" component={SignUp} />
       <Route path="/profilepage" component={ProfilePage} />
+      <Route path="/strategytable" component={StrategyTable} />
     </Switch>
   );
 };
