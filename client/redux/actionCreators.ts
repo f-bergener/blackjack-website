@@ -104,6 +104,12 @@ export const postDealUpdate = () => {
   };
 };
 
+export const postSplitUpdate = () => {
+  return {
+    type: ActionConstants.POST_SPLIT_UPDATE,
+  };
+};
+
 export const updateUserCorrectHands = (handOutcome: string) => {
   return {
     type: ActionConstants.UPDATE_USER_CORRECT_HANDS,

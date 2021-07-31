@@ -76,6 +76,10 @@ interface postDealUpdate {
   type: ActionConstants.POST_DEAL_UPDATE;
 }
 
+interface postSplitUpdate {
+  type: ActionConstants.POST_SPLIT_UPDATE;
+}
+
 interface updateUserCorrectHands {
   type: ActionConstants.UPDATE_USER_CORRECT_HANDS;
   handOutcome: string;
@@ -119,6 +123,7 @@ export type Action =
   | clearGameState
   | postMoveUpdate
   | postDealUpdate
+  | postSplitUpdate
   | updateUserCorrectHands
   | updateUserBankroll
   | clearUserState

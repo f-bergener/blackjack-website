@@ -12,6 +12,9 @@ const Game: React.FC = () => {
   const bet = useSelector((state: State) => state.game.bet);
   const bankroll = useSelector((state: State) => state.user.bankroll);
   const playerHand = useSelector((state: State) => state.game.playerHand);
+  const playerHandBestMove = useSelector(
+    (state: State) => state.game.playerHandBestMove
+  );
 
   return (
     <>

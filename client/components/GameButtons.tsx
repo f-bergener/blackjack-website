@@ -10,6 +10,7 @@ import {
   stay,
   postDealUpdate,
   postMoveUpdate,
+  postSplitUpdate,
   updateUserBankroll,
 } from "../redux/actionCreators";
 import { ActionConstants } from "../redux/actionConstants";
@@ -169,7 +170,7 @@ export const Split: React.FC = () => {
           }
           dispatch(updateUserBankroll(-pot));
           dispatch(split());
-          dispatch(postDealUpdate());
+          dispatch(postSplitUpdate());
         }}
       >
         Split

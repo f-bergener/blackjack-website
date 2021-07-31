@@ -356,10 +356,8 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           state.dealerHand,
           newPlayerCount
         ),
-        splitHandBestMove: postFirstMoveGetBestHand(
-          state.dealerHand,
-          newSplitCount
-        ),
+        splitHandBestMove:
+          "SPLIT_" + postFirstMoveGetBestHand(state.dealerHand, newSplitCount),
       };
     }
     case ActionConstants.SPLIT_HIT: {
@@ -392,10 +390,9 @@ const gameReducer = (state: GameState = initialState, action: Action) => {
           splitBoolean: false,
           splitHitBoolean: true,
           splitStayBoolean: true,
-          splitHandBestMove: postFirstMoveGetBestHand(
-            state.dealerHand,
-            newSplitCount
-          ),
+          splitHandBestMove:
+            "SPLIT_" +
+            postFirstMoveGetBestHand(state.dealerHand, newSplitCount),
         };
       }
       // Player busted

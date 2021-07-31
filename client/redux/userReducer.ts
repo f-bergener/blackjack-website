@@ -121,6 +121,13 @@ const userReducer = (state: UserState = initialState, action: Action) => {
         moveUpdated: false,
       };
     }
+    case ActionConstants.POST_SPLIT_UPDATE: {
+      const newTotalHands = state.totalHands + 1;
+      return {
+        ...state,
+        totalHands: newTotalHands,
+      };
+    }
     case ActionConstants.UPDATE_USER_CORRECT_HANDS: {
       if (action.handOutcome === won) {
         const newHandsWon = state.handsWon + 1;
