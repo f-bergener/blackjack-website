@@ -29,6 +29,7 @@ const ActiveHandDisplay: React.FC = () => {
     (state: State) => state.game.splitHandBestMove
   );
   const stayBoolean = useSelector((state: State) => state.game.stayBoolean);
+  const username = useSelector((state: State) => state.user.username);
   // const correctMoves = useSelector((state: State) => state.user.correctMoves);
   // const totalMoves = useSelector((state: State) => state.user.totalMoves);
   // const handsWon = useSelector((state: State) => state.user.handsWon);
@@ -56,7 +57,9 @@ const ActiveHandDisplay: React.FC = () => {
       <div className="container active-hand">
         <div className="container hand">
           <PlayerHand />
-          <h2>Player Count: {playerCount}</h2>
+          <h2>
+            {username}'s Count: {playerCount}
+          </h2>
           <div className="container game-buttons">
             <Hit />
             <Stay />
