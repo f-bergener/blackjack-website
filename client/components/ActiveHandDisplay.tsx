@@ -57,7 +57,7 @@ const ActiveHandDisplay: React.FC = () => {
         <div className="container hand">
           <PlayerHand />
           <h2>Player Count: {playerCount}</h2>
-          <div>
+          <div className="container game-buttons">
             <Hit />
             <Stay />
             <DoubleDown />
@@ -70,7 +70,7 @@ const ActiveHandDisplay: React.FC = () => {
           <h2>
             {splitHand.length >= 2 ? `Split Count: ${splitCount}` : <></>}
           </h2>
-          <div>
+          <div className="container game-buttons">
             <SplitHit />
             <SplitStay />
           </div>

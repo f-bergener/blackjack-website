@@ -42,7 +42,7 @@ const DownChips: React.FC = () => {
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(100))}
-            style={{ borderColor: "green" }}
+            style={{ borderColor: "#2AB26A" }}
           >
             $100
           </div>
@@ -89,7 +89,7 @@ const DownChips: React.FC = () => {
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(100))}
-            style={{ borderColor: "green" }}
+            style={{ borderColor: "#2AB26A" }}
           >
             $100
           </div>
@@ -129,7 +129,7 @@ const DownChips: React.FC = () => {
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(100))}
-            style={{ borderColor: "green" }}
+            style={{ borderColor: "#2AB26A" }}
           >
             $100
           </div>
@@ -162,7 +162,7 @@ const DownChips: React.FC = () => {
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(100))}
-            style={{ borderColor: "green" }}
+            style={{ borderColor: "#2AB26A" }}
           >
             $100
           </div>
@@ -188,7 +188,7 @@ const DownChips: React.FC = () => {
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(100))}
-            style={{ borderColor: "green" }}
+            style={{ borderColor: "#2AB26A" }}
           >
             $100
           </div>

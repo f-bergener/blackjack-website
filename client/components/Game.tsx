@@ -21,9 +21,9 @@ const Game: React.FC = () => {
         {playerHand.length === 0 ? <SendData /> : <></>}
         {!pot ? <PreDealDisplay /> : <ActiveHandDisplay />}
       </div>
-      <Link to="/">
+      {/* <Link to="/">
         <button>Back to Home</button>
-      </Link>
+      </Link> */}
     </div>
   );
 };

@@ -1,19 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 body {
+  padding: 0;
   margin: 0;
+  box-sizing: border-box;
+  background-color: rgb(70, 40, 70);
+  font-family: "Roboto";
+  color: white;
+}
+
+header {
+  display: flex;
+}
+
+button {
+  font-size: 1.2em;
+  margin-top: 1em;
+  border-radius: 4px;
+  border-color: black;
+  padding: 0.5em;
+  cursor: pointer;
 }
 
 .container {
   display: flex;
 }
 
-.game {
+.homepage {
   flex-direction: column;
   align-items: center;
+}
+
+.game {
+  width: 95%;
+  height: 80vh;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+  flex-direction: column;
+  align-items: center;
+  background-image: radial-gradient(green, darkgreen, black);
+  border: 4px solid gold;
+  border-radius: 50%;
 }
 
 .game-display {
   flex-direction: column;
   align-items: center;
+}
+
+.game-buttons {
+  justify-content: space-around;
 }
 
 .active-hand {
@@ -43,6 +79,11 @@ body {
   border-radius: 50%;
   cursor: pointer;
 }
+
+.chip:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
 /* .card {
   justify-content: space-around;
 } */
