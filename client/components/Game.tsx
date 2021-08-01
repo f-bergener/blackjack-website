@@ -12,20 +12,19 @@ const Game: React.FC = () => {
   const bet = useSelector((state: State) => state.game.bet);
   const bankroll = useSelector((state: State) => state.user.bankroll);
   const playerHand = useSelector((state: State) => state.game.playerHand);
-  const playerHandBestMove = useSelector(
-    (state: State) => state.game.playerHandBestMove
-  );
 
   return (
-    <>
+    <div className="container game">
       <h2>Bankroll: ${(bankroll - bet).toLocaleString("en")}</h2>
-      {playerHand.length > 0 ? <MoveFeedback /> : <></>}
-      {playerHand.length === 0 ? <SendData /> : <></>}
-      {!pot ? <PreDealDisplay /> : <ActiveHandDisplay />}
+      <div className="container game-display">
+        {playerHand.length > 0 ? <MoveFeedback /> : <></>}
+        {playerHand.length === 0 ? <SendData /> : <></>}
+        {!pot ? <PreDealDisplay /> : <ActiveHandDisplay />}
+      </div>
       <Link to="/">
         <button>Back to Home</button>
       </Link>
-    </>
+    </div>
   );
 };
 

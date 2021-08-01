@@ -4,7 +4,7 @@ import { card } from "./data/getDeck";
 
 const RegularHand: React.FC<card[]> = (hand: card[]) => {
   return (
-    <>
+    <div className="container card">
       {hand.map((card: card) => {
         if (card.faceValue) {
           return (
@@ -26,7 +26,7 @@ const RegularHand: React.FC<card[]> = (hand: card[]) => {
           );
         }
       })}
-    </>
+    </div>
   );
 };
 

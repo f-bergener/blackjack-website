@@ -22,7 +22,7 @@ export const Deal: React.FC = () => {
   const bet = useSelector((state: State) => state.game.bet);
   return (
     <button
-      className="button deal-button"
+      className="button hit-button"
       onClick={() => {
         dispatch(postDealUpdate());
         dispatch(updateUserBankroll(-bet));

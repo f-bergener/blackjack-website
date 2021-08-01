@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+}
+
+.game {
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-display {
+  flex-direction: column;
+  align-items: center;
+}
+
+.active-hand {
+  justify-content: space-between;
+}
+
+.hand {
+  flex-direction: column;
+  align-items: center;
+}
+
+.chips {
+  justify-content: space-between;
+}
+
+.chip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 4em;
+  height: 4em;
+  font-size: 1.5em;
+  background-color: white;
+  color: black;
+  border-style: solid;
+  border-width: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+/* .card {
+  justify-content: space-around;
+} */
+
+/* img {
+  width: 30%;
+}
+
+@media (min-width: 1024px) {
+  img {
+    width: 10%;
+  }
+} */

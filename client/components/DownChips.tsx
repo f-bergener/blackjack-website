@@ -10,7 +10,7 @@ const DownChips: React.FC = () => {
   const displayDecreaseChips = () => {
     if (bet >= 5000) {
       return (
-        <div className="decrease-chips seven">
+        <div className="container chips decrease-chips seven">
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(5000))}
@@ -64,7 +64,7 @@ const DownChips: React.FC = () => {
       );
     } else if (bet >= 2500) {
       return (
-        <div className="decrease-chips six">
+        <div className="container chips decrease-chips six">
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(2500))}
@@ -111,7 +111,7 @@ const DownChips: React.FC = () => {
       );
     } else if (bet >= 1000) {
       return (
-        <div className="decrease-chips five">
+        <div className="container chips decrease-chips five">
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(1000))}
@@ -151,7 +151,7 @@ const DownChips: React.FC = () => {
       );
     } else if (bet >= 500) {
       return (
-        <div className="decrease-chips four">
+        <div className="container chips decrease-chips four">
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(500))}
@@ -184,7 +184,7 @@ const DownChips: React.FC = () => {
       );
     } else if (bet >= 100) {
       return (
-        <div className="decrease-chips three">
+        <div className="container chips decrease-chips three">
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(100))}
@@ -210,7 +210,7 @@ const DownChips: React.FC = () => {
       );
     } else if (bet >= 10) {
       return (
-        <div className="decrease-chips two">
+        <div className="container chips decrease-chips two">
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(10))}
@@ -229,7 +229,7 @@ const DownChips: React.FC = () => {
       );
     } else if (bet >= 1) {
       return (
-        <div className="decrease-chips one">
+        <div className="container chips decrease-chips one">
           <div
             className="chip"
             onClick={() => dispatch(removeFromBet(1))}

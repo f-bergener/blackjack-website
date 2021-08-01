@@ -12,7 +12,7 @@ const UpChips: React.FC = () => {
   const displayIncreaseChips = () => {
     if (remainingBankroll >= 5000) {
       return (
-        <div className="increase-chips seven">
+        <div className="container chips increase-chips seven">
           <div
             className="chip"
             onClick={() => dispatch(addToBet(5000))}
@@ -66,7 +66,7 @@ const UpChips: React.FC = () => {
       );
     } else if (remainingBankroll >= 2500) {
       return (
-        <div className="increase-chips six">
+        <div className="container chips increase-chips six">
           <div
             className="chip"
             onClick={() => dispatch(addToBet(2500))}
@@ -113,7 +113,7 @@ const UpChips: React.FC = () => {
       );
     } else if (remainingBankroll >= 1000) {
       return (
-        <div className="increase-chips five">
+        <div className="container chips increase-chips five">
           <div
             className="chip"
             onClick={() => dispatch(addToBet(1000))}
@@ -153,7 +153,7 @@ const UpChips: React.FC = () => {
       );
     } else if (remainingBankroll >= 500) {
       return (
-        <div className="increase-chips four">
+        <div className="container chips increase-chips four">
           <div
             className="chip"
             onClick={() => dispatch(addToBet(500))}
@@ -186,7 +186,7 @@ const UpChips: React.FC = () => {
       );
     } else if (remainingBankroll >= 100) {
       return (
-        <div className="increase-chips three">
+        <div className="container chips increase-chips three">
           <div
             className="chip"
             onClick={() => dispatch(addToBet(100))}
@@ -212,7 +212,7 @@ const UpChips: React.FC = () => {
       );
     } else if (remainingBankroll >= 10) {
       return (
-        <div className="increase-chips two">
+        <div className="container chips increase-chips two">
           <div
             className="chip"
             onClick={() => dispatch(addToBet(10))}
@@ -231,7 +231,7 @@ const UpChips: React.FC = () => {
       );
     } else if (remainingBankroll >= 1) {
       return (
-        <div className="increase-chips one">
+        <div className="container chips increase-chips one">
           <div
             className="chip"
             onClick={() => dispatch(addToBet(1))}

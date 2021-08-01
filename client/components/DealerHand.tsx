@@ -12,7 +12,7 @@ const DealerHand: React.FC = () => {
     let card = dealerHand[1];
     if (card.faceValue) {
       return (
-        <>
+        <div className="container card">
           <img
             className="card-back"
             src={cardBack}
@@ -24,11 +24,11 @@ const DealerHand: React.FC = () => {
             src={images[`${card.suit}${card.faceValue}`]}
             alt={`${card.faceValue} of ${card.suit}`}
           />
-        </>
+        </div>
       );
     } else {
       return (
-        <>
+        <div className="container card">
           <img
             className="card-back"
             src={cardBack}
@@ -40,7 +40,7 @@ const DealerHand: React.FC = () => {
             src={images[`${card.suit}${card.numberValue}`]}
             alt={`${card.numberValue} of ${card.suit}`}
           />
-        </>
+        </div>
       );
     }
   } else {

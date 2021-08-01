@@ -53,20 +53,34 @@ const ActiveHandDisplay: React.FC = () => {
       </h2> */}
       <h2>Bet: ${pot.toLocaleString("en")}</h2>
       {splitPot ? <h2>Split Bet: ${splitPot.toLocaleString("en")}</h2> : <></>}
-      <PlayerHand />
-      <h2>Player Count: {playerCount}</h2>
-      <Hit />
-      <Stay />
-      <DoubleDown />
-      <Split />
-      {playerHandBestMove ? <h1>{playerHandBestMove}</h1> : <></>}
-      <SplitHand />
-      <h2>{splitHand.length >= 2 ? `Split Count: ${splitCount}` : <></>}</h2>
-      <SplitHit />
-      <SplitStay />
-      {splitHandBestMove ? <h1>{splitHandBestMove}</h1> : <></>}
-      <DealerHand />
-      <h2>{!stayBoolean ? `Dealer Count: ${dealerCount}` : <></>}</h2>
+      <div className="container active-hand">
+        <div className="container hand">
+          <PlayerHand />
+          <h2>Player Count: {playerCount}</h2>
+          <div>
+            <Hit />
+            <Stay />
+            <DoubleDown />
+            <Split />
+          </div>
+          {playerHandBestMove ? <h1>{playerHandBestMove}</h1> : <></>}
+        </div>
+        <div className="container hand">
+          <SplitHand />
+          <h2>
+            {splitHand.length >= 2 ? `Split Count: ${splitCount}` : <></>}
+          </h2>
+          <div>
+            <SplitHit />
+            <SplitStay />
+          </div>
+          {splitHandBestMove ? <h1>{splitHandBestMove}</h1> : <></>}
+        </div>
+        <div className="container hand">
+          <DealerHand />
+          <h2>{!stayBoolean ? `Dealer Count: ${dealerCount}` : <></>}</h2>
+        </div>
+      </div>
       <UpdateBankroll />
       <SplitUpdateBankroll />
     </>
