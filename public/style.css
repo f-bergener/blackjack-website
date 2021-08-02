@@ -162,14 +162,14 @@ button:hover {
   background-color: rgba(255, 255, 255, 0.4);
 }
 
-.button.deal-button {
+.deal-button {
   background: linear-gradient(to bottom, green 5%, darkgreen 100%);
   background-color: green;
   border: 1px solid white;
   color: white;
 }
 
-.button.deal-button:hover {
+.deal-button:hover {
   background: linear-gradient(to bottom, darkgreen 5%, green 100%);
   background-color: darkgreen;
 }
