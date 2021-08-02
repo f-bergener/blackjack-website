@@ -38,7 +38,7 @@ const ActiveHandDisplay: React.FC = () => {
       <div className="container active-hand">
         <div className="container hand">
           <PlayerHand />
-          <h2>
+          <h2 className="count-text">
             {username}'s Count: {playerCount}
           </h2>
           <div className="container game-buttons">
@@ -47,22 +47,22 @@ const ActiveHandDisplay: React.FC = () => {
             <DoubleDown />
             <Split />
           </div>
-          {playerHandBestMove ? <h1>{playerHandBestMove}</h1> : <></>}
         </div>
         <div className="container hand">
           <SplitHand />
-          <h2>
+          <h2 className="count-text">
             {splitHand.length >= 2 ? `Split Count: ${splitCount}` : <></>}
           </h2>
           <div className="container game-buttons">
             <SplitHit />
             <SplitStay />
           </div>
-          {splitHandBestMove ? <h1>{splitHandBestMove}</h1> : <></>}
         </div>
         <div className="container hand">
           <DealerHand />
-          <h2>{!stayBoolean ? `Dealer Count: ${dealerCount}` : <></>}</h2>
+          <h2 className="count-text">
+            {!stayBoolean ? `Dealer Count: ${dealerCount}` : <></>}
+          </h2>
         </div>
       </div>
       <UpdateBankroll />

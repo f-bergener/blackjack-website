@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { State } from "../redux/store";
 import PreDealDisplay from "./PreDealDisplay";
@@ -21,9 +20,6 @@ const Game: React.FC = () => {
         {playerHand.length === 0 ? <SendData /> : <></>}
         {!pot ? <PreDealDisplay /> : <ActiveHandDisplay />}
       </div>
-      {/* <Link to="/">
-        <button>Back to Home</button>
-      </Link> */}
     </div>
   );
 };
