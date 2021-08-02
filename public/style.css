@@ -50,6 +50,14 @@ button {
   cursor: pointer;
 }
 
+@media (max-width: 800px) {
+  button {
+    font-size: 1em;
+    margin-top: 0.5em;
+    padding: 0.25em;
+  }
+}
+
 button:hover {
   background: linear-gradient(to bottom, #ffb300 5%, #ffff33 100%);
   background-color: darkgoldenrod;
