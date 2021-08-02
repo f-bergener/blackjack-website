@@ -31,14 +31,12 @@ const MoveFeedback: React.FC = () => {
   const moveUpdated = useSelector((state: State) => state.user.moveUpdated);
   if (moveUpdated === true) {
     if (lastMoveCorrect === true) {
-      return <>Good Job! You made the optimal move</>;
+      return <h2>Good Job! You made the optimal move</h2>;
     } else {
       const lastMoveText = fixMoveText(lastMove);
       const correctLastMoveText = fixMoveText(correctLastMove);
       return (
-        <>
-          <p>{`You should have ${correctLastMoveText} instead of ${lastMoveText}`}</p>
-        </>
+        <h2>{`You should have ${correctLastMoveText} instead of ${lastMoveText}`}</h2>
       );
     }
   } else {

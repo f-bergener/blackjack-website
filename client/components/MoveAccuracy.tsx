@@ -21,7 +21,7 @@ const MoveAccuracy: React.FC = () => {
     ],
   };
   return (
-    <div>
+    <div className="individual-graph-container">
       <h3>Move Accuracy %</h3>
       <Pie data={data} />
     </div>

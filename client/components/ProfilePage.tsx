@@ -8,11 +8,13 @@ const ProfilePage: React.FC = () => {
   const user = useSelector((state: State) => state.user);
   const { bankroll, username } = user;
   return (
-    <div>
+    <div className="container regular-page">
       <h2>{`${username}'s Stats`}</h2>
       <h3>{`Bankroll: $${bankroll.toLocaleString("en")}`}</h3>
-      <WinningPercentage />
-      <MoveAccuracy />
+      <div className="graph-container">
+        <WinningPercentage />
+        <MoveAccuracy />
+      </div>
     </div>
   );
 };
