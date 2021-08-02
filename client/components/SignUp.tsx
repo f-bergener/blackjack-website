@@ -11,6 +11,7 @@ const LogIn: React.FC = () => {
 
   return (
     <form
+      className="container regular-page"
       onSubmit={(event) => {
         event.preventDefault();
         dispatch(authenticateSignup(username, email, password));

@@ -9,7 +9,7 @@ const Homepage: React.FC = () => {
   const isLoggedIn = useSelector((state: State) => state.user.isLoggedIn);
   const username = useSelector((state: State) => state.user.username);
   return (
-    <div className="container homepage">
+    <div className="container regular-page">
       <h1>Welcome</h1>
       <h2>Click the button below to start your game</h2>
       {isLoggedIn ? <h3>{username}</h3> : <></>}
