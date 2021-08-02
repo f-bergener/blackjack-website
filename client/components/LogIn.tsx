@@ -20,7 +20,7 @@ const LogIn: React.FC = () => {
       }}
     >
       <label>
-        Email:{" "}
+        Email
         <input
           type="email"
           value={email}
@@ -30,7 +30,7 @@ const LogIn: React.FC = () => {
         />
       </label>
       <label>
-        Password:{" "}
+        Password
         <input
           type="password"
           value={password}

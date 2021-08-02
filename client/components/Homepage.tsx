@@ -16,6 +16,14 @@ const Homepage: React.FC = () => {
       <Link to="/game">
         <button id="start-button">Play</button>
       </Link>
+      <h3 className="homepage-text">
+        Want to make some money at the casino? Well, you probably won't. But
+        with this awesome game you can at least improve your chances of winning
+        with smart play at the BlackJack table. This game will give you real
+        time feedback on your decisions at the table and it records your
+        statistics, so you can keep track of your progress. What are you waiting
+        for? Let's play!
+      </h3>
     </div>
   );
 };
