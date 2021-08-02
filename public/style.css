@@ -42,6 +42,12 @@ a:hover {
   color: white;
 }
 
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
 input {
   font-size: 1.2em;
   padding: 0.5em;
@@ -70,6 +76,10 @@ button {
 button:hover {
   background: linear-gradient(to bottom, #ffb300 5%, #ffff33 100%);
   background-color: darkgoldenrod;
+}
+
+.homepage-text {
+  text-align: center;
 }
 
 .link-container {
@@ -106,7 +116,7 @@ button:hover {
 
 .game {
   width: 90%;
-  height: 50em;
+  height: 55em;
   flex-direction: column;
   align-items: center;
   background-image: radial-gradient(green, darkgreen, black);
@@ -136,7 +146,7 @@ button:hover {
 }
 
 .active-hand {
-  width: 70%;
+  width: 85%;
   margin-bottom: 1em;
   align-items: baseline;
   justify-content: space-between;
@@ -255,35 +265,41 @@ button:hover {
 
 img {
   width: 10em;
+  height: 14em;
 }
 
 @media (max-width: 1250px) {
   img {
     width: 8em;
+    height: 11.2em;
   }
 }
 
 @media (max-width: 1024px) {
   img {
     width: 6em;
+    height: 8.4em;
   }
 }
 
 @media (max-width: 900px) {
   img {
     width: 4em;
+    height: 5.6em;
   }
 }
 
 @media (max-width: 600px) {
   img {
     width: 3em;
+    height: 4.2em;
   }
 }
 
 @media (max-width: 400px) {
   img {
     width: 2.5em;
+    height: 3.5em;
   }
 }
 
