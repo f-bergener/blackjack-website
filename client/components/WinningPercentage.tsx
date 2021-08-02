@@ -32,7 +32,7 @@ const WinningPercentage: React.FC = () => {
   };
   return (
     <div className="individual-graph-container">
-      <h3>Hand Outcome %</h3>
+      <h3>Hand Outcome % ({totalHands}) Hands</h3>
       <Pie data={data} />
     </div>
   );
