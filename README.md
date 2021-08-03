@@ -23,8 +23,7 @@ npm install
 ```
 
 ## Running Optimal BlackJack:
-To use Optimal BlackJack, follow these steps:
-
+To use Optimal BlackJack on your local machine, follow these steps:
 * Set up a database titled blackjack-practice
 * Run the below commands in two different terminals in the root directory
 ```
