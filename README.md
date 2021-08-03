@@ -5,3 +5,5 @@ In BlackJack there is an optimal move that can be made in every scenario. This B
 
 This application can help a player identify mistakes that they are making, so they can correct them and hopefully win more money at the BlackJack table.
 
+## Technologies
+HTML, CSS, TypeScript, React, Redux, Chart.js, Node.js, Express, PostgreSql, Sequelize
