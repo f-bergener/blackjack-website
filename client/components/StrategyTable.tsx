@@ -3,6 +3,7 @@ import React from "react";
 const StrategyTable: React.FC = () => {
   return (
     <div className="container regular-page">
+      <h2>X-Axis: Dealer Card, Y-Axis: Player Hand</h2>
       <table>
         <tbody>
           <tr className="table-cell">
