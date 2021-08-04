@@ -35,7 +35,7 @@ const UpdateBankroll: React.FC = () => {
         }
         return (
           <>
-            <h1>Blackjack</h1>
+            <h2>Blackjack</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -50,7 +50,7 @@ const UpdateBankroll: React.FC = () => {
         dispatch(updateUserCorrectHands(lost));
         return (
           <>
-            <h1>Dealer Wins</h1>
+            <h2>Dealer Wins</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -69,7 +69,7 @@ const UpdateBankroll: React.FC = () => {
         }
         return (
           <>
-            <h1>You Win</h1>
+            <h2>You Win</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -89,7 +89,7 @@ const UpdateBankroll: React.FC = () => {
           }
           return (
             <>
-              <h1>Push</h1>
+              <h2>Push</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -108,7 +108,7 @@ const UpdateBankroll: React.FC = () => {
           }
           return (
             <>
-              <h1>You Win</h1>
+              <h2>You Win</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -123,7 +123,7 @@ const UpdateBankroll: React.FC = () => {
           dispatch(updateUserCorrectHands(lost));
           return (
             <>
-              <h1>Dealer Wins</h1>
+              <h2>Dealer Wins</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -146,7 +146,7 @@ const UpdateBankroll: React.FC = () => {
           }
           return (
             <>
-              <h1>Push</h1>
+              <h2>Push</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -165,7 +165,7 @@ const UpdateBankroll: React.FC = () => {
           }
           return (
             <>
-              <h1>You Win</h1>
+              <h2>You Win</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -180,7 +180,7 @@ const UpdateBankroll: React.FC = () => {
           dispatch(updateUserCorrectHands(lost));
           return (
             <>
-              <h1>Dealer Wins</h1>
+              <h2>Dealer Wins</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -196,7 +196,7 @@ const UpdateBankroll: React.FC = () => {
         dispatch(updateUserCorrectHands(lost));
         return (
           <>
-            <h1>Dealer Wins</h1>
+            <h2>Dealer Wins</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -215,7 +215,7 @@ const UpdateBankroll: React.FC = () => {
         }
         return (
           <>
-            <h1>You Win</h1>
+            <h2>You Win</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -234,7 +234,7 @@ const UpdateBankroll: React.FC = () => {
         }
         return (
           <>
-            <h1>You Win</h1>
+            <h2>You Win</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -249,7 +249,7 @@ const UpdateBankroll: React.FC = () => {
         dispatch(updateUserCorrectHands(lost));
         return (
           <>
-            <h1>Dealer Wins</h1>
+            <h2>Dealer Wins</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -268,7 +268,7 @@ const UpdateBankroll: React.FC = () => {
         }
         return (
           <>
-            <h1>Push</h1>
+            <h2>Push</h2>
             <button
               className="next-hand-button"
               onClick={() => {

@@ -22,12 +22,6 @@ const ActiveHandDisplay: React.FC = () => {
   const splitCount = useSelector((state: State) => state.game.splitCount);
   const splitHand = useSelector((state: State) => state.game.splitHand);
   const dealerCount = useSelector((state: State) => state.game.dealerCount);
-  const playerHandBestMove = useSelector(
-    (state: State) => state.game.playerHandBestMove
-  );
-  const splitHandBestMove = useSelector(
-    (state: State) => state.game.splitHandBestMove
-  );
   const stayBoolean = useSelector((state: State) => state.game.stayBoolean);
   const username = useSelector((state: State) => state.user.username);
 
@@ -48,16 +42,20 @@ const ActiveHandDisplay: React.FC = () => {
             <Split />
           </div>
         </div>
-        <div className="container hand">
-          <SplitHand />
-          <h2 className="count-text">
-            {splitHand.length >= 2 ? `Split Count: ${splitCount}` : <></>}
-          </h2>
-          <div className="container game-buttons">
-            <SplitHit />
-            <SplitStay />
+        {splitHand.length > 0 ? (
+          <div className="container hand">
+            <SplitHand />
+            <h2 className="count-text">
+              {splitHand.length >= 2 ? `Split Count: ${splitCount}` : <></>}
+            </h2>
+            <div className="container game-buttons">
+              <SplitHit />
+              <SplitStay />
+            </div>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
         <div className="container hand">
           <DealerHand />
           <h2 className="count-text">
