@@ -41,7 +41,7 @@ const SplitUpdateBankroll: React.FC = () => {
         }
         return (
           <>
-            <h1>You Win on the Split Hand</h1>
+            <h2>You Win on the Split Hand</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -56,7 +56,7 @@ const SplitUpdateBankroll: React.FC = () => {
         dispatch(updateUserCorrectHands(lost));
         return (
           <>
-            <h1>Dealer Beat your Split Hand</h1>
+            <h2>Dealer Beat your Split Hand</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -75,7 +75,7 @@ const SplitUpdateBankroll: React.FC = () => {
         }
         return (
           <>
-            <h1>You Win on the Split Hand</h1>
+            <h2>You Win on the Split Hand</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -95,7 +95,7 @@ const SplitUpdateBankroll: React.FC = () => {
           }
           return (
             <>
-              <h1>Push on your Split Hand</h1>
+              <h2>Push on your Split Hand</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -114,7 +114,7 @@ const SplitUpdateBankroll: React.FC = () => {
           }
           return (
             <>
-              <h1>You Win on the Split Hand</h1>
+              <h2>You Win on the Split Hand</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -129,7 +129,7 @@ const SplitUpdateBankroll: React.FC = () => {
           dispatch(updateUserCorrectHands(lost));
           return (
             <>
-              <h1>Dealer Beat your Split Hand</h1>
+              <h2>Dealer Beat your Split Hand</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -152,7 +152,7 @@ const SplitUpdateBankroll: React.FC = () => {
           }
           return (
             <>
-              <h1>Push</h1>
+              <h2>Push</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -171,7 +171,7 @@ const SplitUpdateBankroll: React.FC = () => {
           }
           return (
             <>
-              <h1>You Win on the Split Hand</h1>
+              <h2>You Win on the Split Hand</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -186,7 +186,7 @@ const SplitUpdateBankroll: React.FC = () => {
           dispatch(updateUserCorrectHands(lost));
           return (
             <>
-              <h1>Dealer Beat your Split Hand</h1>
+              <h2>Dealer Beat your Split Hand</h2>
               <button
                 className="next-hand-button"
                 onClick={() => {
@@ -202,7 +202,7 @@ const SplitUpdateBankroll: React.FC = () => {
         dispatch(updateUserCorrectHands(lost));
         return (
           <>
-            <h1>Dealer Beat your Split Hand</h1>
+            <h2>Dealer Beat your Split Hand</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -221,7 +221,7 @@ const SplitUpdateBankroll: React.FC = () => {
         }
         return (
           <>
-            <h1>You Win on the Split Hand</h1>
+            <h2>You Win on the Split Hand</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -240,7 +240,7 @@ const SplitUpdateBankroll: React.FC = () => {
         }
         return (
           <>
-            <h1>You Win on the Split Hand</h1>
+            <h2>You Win on the Split Hand</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -255,7 +255,7 @@ const SplitUpdateBankroll: React.FC = () => {
         dispatch(updateUserCorrectHands(lost));
         return (
           <>
-            <h1>Dealer Beat your Split Hand</h1>
+            <h2>Dealer Beat your Split Hand</h2>
             <button
               className="next-hand-button"
               onClick={() => {
@@ -274,7 +274,7 @@ const SplitUpdateBankroll: React.FC = () => {
         }
         return (
           <>
-            <h1>Push on your Split Hand</h1>
+            <h2>Push on your Split Hand</h2>
             <button
               className="next-hand-button"
               onClick={() => {
