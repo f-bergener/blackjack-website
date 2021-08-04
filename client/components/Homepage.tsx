@@ -25,18 +25,32 @@ const Homepage: React.FC = () => {
         </h3>
       </div>
       <div>
+        Application created by Freddie Bergener{" "}
+        <a
+          href="https://github.com/f-bergener/blackjack-website"
+          target="_blank"
+          title="GitHub Repository Link"
+        >
+          GitHub Repository
+        </a>
+      </div>
+      <div>
         Card images made by{" "}
-        <a href="https://www.me.uk/cards/" title="Attribution Link">
+        <a
+          href="https://www.me.uk/cards/"
+          target="_blank"
+          title="Attribution Link"
+        >
           Adrian Kennard
         </a>
       </div>
       <div>
         Favicon made by{" "}
-        <a href="https://www.freepik.com" title="Freepik">
+        <a href="https://www.freepik.com" target="_blank" title="Freepik">
           Freepik
         </a>{" "}
         from{" "}
-        <a href="https://www.flaticon.com/" title="Flaticon">
+        <a href="https://www.flaticon.com/" target="_blank" title="Flaticon">
           www.flaticon.com
         </a>
       </div>
