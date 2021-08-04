@@ -19,19 +19,19 @@ const PreDealDisplay: React.FC = () => {
       ) : (
         <>
           <h2>Bet: ${bet.toLocaleString()}</h2>
-          {bankroll > 0 && pot === 0 ? (
+          {bankroll - bet > 0 ? (
             <>
               <h2>Increase Bet</h2> <UpChips />
             </>
           ) : (
-            ""
+            <></>
           )}
-          {bet > 0 && pot === 0 ? (
+          {bet > 0 ? (
             <>
               <h2>Lower Bet</h2> <DownChips />
             </>
           ) : (
-            ""
+            <></>
           )}
           {bet ? <Deal /> : <></>}
         </>
