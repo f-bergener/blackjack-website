@@ -87,7 +87,7 @@ button:hover {
 }
 
 .homepage-text {
-  text-align: center;
+  text-align: justify;
 }
 
 .link-container {
@@ -383,4 +383,8 @@ table {
   .individual-graph-container {
     width: 12em;
   }
+}
+
+.center-text {
+  text-align: center;
 }
