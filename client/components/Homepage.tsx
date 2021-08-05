@@ -24,7 +24,7 @@ const Homepage: React.FC = () => {
           waiting for? Let's play!
         </h3>
       </div>
-      <div>
+      <div className="center-text">
         Application created by Freddie Bergener{" "}
         <a
           href="https://github.com/f-bergener/blackjack-website"
@@ -34,7 +34,7 @@ const Homepage: React.FC = () => {
           GitHub Repository
         </a>
       </div>
-      <div>
+      <div className="center-text">
         Card images made by{" "}
         <a
           href="https://www.me.uk/cards/"
@@ -44,7 +44,7 @@ const Homepage: React.FC = () => {
           Adrian Kennard
         </a>
       </div>
-      <div>
+      <div className="center-text">
         Favicon made by{" "}
         <a href="https://www.freepik.com" target="_blank" title="Freepik">
           Freepik
