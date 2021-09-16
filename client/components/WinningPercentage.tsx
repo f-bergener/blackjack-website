@@ -14,7 +14,6 @@ const WinningPercentage: React.FC = () => {
     labels: ["Won", "Pushed", "Lost"],
     datasets: [
       {
-        label: "# of Votes",
         data: [winningPercentage, pushPercentage, losingPercentage],
         backgroundColor: [
           "rgba(0, 204, 0, 0.5)",
@@ -33,7 +32,7 @@ const WinningPercentage: React.FC = () => {
   const options = { color: "white" };
   return (
     <div className="individual-graph-container">
-      <h3>Hand Outcome % ({totalHands}) Hands</h3>
+      <h3>Hand Outcome % ({totalHands} Hands)</h3>
       <Pie options={options} data={data} />
     </div>
   );

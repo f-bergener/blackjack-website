@@ -12,7 +12,6 @@ const MoveAccuracy: React.FC = () => {
     labels: ["Correct", "Incorrect"],
     datasets: [
       {
-        label: "# of Votes",
         data: [moveAccuracy, moveInaccuracy],
         backgroundColor: ["rgba(0, 204, 0, 0.5)", "rgba(255, 25, 64, 0.5)"],
         borderColor: ["rgba(0, 204, 0, 1)", "rgba(255, 25, 64, 1)"],
